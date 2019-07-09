@@ -1,10 +1,12 @@
-import re
 import datetime
 
-from .bases import BaseField
+from ..types import type_date
+from ..types import type_time
+
+from .base import BaseField, Splitted
 
 
-__all__ = ("Date", "Time", )
+__all__ = ("Date", "Time", "SplittedDateTime")
 
 
 class Date(BaseField):
@@ -12,7 +14,7 @@ class Date(BaseField):
     """
 
     def type(self, value):
-        return value_to_date(value)
+        return type_date(value)
 
 
 class Time(BaseField):
@@ -21,10 +23,10 @@ class Time(BaseField):
     """
 
     def type(self, value):
-        return value_to_time(value)
+        return type_time(value)
 
 
-class SpliitedDateTime(BaseField):
+class SplittedDateTime(Splitted):
     """A Datetime field splitted in a date and a time field (with the same name).
     The first value is the date and the second one the time.
     """
@@ -34,34 +36,6 @@ class SpliitedDateTime(BaseField):
     multi = True
 
     def type(self, values):
-        date = value_to_date(values[0])
-        time = value_to_time(values[1])
+        date = type_date(values[0])
+        time = type_time(values[1])
         return datetime.combine(date, time)
-
-
-# --- Private ---
-
-rx_time = re.compile(
-    r"(?P<hour>[0-9]{1,2}):(?P<minute>[0-9]{1,2})(:(?P<second>[0-9]{1,2}))?\s?(?P<tt>am|pm)?",
-    re.IGNORECASE,
-)
-
-
-def value_to_date(value):
-    ldt = [int(f) for f in value.split("-")]
-    return datetime.date(*ldt)
-
-
-def value_to_time(value):
-    match = rx_time.match(value.upper())
-    if not match:
-        return None
-
-    gd = match.groupdict()
-    hour = int(gd["hour"])
-    minute = int(gd["minute"])
-    second = int(gd["second"] or 0)
-    if gd["tt"] == "PM":
-        hour += 12
-
-    return datetime.time(hour, minute, second)

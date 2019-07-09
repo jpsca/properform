@@ -1,7 +1,7 @@
-from .bases import BaseField, BaseMultiField
+from .base import BaseField
 
 
-__all__ = ("Text", "Integer", "Float", "Boolean", "Multiple")
+__all__ = ("Text", "Integer", "Float", "Boolean")
 
 
 class Text(BaseField):
@@ -24,7 +24,3 @@ class Boolean(BaseField):
         if str(value).lower() in self.false_values:
             return False
         return True
-
-
-class Multiple(BaseMultiField):
-    type = int
