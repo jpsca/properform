@@ -9,36 +9,26 @@ from pathlib import Path
 
 
 data = {
-    "title": "Proper",
-    "name": "proper",
-    "pypi_name": "proper",
+    "title": "Proper Form",
+    "name": "proper_form",
+    "pypi_name": "proper_form",
     "version": "1.190730",
     "author": "Juan-Pablo Scaletti",
     "author_email": "juanpablo@jpscaletti.com",
-    "description": "A web framework optimized for programmer happiness.",
+    "description": "A not-terrible Python form library.",
     "copyright": "2019",
-    "repo_name": "jpscaletti/proper",
-    "home_url": "https://properframework.dev",
+    "repo_name": "jpscaletti/proper-form",
+    "home_url": "https://github.com/jpscaletti/proper-form",
     # Displayed in the pypi project page
-    "project_urls": {
-        "Documentation": "https://properframework.dev/docs",
-    },
+    # "project_urls": {
+    #     "Documentation": "https://github.com/jpscaletti/proper-form",
+    # },
 
     "development_status": "4 - Beta",
     "minimal_python": 3.6,
     "install_requires": [
-        "multipart ~=0.2",
-        "copier ~=2.4",
-        "cryptography ~=2.5",
-        "gevent ~=1.4",
-        "gevent-websocket",
-        "itsdangerous ~=1.1",
-        "jinja2 ~=2.10",
-        "pyceo ~=2.190702",
-        "toml ~=0.10",
-        "text-editor ~=1.0.5",  # WITH A DASH!
-        "ujson ~=1.35",
-        "wsaccel ~=0.6",
+        "email-validator ~=1.0.4",
+        "idna ~=2.8",
     ],
     "testing_requires": [
         "pytest-cov",
@@ -49,21 +39,10 @@ data = {
         "flake8",
         "ipdb",
         "tox",
-
-        "mkdocs",
-        "mkdocs-material",
-        "pymdown-extensions",
-        "pygments",
-        "pygments-github-lexers",
     ],
-    "entry_points": "proper = proper.cli:run",
+    "entry_points": "",
 
-    "coverage_omit": [
-        "proper/base_channel.py",
-        "proper/cli.py",
-        "proper/server.py",
-        "proper/router/channel.py",
-    ],
+    "coverage_omit": [],
 
     "has_docs": True,
     "google_analytics": "UA-XXXXXXXX-X",
@@ -77,6 +56,7 @@ exclude = [
     ".git/*",
     ".venv",
     ".venv/*",
+    ".DS_Store",
 ]
 
 
@@ -90,10 +70,13 @@ def do_the_thing():
         if not mkdocs_path.exists():
             return
         mkdocs = yaml.load(mkdocs_path)
-        data["docs_nav"] = mkdocs.get("nav")
+        nav = list(filter(None, mkdocs.get("nav") or []))
+        data["docs_nav"] = nav or ["index.md"]
 
     if data["has_docs"]:
         save_current_nav()
+    else:
+        data["docs_nav"] = []
 
     copier.copy(
         # "gh:jpscaletti/mastermold.git",

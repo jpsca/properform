@@ -1,14 +1,12 @@
-import re
+from ..types import type_hex_color
 
-from ..types import type_color
-
-from .base import BaseField
+from .field import Field
 
 
 __all__ = ("HexColor", )
 
 
-class HexColor(BaseField):
+class HexColor(Field):
     """Accepts a color in hex, rgb, or rgba color and normalize it to a hex value
     of 6 digits or 6 digits plus one for alpha.
 
@@ -20,5 +18,4 @@ class HexColor(BaseField):
     - "rgba(221, 96, 89, 0.3)" -> "#dd60594c"
     """
 
-    def type(self, value):
-        return type_color(value)
+    type = type_hex_color
