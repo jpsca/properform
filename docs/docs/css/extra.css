@@ -1,0 +1,15 @@
+.md-sidebar--secondary {
+	/* margin-left: 0; */
+	display: none;
+}
+.md-content {
+	font-size: 150%;
+	max-width: 800px;
+}
+.md-typeset .highlight pre {
+	padding: .7rem .6rem;
+}
+
+.md-typeset .admonition {
+	font-size:  0.75rem;
+}
