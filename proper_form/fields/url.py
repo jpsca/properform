@@ -28,4 +28,9 @@ class URL(Field):
 
     """
 
-    type = type_url
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.error_messages.setdefault("type", "Doesn‘t look like a valid URL.")
+
+    def type(self, value):
+        return type_url(value)

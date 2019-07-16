@@ -8,4 +8,5 @@ __all__ = ("Boolean", )
 
 class Boolean(Field):
 
-    type = type_boolean
+    def type(self, value):
+        return type_boolean(value)

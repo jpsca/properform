@@ -9,5 +9,7 @@ class Splitted(Field):
     """
     def __init__(self, *args, **kwargs):
         assert not kwargs.get("collection"), "A splitted field cannot be a collection."
-        assert not kwargs.get("multiple"), "A splitted field cannot be `multiple`."
         super().__init__(*args, **kwargs)
+
+    def _pre(self, values):
+        return values

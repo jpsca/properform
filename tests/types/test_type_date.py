@@ -28,10 +28,10 @@ INVALID_DATES = [
 
 
 @pytest.mark.parametrize("value, expected", VALID_DATES)
-def test_type_url_valid(value, expected):
+def test_type_date_valid(value, expected):
     assert type_date(value) == expected
 
 
 @pytest.mark.parametrize("value", INVALID_DATES)
-def test_type_url_invalid(value):
+def test_type_date_invalid(value):
     assert type_date(value) is None

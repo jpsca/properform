@@ -53,10 +53,10 @@ INVALID_TIMES = [
 
 
 @pytest.mark.parametrize("value, expected", VALID_TIMES)
-def test_type_url_valid(value, expected):
+def test_type_hex_color_valid(value, expected):
     assert type_time(value) == expected
 
 
 @pytest.mark.parametrize("value", INVALID_TIMES)
-def test_type_url_invalid(value):
+def test_type_hex_color_invalid(value):
     assert type_time(value) is None

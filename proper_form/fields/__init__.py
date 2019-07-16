@@ -1,10 +1,11 @@
 from .boolean import *  # noqa
-from .color import *  # noqa
 from .date import *  # noqa
 from .email import *  # noqa
 from .field import *  # noqa
+from .hex_color import *  # noqa
 from .number import *  # noqa
 from .splitted_date_time import *  # noqa
 from .splitted import *  # noqa
 from .text import *  # noqa
 from .time import *  # noqa
+from .url import *  # noqa

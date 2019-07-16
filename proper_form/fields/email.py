@@ -38,4 +38,9 @@ class Email(Field):
 
     """
 
-    type = type_email
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.error_messages.setdefault("type", "Doesn‘t look like a valid e-mail.")
+
+    def type(self, value, check_dns=False, allow_smtputf8=False):
+        return type_email(value, check_dns=check_dns, allow_smtputf8=allow_smtputf8)

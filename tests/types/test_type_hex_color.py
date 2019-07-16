@@ -41,10 +41,10 @@ INVALID_COLORS = [
 
 
 @pytest.mark.parametrize("value, expected", VALID_COLORS)
-def test_type_url_valid(value, expected):
+def test_type_hex_color_valid(value, expected):
     assert type_hex_color(value) == expected
 
 
 @pytest.mark.parametrize("value", INVALID_COLORS)
-def test_type_url_invalid(value):
+def test_type_hex_color_invalid(value):
     assert type_hex_color(value) is None

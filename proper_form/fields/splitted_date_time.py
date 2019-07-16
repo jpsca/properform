@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from ..types import type_date
 from ..types import type_time
@@ -14,7 +14,27 @@ class SplittedDateTime(Splitted):
     The first value is the date and the second one the time.
     """
 
-    def type(self, values):
-        date = type_date(values[0])
-        time = type_time(values[1])
-        return datetime.combine(date, time)
+    def _pre(self, values):
+        if not self.multiple:
+            return values[:2]
+        return values
+
+    def _typecast_values(self, values):
+        pyvalues = []
+        values.append("00:00")  # So it always has a time
+        pairs = zip(values[::2], values[1::2])
+
+        for date, time in pairs:
+            try:
+                pyvalue = datetime.combine(type_date(date), type_time(time))
+            except (ValueError, TypeError, IndexError):
+                pyvalue = None
+
+            if pyvalue is None:
+                if self.strict:
+                    self._set_error("type")
+                    self.error_value = (date, time)
+                    return
+                continue
+            pyvalues.append(pyvalue)
+        return pyvalues

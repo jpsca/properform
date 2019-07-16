@@ -3,7 +3,7 @@ from ..types import type_hex_color
 from .field import Field
 
 
-__all__ = ("HexColor", )
+__all__ = ("HexColor",)
 
 
 class HexColor(Field):
@@ -18,4 +18,11 @@ class HexColor(Field):
     - "rgba(221, 96, 89, 0.3)" -> "#dd60594c"
     """
 
-    type = type_hex_color
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.error_messages.setdefault(
+            "type", "Enter color in #hex, rgb() or rgba() format."
+        )
+
+    def type(self, value):
+        return type_hex_color(value)
