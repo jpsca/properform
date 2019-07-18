@@ -70,8 +70,10 @@ class Text(object):
             self.sep = sep
             multiple = False
         self.multiple = multiple
-        self.min_num_values = min_num_values
-        self.max_num_values = max_num_values
+
+        if collection or multiple:
+            self.min_num_values = min_num_values
+            self.max_num_values = max_num_values
 
         self.extra = extra
         self.clear_error()
@@ -114,10 +116,10 @@ class Text(object):
     def _pre(self, values):
         if self.collection:
             rxsep = r"\s*%s\s*" % re.escape(self.sep.strip())
-            return re.split(values[0], rxsep)
-        elif not self.multiple:
-            return values[:1]
-        return values
+            return re.split(rxsep, values[0])
+        elif self.multiple:
+            return values
+        return values[:1]
 
     def _post(self, values):
         if self.collection:
@@ -145,12 +147,12 @@ class Text(object):
         return pyvalues
 
     def _validate_values(self, pyvalues):
-        if self.multiple:
+        if self.collection or self.multiple:
             num_values = len(pyvalues)
-            if self.min_num_values is not None and self.min_num_values < num_values:
+            if self.min_num_values is not None and self.min_num_values > num_values:
                 self._set_error("min_num_values", num=self.min_num_values)
                 return
-            if self.max_num_values is not None and self.max_num_values > num_values:
+            if self.max_num_values is not None and self.max_num_values < num_values:
                 self._set_error("max_num_values", num=self.max_num_values)
                 return
 
@@ -162,5 +164,5 @@ class Text(object):
     def _set_error(self, name, **kwargs):
         msg = self.error_messages.get(name) or default_error_messages.get(name, "")
         for key, repl in kwargs.items():
-            msg = msg.replace("{" + key + "}", repl)
+            msg = msg.replace("{" + key + "}", str(repl))
         self.error = msg or name

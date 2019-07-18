@@ -10,6 +10,7 @@ VALID_URLS = [
     ("https://example.com", "https://example.com"),
     ("example.com/a/b/c", "http://example.com/a/b/c"),
     ("mañana.co/yes", "http://mañana.co/yes"),
+    ("Königsgäßchen.com", "http://königsgäßchen.com"),
     ("localhost:5000/login", "http://localhost:5000/login"),
     ("127.0.0.1", "http://127.0.0.1"),
 ]

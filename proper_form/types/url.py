@@ -49,7 +49,7 @@ def type_url(value, require_tld=False):
 
     try:
         domain = idna.uts46_remap(domain, std3_rules=False, transitional=False)
-    except idna.IDNAError:
+    except idna.IDNAError:  # pragma:no cover
         return None
 
     return urlunsplit((scheme, domain, path, query, fragment))
