@@ -1,12 +1,12 @@
 from ..types import type_hex_color
 
-from .field import Field
+from .text import Text
 
 
 __all__ = ("HexColor",)
 
 
-class HexColor(Field):
+class HexColor(Text):
     """Accepts a color in hex, rgb, or rgba color and normalize it to a hex value
     of 6 digits or 6 digits plus one for alpha.
 

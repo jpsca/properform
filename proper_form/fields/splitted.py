@@ -1,10 +1,10 @@
-from .field import Field
+from .text import Text
 
 
 __all__ = ("Splitted", )
 
 
-class Splitted(Field):
+class Splitted(Text):
     """Doesn't allow `multiple` or `collection` to be True.
     """
     def __init__(self, *args, **kwargs):

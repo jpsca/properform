@@ -1,10 +1,10 @@
-from .field import Field
+from .text import Text
 
 
 __all__ = ("Integer", "Float", )
 
 
-class Integer(Field):
+class Integer(Text):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -14,7 +14,7 @@ class Integer(Field):
         return int(value)
 
 
-class Float(Field):
+class Float(Text):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

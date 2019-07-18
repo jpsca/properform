@@ -1,7 +1,6 @@
 from .boolean import *  # noqa
 from .date import *  # noqa
 from .email import *  # noqa
-from .field import *  # noqa
 from .hex_color import *  # noqa
 from .number import *  # noqa
 from .splitted_date_time import *  # noqa

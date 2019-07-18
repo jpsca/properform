@@ -1,4 +1,4 @@
-from .field import Field
+from .text import Text
 
 from ..types import type_email
 
@@ -6,7 +6,7 @@ from ..types import type_email
 __all__ = ("Email", )
 
 
-class Email(Field):
+class Email(Text):
     """Validates and normalize an email address using the
     JoshData/python-email-validator library.
 

@@ -1,12 +1,12 @@
 from ..types import type_boolean
 
-from .field import Field
+from .text import Text
 
 
 __all__ = ("Boolean", )
 
 
-class Boolean(Field):
+class Boolean(Text):
 
     def type(self, value):
         return type_boolean(value)

@@ -1,12 +1,12 @@
 from ..types import type_time
 
-from .field import Field
+from .text import Text
 
 
 __all__ = ("Time", )
 
 
-class Time(Field):
+class Time(Text):
     """A simple 12-hours time field, seconds optional. Examples: "5:03 AM", "11:00 PM",
     "4:20:16 PM".
     """

@@ -1,12 +1,12 @@
 from ..types import type_date
 
-from .field import Field
+from .text import Text
 
 
 __all__ = ("Date", )
 
 
-class Date(Field):
+class Date(Text):
     """A simple date field formatted as `YYYY-MM-dd`. Example: "1980-07-28".
     """
 

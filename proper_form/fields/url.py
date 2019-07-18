@@ -1,4 +1,4 @@
-from .field import Field
+from .text import Text
 
 from ..types import type_url
 
@@ -6,7 +6,7 @@ from ..types import type_url
 __all__ = ("URL", )
 
 
-class URL(Field):
+class URL(Text):
     """Validates and normalize an URL address.
 
     Even if the format is valid, it cannot guarantee that the URL is real. The
