@@ -56,6 +56,14 @@ def test_fields(Field, valid, expected, invalid, error):
     assert field.error_value == invalid
 
 
+@pytest.mark.parametrize("Field, _valid, _expected, invalid, _error", TEST_DATA)
+def test_required_filtered_values(Field, _valid, _expected, invalid, _error):
+    field = Field(required=True, strict=False)
+
+    assert field.validate([invalid]) is None
+    assert field.error == "This field is required."
+
+
 @pytest.mark.parametrize("Field, valid, expected, invalid, error", TEST_DATA)
 def test_fields_single(Field, valid, expected, invalid, error):
     field = Field()
@@ -82,8 +90,8 @@ def test_fields_multiple(Field, valid, expected, invalid, error):
     assert field.error_value == invalid
 
 
-@pytest.mark.parametrize("Field, valid, expected, invalid, error", TEST_DATA)
-def test_fields_single_not_strict(Field, valid, expected, invalid, error):
+@pytest.mark.parametrize("Field, valid, _expected, invalid, _error", TEST_DATA)
+def test_fields_single_not_strict(Field, valid, _expected, invalid, _error):
     field = Field(strict=False)
 
     assert field.validate([invalid]) is None
@@ -91,8 +99,8 @@ def test_fields_single_not_strict(Field, valid, expected, invalid, error):
     assert field.error_value is None
 
 
-@pytest.mark.parametrize("Field, valid, expected, invalid, error", TEST_DATA)
-def test_fields_multiple_not_strict(Field, valid, expected, invalid, error):
+@pytest.mark.parametrize("Field, valid, expected, invalid, _error", TEST_DATA)
+def test_fields_multiple_not_strict(Field, valid, expected, invalid, _error):
     field = Field(multiple=True, strict=False)
 
     assert field.validate([valid, invalid, valid]) == [expected, expected]
@@ -211,3 +219,22 @@ def test_splitted_date_time_multiple_not_strict():
     assert result == expected
     assert field.error is None
     assert field.error_value is None
+
+
+def test_splitted_fields_cannot_be_a_collection():
+    with pytest.raises(AssertionError):
+        f.SplittedDateTime(collection=True)
+
+    with pytest.raises(AssertionError):
+        f.Splitted(collection=True)
+
+
+def test_splitted_fields_take_all_values():
+    class MyLittleSplitted(f.Splitted):
+        def _typecast_values(self, values):
+            self.called_with = values[:]
+            return values
+
+    field = MyLittleSplitted()
+    assert field.validate(["a", "b", "c", "d"]) == "a"
+    assert field.called_with == ["a", "b", "c", "d"]

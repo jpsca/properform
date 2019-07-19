@@ -142,7 +142,7 @@ class Text(object):
                     self._set_error("type")
                     self.error_value = value
                     return
-                continue
+                continue  # pragma: no cover
             pyvalues.append(pyvalue)
         return pyvalues
 

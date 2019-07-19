@@ -1,6 +1,5 @@
-from unittest.mock import Mock
-
 from proper_form.fields import Text
+from proper_form.validators import Validator
 
 
 def test_prepare_called():
@@ -107,3 +106,35 @@ def test_max_num_values_custom_error_message():
     field = Text(multiple=True, max_num_values=2, error_messages={"max_num_values": "Too much"})
     assert field.validate(["a", "b", "c"]) is None
     assert field.error == "Too much"
+
+
+class VTrue(Validator):
+    called = False
+
+    def __call__(self, values):
+        self.called = True
+        return True
+
+
+class VFalse(Validator):
+    called = False
+
+    def __call__(self, values):
+        self.called = True
+        return False
+
+
+def test_validators_called():
+    v1 = VTrue(message="v1")
+    v2 = VTrue(message="v2")
+    v3 = VFalse(message="v3")
+    v4 = VTrue(message="v4")
+
+    field = Text(v1, v2, v3, v4)
+    assert field.validate(["value"]) is None
+    assert field.error == "v3"
+
+    assert v1.called
+    assert v2.called
+    assert v3.called
+    assert not v4.called

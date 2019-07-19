@@ -35,6 +35,6 @@ class SplittedDateTime(Splitted):
                     self._set_error("type")
                     self.error_value = (date, time)
                     return
-                continue
+                continue  # pragma: no cover
             pyvalues.append(pyvalue)
         return pyvalues
