@@ -28,6 +28,8 @@ class URL(Text):
 
     """
 
+    input_type = "url"
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.error_messages.setdefault("type", "Doesn‘t look like a valid URL.")

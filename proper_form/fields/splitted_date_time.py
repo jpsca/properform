@@ -14,6 +14,12 @@ class SplittedDateTime(Splitted):
     The first value is the date and the second one the time.
     """
 
+    def prepare(self, object_value):
+        return [
+            object_value.date().strftime("%Y-%m-%d"),
+            object_value.time().strftime("%r"),
+        ]
+
     def _pre(self, values):
         if not self.multiple:
             return values[:2]

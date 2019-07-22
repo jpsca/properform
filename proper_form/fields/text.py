@@ -12,10 +12,6 @@ default_error_messages = {
 }
 
 
-def identity(value, **kwargs):
-    return value
-
-
 class Text(object):
     r"""
 
@@ -31,7 +27,10 @@ class Text(object):
 
     """
 
-    value = None  # Object value
+    prefix = "form"
+    object_value = None
+    input_values = None
+    input_type = "text"
 
     def __init__(
         self,
@@ -42,8 +41,8 @@ class Text(object):
         strict=True,
         error_messages=None,
 
-        prepare=identity,
-        clean=identity,
+        prepare=None,
+        clean=None,
 
         collection=False,
         sep=",",
@@ -62,8 +61,10 @@ class Text(object):
         self.strict = strict
         self.error_messages = error_messages or {}
 
-        self.prepare = prepare
-        self.clean = clean
+        if prepare is not None:
+            self.prepare = prepare
+        if clean is not None:
+            self.clean = clean
 
         self.collection = collection
         if collection:
@@ -78,34 +79,39 @@ class Text(object):
         self.extra = extra
         self.clear_error()
 
+    def prepare(self, object_value):
+        return object_value
+
+    def clean(self, pyvalues):
+        return pyvalues
+
     def clear_error(self):
         self.error = None
         self.error_value = None
 
-    def validate(self, values):
+    def validate(self):
         self.clear_error()
+        values = [value.strip() for value in self.input_values or []]
 
-        values = self.prepare(values)
-        values = [value.strip() for value in values]
-
-        if self.required and not values:
-            self._set_error("required")
-            return
+        if not values:
+            if self.required:
+                self._set_error("required")
+            return None
 
         values = self._pre(values)
-
         pyvalues = self._typecast_values(values)
         if self.error:
-            return
+            return None
 
         # Typecasting with `strict=False` could've emptied the values without erroring.
-        if self.required and not pyvalues:
+        # An empty string is only an error if the field is required
+        if (not pyvalues or pyvalues[0] == "") and self.required:
             self._set_error("required")
-            return
+            return None
 
         self._validate_values(pyvalues)
         if self.error:
-            return
+            return None
 
         pyvalues = self._post(pyvalues)
         return self.clean(pyvalues)

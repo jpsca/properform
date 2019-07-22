@@ -38,6 +38,8 @@ class Email(Text):
 
     """
 
+    input_type = "email"
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.error_messages.setdefault("type", "Doesn‘t look like a valid e-mail.")

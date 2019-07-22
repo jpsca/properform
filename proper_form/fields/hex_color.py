@@ -18,6 +18,8 @@ class HexColor(Text):
     - "rgba(221, 96, 89, 0.3)" -> "#dd60594c"
     """
 
+    input_type = "color"
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.error_messages.setdefault(
