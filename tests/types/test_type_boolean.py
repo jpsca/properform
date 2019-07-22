@@ -7,7 +7,7 @@ TRUE_VALUES = ["1", "-1", "nu-hu", "foobar", "very false", "not a chance", "mayb
 
 FALSE_VALUES = [
     "", "0",
-    "None", "none",
+    None, "None", "none",
     "no", "NO", "No", "nO",
     "Nope", "nah",
     "off", "Off",

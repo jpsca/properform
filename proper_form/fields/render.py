@@ -50,9 +50,6 @@ def get_html_attrs(attrs=None):
     return " ".join(attrs_list)
 
 
-# "<label {}>{}</label>"
-
-
 class RenderedField(object):
 
     @property
@@ -67,10 +64,11 @@ class RenderedField(object):
     def value(self):
         return self.values[0] if self.values else None
 
+    @property
     def auto_id(self):
         """Generates a unique value for using the id attribute of the rendered field.
         """
-        return "{}_{}_".format(self.prefix, self.name)
+        return "{}_{}".format(self.prefix, self.name)
 
     def as_input(self, *, label=None, **attrs):
         """Renders the field as a `<input type="text">` element, although the type
@@ -83,13 +81,14 @@ class RenderedField(object):
         """
         attrs.setdefault("name", self.name)
         attrs.setdefault("required", self.required)
-        attrs.setdefault("id", self.auto_id())
         attrs.setdefault("type", self.input_type)
         attrs.setdefault("value", self.value)
+        if label:
+            attrs.setdefault("id", self.auto_id)
         html = "<input {}>".format(get_html_attrs(attrs))
         if label:
             label = escape_silent(str(label))
-            html = '<label for="{}">{}</label>/n{}'.format(attrs["id"], label, html)
+            html = '<label for="{}">{}</label>\n{}'.format(attrs["id"], label, html)
         return Markup(html)
 
     def as_textarea(self, *, label=None, **attrs):
@@ -102,13 +101,14 @@ class RenderedField(object):
         """
         attrs.setdefault("name", self.name)
         attrs.setdefault("required", self.required)
-        attrs.setdefault("id", self.auto_id())
+        if label:
+            attrs.setdefault("id", self.auto_id)
         html_attrs = get_html_attrs(attrs)
-        value = attrs.get("value", self.value)
+        value = attrs.pop("value", None) or self.value
         html = "<textarea {}>{}</textarea>".format(html_attrs, value)
         if label:
             label = escape_silent(str(label))
-            html = '<label for="{}">{}</label>/n{}'.format(attrs["id"], label, html)
+            html = '<label for="{}">{}</label>\n{}'.format(attrs["id"], label, html)
         return Markup(html)
 
     def as_checkbox(self, *, label=None, **attrs):
@@ -121,13 +121,46 @@ class RenderedField(object):
         """
         attrs.setdefault("name", self.name)
         attrs["type"] = "checkbox"
-        if type_boolean(self.value):
-            attrs.setdefault("checked", True)
         attrs.setdefault("required", self.required)
+
+        value = attrs.get("value")
+        if value is not None:
+            attrs.setdefault("checked", value in self.values)
+        else:
+            attrs.setdefault("checked", type_boolean(self.value))
+
         html = "<input {}>".format(get_html_attrs(attrs))
+
         if label:
             label = escape_silent(str(label))
             html = '<label class="checkbox">{} {}</label>'.format(html, label)
+
+        return Markup(html)
+
+    def as_radio(self, *, label=None, **attrs):
+        """Renders the field as a `<input type="radio">` tag.
+
+        kwargs (dict):
+            Named parameters used to generate the HTML attributes.
+            It follows the same rules as `get_html_attrs`
+
+        """
+        attrs.setdefault("name", self.name)
+        attrs["type"] = "radio"
+        attrs.setdefault("required", self.required)
+
+        value = attrs.get("value")
+        if value is not None:
+            attrs.setdefault("checked", value in self.values)
+        else:
+            attrs.setdefault("checked", type_boolean(self.value))
+
+        html = "<input {}>".format(get_html_attrs(attrs))
+
+        if label:
+            label = escape_silent(str(label))
+            html = '<label class="radio">{} {}</label>'.format(html, label)
+
         return Markup(html)
 
     def as_select_tag(self, **attrs):
@@ -159,7 +192,8 @@ class RenderedField(object):
             It follows the same rules as `get_html_attrs`
 
         """
-        attrs.setdefault("id", self.auto_id())
+        if label:
+            attrs.setdefault("id", self.auto_id)
         html = [str(self.as_select_tag(**attrs))]
 
         for item in items:
@@ -174,8 +208,12 @@ class RenderedField(object):
         html.append("</select>")
         if label:
             label = escape_silent(str(label))
-            html = '<label class="radiobutton">{} {}</label>'.format(html, label)
+            html = '<label for="{}">{}</label>\n{}'.format(attrs["id"], label, html)
         return Markup("\n".join(html))
+
+    def render_attrs(self, **attrs):
+        html = get_html_attrs(attrs)
+        return Markup(html)
 
     def render_optgroup(self, label, items, values=None, **attrs):
         """Renders an <optgroup> tag with <options>.
@@ -229,19 +267,3 @@ class RenderedField(object):
         label = escape_silent(str(label))
         tag = "<option {}>{}</option>".format(get_html_attrs(attrs), label)
         return Markup(tag)
-
-    def render_radiobutton(self, item, values=None, **attrs):
-        values = values or []
-        if values:
-            if not isinstance(values, (list, tuple)):
-                values = [values]
-
-        val, label = item[:2]
-        attrs.setdefault("value", val)
-        attrs["selected"] = val in values or str(val) in values
-        attrs["type"] = "radio"
-        label = escape_silent(str(label))
-        html = '<label class="radiobutton"><input {}> {}</label>'.format(
-            get_html_attrs(attrs), label
-        )
-        return Markup(html)

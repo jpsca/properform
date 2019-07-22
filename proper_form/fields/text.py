@@ -1,5 +1,7 @@
 import re
 
+from .render import RenderedField
+
 
 __all__ = ("Text", )
 
@@ -12,7 +14,7 @@ default_error_messages = {
 }
 
 
-class Text(object):
+class Text(RenderedField):
     r"""
 
     Arguments are:
@@ -26,6 +28,21 @@ class Text(object):
             Ignored otherwise
 
     """
+
+    __slots__ = (
+        "error",
+        "validators",
+        "name",
+        "required",
+        "strict",
+        "error_messages",
+        "collection",
+        "sep",
+        "multiple",
+        "min_num_values",
+        "max_num_values",
+        "extra",
+    )
 
     prefix = "form"
     object_value = None
@@ -56,7 +73,7 @@ class Text(object):
 
         self.validators = validators
 
-        self.name = name
+        self.name = name or ""
         self.required = required
         self.strict = strict
         self.error_messages = error_messages or {}
@@ -80,7 +97,7 @@ class Text(object):
         self.clear_error()
 
     def prepare(self, object_value):
-        return object_value
+        return [object_value]
 
     def clean(self, pyvalues):
         return pyvalues

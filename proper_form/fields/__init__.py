@@ -1,6 +1,7 @@
 from .boolean import *  # noqa
 from .date import *  # noqa
 from .email import *  # noqa
+from .file import *  # noqa
 from .float import *  # noqa
 from .hex_color import *  # noqa
 from .integer import *  # noqa
