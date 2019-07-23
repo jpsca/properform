@@ -96,6 +96,18 @@ class Text(RenderedField):
         self.extra = extra
         self.clear_error()
 
+    @property
+    def values(self):
+        if self.input_values is not None:
+            return self.input_values
+        if self.object_value is not None:
+            return self.prepare(self.object_value)
+        return []
+
+    @property
+    def value(self):
+        return self.values[0] if self.values else None
+
     def prepare(self, object_value):
         return [object_value]
 
@@ -108,7 +120,7 @@ class Text(RenderedField):
 
     def validate(self):
         self.clear_error()
-        values = [value.strip() for value in self.input_values or []]
+        values = [str(value).strip() for value in self.values or []]
 
         if not values:
             if self.required:

@@ -1,3 +1,5 @@
+from datetime import date
+
 from ..types import type_date
 
 from .text import Text
@@ -19,7 +21,7 @@ class Month(Text):
         )
 
     def prepare(self, object_value):
-        return object_value.date().strftime("%Y-%m")
+        return [object_value.strftime("%Y-%m")]
 
     def type(self, value):
         value = str(value or "") + "-01"

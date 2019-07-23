@@ -20,7 +20,14 @@ class Time(Text):
         )
 
     def prepare(self, object_value):
-        return object_value.time().strftime("%r")
+        value = "{}:{:02d}".format(
+            object_value.hour if object_value.hour <= 12 else object_value.hour - 12,
+            object_value.minute
+        )
+        if object_value.second:
+            value += ":{:02d}".format(object_value.second)
+        value += object_value.strftime(" %p")
+        return [value]
 
     def type(self, value):
         return type_time(value)

@@ -19,7 +19,7 @@ class Date(Text):
         )
 
     def prepare(self, object_value):
-        return object_value.date().strftime("%Y-%m-%d")
+        return [object_value.strftime("%Y-%m-%d")]
 
     def type(self, value):
         return type_date(value)

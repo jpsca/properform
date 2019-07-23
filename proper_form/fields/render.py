@@ -50,25 +50,25 @@ def get_html_attrs(attrs=None):
     return " ".join(attrs_list)
 
 
+def in_(value, values):
+    """Test if the value is in a list of values, or if the value as string is, or
+    if the value is one of the values as strings.
+    """
+    ext_values = values + [str(val) for val in values]
+    return value in ext_values or str(value) in ext_values
+
+
 class RenderedField(object):
-
-    @property
-    def values(self):
-        if self.input_values is not None:
-            return self.input_values or [""]
-        if self.object_value is not None:
-            return self.prepare(self.object_value) or [""]
-        return [""]
-
-    @property
-    def value(self):
-        return self.values[0] if self.values else None
 
     @property
     def auto_id(self):
         """Generates a unique value for using the id attribute of the rendered field.
         """
         return "{}_{}".format(self.prefix, self.name)
+
+    def render_attrs(self, **attrs):
+        html = get_html_attrs(attrs)
+        return Markup(html)
 
     def as_input(self, *, label=None, **attrs):
         """Renders the field as a `<input type="text">` element, although the type
@@ -82,7 +82,7 @@ class RenderedField(object):
         attrs.setdefault("name", self.name)
         attrs.setdefault("required", self.required)
         attrs.setdefault("type", self.input_type)
-        attrs.setdefault("value", self.value)
+        attrs.setdefault("value", self.value or "")
         if label:
             attrs.setdefault("id", self.auto_id)
         html = "<input {}>".format(get_html_attrs(attrs))
@@ -104,7 +104,7 @@ class RenderedField(object):
         if label:
             attrs.setdefault("id", self.auto_id)
         html_attrs = get_html_attrs(attrs)
-        value = attrs.pop("value", None) or self.value
+        value = attrs.pop("value", None) or self.value or ""
         html = "<textarea {}>{}</textarea>".format(html_attrs, value)
         if label:
             label = escape_silent(str(label))
@@ -125,7 +125,7 @@ class RenderedField(object):
 
         value = attrs.get("value")
         if value is not None:
-            attrs.setdefault("checked", value in self.values)
+            attrs.setdefault("checked", in_(value, self.values))
         else:
             attrs.setdefault("checked", type_boolean(self.value))
 
@@ -151,7 +151,7 @@ class RenderedField(object):
 
         value = attrs.get("value")
         if value is not None:
-            attrs.setdefault("checked", value in self.values)
+            attrs.setdefault("checked", in_(value, self.values))
         else:
             attrs.setdefault("checked", type_boolean(self.value))
 
@@ -163,7 +163,7 @@ class RenderedField(object):
 
         return Markup(html)
 
-    def as_select_tag(self, **attrs):
+    def as_select_tag(self, *, label=None, **attrs):
         """Renders *just* the opening `<select>` tag for a field, not any options
         nor the closing "</select>".
 
@@ -178,8 +178,15 @@ class RenderedField(object):
         attrs.setdefault("name", self.name)
         attrs.setdefault("required", self.required)
         attrs.setdefault("multiple", self.multiple)
-        tag = "<select {}>".format(get_html_attrs(attrs))
-        return Markup(tag)
+        if label:
+            attrs.setdefault("id", self.auto_id)
+        html = "<select {}>".format(get_html_attrs(attrs))
+
+        if label:
+            label = escape_silent(str(label))
+            html = '<label for="{}">{}</label>\n{}'.format(attrs["id"], label, html)
+
+        return Markup(html)
 
     def as_select(self, items, *, label=None, **attrs):
         """Renders the field as a `<select>` tag.
@@ -192,28 +199,19 @@ class RenderedField(object):
             It follows the same rules as `get_html_attrs`
 
         """
-        if label:
-            attrs.setdefault("id", self.auto_id)
-        html = [str(self.as_select_tag(**attrs))]
+
+        html = [str(self.as_select_tag(label=label, **attrs))]
 
         for item in items:
-            if isinstance(item, (list, tuple)):
-                if not item:
-                    continue
-                tags = self.render_optgroup(item[0], item[1:], self.values)
+            label, value = item[:2]
+            if isinstance(value, (list, tuple)):
+                tags = self.render_optgroup(label, value, self.values)
             else:
                 tags = self.render_option(item, self.values)
             html.append(str(tags))
 
         html.append("</select>")
-        if label:
-            label = escape_silent(str(label))
-            html = '<label for="{}">{}</label>\n{}'.format(attrs["id"], label, html)
         return Markup("\n".join(html))
-
-    def render_attrs(self, **attrs):
-        html = get_html_attrs(attrs)
-        return Markup(html)
 
     def render_optgroup(self, label, items, values=None, **attrs):
         """Renders an <optgroup> tag with <options>.
@@ -246,7 +244,7 @@ class RenderedField(object):
         """Renders an <option> tag
 
         item (tuple|list):
-            A (value, label) tuple.
+            A (value, label) or (value, label, {attrs}) tuple.
 
         values (any|list|None):
             A value or a list of "selected" values.
@@ -257,13 +255,14 @@ class RenderedField(object):
 
         """
         values = values or []
-        if values:
-            if not isinstance(values, (list, tuple)):
-                values = [values]
+        assert isinstance(values, (list, tuple))
 
-        val, label = item[:2]
-        attrs.setdefault("value", val)
-        attrs["selected"] = val in values or str(val) in values
+        label, value = item[:2]
+        if len(item) > 2:
+            attrs.update(item[2])
+
+        attrs.setdefault("value", value)
+        attrs["selected"] = in_(value, values)
         label = escape_silent(str(label))
         tag = "<option {}>{}</option>".format(get_html_attrs(attrs), label)
         return Markup(tag)

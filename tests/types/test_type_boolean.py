@@ -11,7 +11,7 @@ FALSE_VALUES = [
     "no", "NO", "No", "nO",
     "Nope", "nah",
     "off", "Off",
-    "false", "False",
+    False, "false", "False",
 ]
 
 
