@@ -1,5 +1,3 @@
-from datetime import date
-
 from ..types import type_date
 
 from .text import Text
@@ -9,7 +7,7 @@ __all__ = ("Month", )
 
 
 class Month(Text):
-    """A simple date field formatted as `YYYY-MM-dd`. Example: "1980-07-28".
+    """A simple month field formatted as `YYYY-MM`. Example: "1980-07".
     """
 
     input_type = "month"
