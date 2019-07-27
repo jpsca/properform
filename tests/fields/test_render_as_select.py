@@ -22,7 +22,7 @@ def test_render_as_select_tag_attrs():
 def test_render_as_select_tag_with_label():
     field = f.Integer(name="name")
     assert field.as_select_tag(label="Choose one") == \
-        '<label for="form_name">Choose one</label>\n<select id="form_name" name="name">'
+        '<label for="name">Choose one</label>\n<select id="name" name="name">'
 
 
 def test_text_render_as_select():

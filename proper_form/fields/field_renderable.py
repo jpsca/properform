@@ -6,65 +6,10 @@ from markupsafe import Markup, escape_silent
 from ..types import type_boolean
 
 
-rx_spaces = re.compile(r"\s+")
+__all__ = ("FieldRenderable", )
 
 
-def get_html_attrs(attrs=None):
-    """Generate HTML attributes from the provided attributes.
-
-    - To provide consistent output, the attributes and properties are sorted by name
-    and rendered liek this: `<sorted attributes> + <sorted properties>`.
-    - "className" can be used intead of "class", to avoid clashes with the
-    reserved word.
-    - Also, all underscores are translated to regular dashes.
-    - Set properties with a `True` value.
-
-    >>> get_html_attrs({
-    ...     "id": "text1",
-    ...     "className": "myclass",
-    ...     "data_id": 1,
-    ...     "checked": True,
-    ... })
-    'class="myclass" data-id="1" id="text1" checked'
-
-    """
-    attrs = attrs or {}
-    attrs_list = []
-    props_list = []
-
-    classes = (attrs.pop("class", "") + " " + attrs.pop("className", "")).strip()
-    if classes:
-        attrs["class"] = " ".join(rx_spaces.split(classes))
-
-    for key, value in attrs.items():
-        key = key.replace("_", "-")
-        if value is True:
-            props_list.append(key)
-        elif value not in (False, None):
-            value = quoteattr(str(value))
-            attrs_list.append("{}={}".format(key, value))
-
-    attrs_list.sort()
-    props_list.sort()
-    attrs_list.extend(props_list)
-    return " ".join(attrs_list)
-
-
-def in_(value, values):
-    """Test if the value is in a list of values, or if the value as string is, or
-    if the value is one of the values as strings.
-    """
-    ext_values = values + [str(val) for val in values]
-    return value in ext_values or str(value) in ext_values
-
-
-class RenderedField(object):
-
-    @property
-    def auto_id(self):
-        """Generates a unique value for using the id attribute of the rendered field.
-        """
-        return "{}_{}".format(self.prefix, self.name)
+class FieldRenderable(object):
 
     def render_attrs(self, **attrs):
         html = get_html_attrs(attrs)
@@ -84,7 +29,7 @@ class RenderedField(object):
         attrs.setdefault("type", self.input_type)
         attrs.setdefault("value", self.value or "")
         if label:
-            attrs.setdefault("id", self.auto_id)
+            attrs.setdefault("id", self.name)
         html = "<input {}>".format(get_html_attrs(attrs))
         if label:
             label = escape_silent(str(label))
@@ -102,7 +47,7 @@ class RenderedField(object):
         attrs.setdefault("name", self.name)
         attrs.setdefault("required", self.required)
         if label:
-            attrs.setdefault("id", self.auto_id)
+            attrs.setdefault("id", self.name)
         html_attrs = get_html_attrs(attrs)
         value = attrs.pop("value", None) or self.value or ""
         html = "<textarea {}>{}</textarea>".format(html_attrs, value)
@@ -179,7 +124,7 @@ class RenderedField(object):
         attrs.setdefault("required", self.required)
         attrs.setdefault("multiple", self.multiple)
         if label:
-            attrs.setdefault("id", self.auto_id)
+            attrs.setdefault("id", self.name)
         html = "<select {}>".format(get_html_attrs(attrs))
 
         if label:
@@ -266,3 +211,55 @@ class RenderedField(object):
         label = escape_silent(str(label))
         tag = "<option {}>{}</option>".format(get_html_attrs(attrs), label)
         return Markup(tag)
+
+
+rx_spaces = re.compile(r"\s+")
+
+
+def get_html_attrs(attrs=None):
+    """Generate HTML attributes from the provided attributes.
+
+    - To provide consistent output, the attributes and properties are sorted by name
+    and rendered liek this: `<sorted attributes> + <sorted properties>`.
+    - "className" can be used intead of "class", to avoid clashes with the
+    reserved word.
+    - Also, all underscores are translated to regular dashes.
+    - Set properties with a `True` value.
+
+    >>> get_html_attrs({
+    ...     "id": "text1",
+    ...     "className": "myclass",
+    ...     "data_id": 1,
+    ...     "checked": True,
+    ... })
+    'class="myclass" data-id="1" id="text1" checked'
+
+    """
+    attrs = attrs or {}
+    attrs_list = []
+    props_list = []
+
+    classes = (attrs.pop("class", "") + " " + attrs.pop("className", "")).strip()
+    if classes:
+        attrs["class"] = " ".join(rx_spaces.split(classes))
+
+    for key, value in attrs.items():
+        key = key.replace("_", "-")
+        if value is True:
+            props_list.append(key)
+        elif value not in (False, None):
+            value = quoteattr(str(value))
+            attrs_list.append("{}={}".format(key, value))
+
+    attrs_list.sort()
+    props_list.sort()
+    attrs_list.extend(props_list)
+    return " ".join(attrs_list)
+
+
+def in_(value, values):
+    """Test if the value is in a list of values, or if the value as string is, or
+    if the value is one of the values as strings.
+    """
+    ext_values = values + [str(val) for val in values]
+    return value in ext_values or str(value) in ext_values

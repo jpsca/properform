@@ -98,6 +98,41 @@ def test_field_single(Field, valid, expected, invalid, error):
     assert field.error_value is None
 
 
+@pytest.mark.parametrize("Field, valid, expected, invalid, error", TEST_DATA)
+def test_fields_multiple(Field, valid, expected, invalid, error):
+    field = Field(multiple=True)
+
+    field.input_values = [valid, valid, valid]
+    assert field.validate() == [expected, expected, expected]
+    assert field.error is None
+    assert field.error_value is None
+
+    field.input_values = [valid, invalid, valid]
+    assert field.validate() is None
+    assert field.error == error
+    assert field.error_value == invalid
+
+
+@pytest.mark.parametrize("Field, valid, _expected, invalid, _error", TEST_DATA)
+def test_fields_single_not_strict(Field, valid, _expected, invalid, _error):
+    field = Field(strict=False)
+
+    field.input_values = [invalid]
+    assert field.validate() is None
+    assert field.error is None
+    assert field.error_value is None
+
+
+@pytest.mark.parametrize("Field, valid, expected, invalid, _error", TEST_DATA)
+def test_fields_multiple_not_strict(Field, valid, expected, invalid, _error):
+    field = Field(multiple=True, strict=False)
+
+    field.input_values = [valid, invalid, valid]
+    assert field.validate() == [expected, expected]
+    assert field.error is None
+    assert field.error_value is None
+
+
 TEST_DATA_PREPARE = [
     (
         f.Date,
@@ -153,39 +188,23 @@ def test_fields_prepare(Field, expected, object_value):
     assert field.error_value is None
 
 
-@pytest.mark.parametrize("Field, valid, expected, invalid, error", TEST_DATA)
-def test_fields_multiple(Field, valid, expected, invalid, error):
-    field = Field(multiple=True)
+@pytest.mark.parametrize("Field, expected, object_value", TEST_DATA_PREPARE)
+def test_fields_updated(Field, expected, object_value):
+    field = Field()
 
-    field.input_values = [valid, valid, valid]
-    assert field.validate() == [expected, expected, expected]
-    assert field.error is None
-    assert field.error_value is None
-
-    field.input_values = [valid, invalid, valid]
-    assert field.validate() is None
-    assert field.error == error
-    assert field.error_value == invalid
+    field.input_values = expected
+    assert field.validate() == object_value
+    assert field.updated is True
 
 
-@pytest.mark.parametrize("Field, valid, _expected, invalid, _error", TEST_DATA)
-def test_fields_single_not_strict(Field, valid, _expected, invalid, _error):
-    field = Field(strict=False)
+@pytest.mark.parametrize("Field, expected, object_value", TEST_DATA_PREPARE)
+def test_fields_not_updated(Field, expected, object_value):
+    field = Field()
 
-    field.input_values = [invalid]
-    assert field.validate() is None
-    assert field.error is None
-    assert field.error_value is None
-
-
-@pytest.mark.parametrize("Field, valid, expected, invalid, _error", TEST_DATA)
-def test_fields_multiple_not_strict(Field, valid, expected, invalid, _error):
-    field = Field(multiple=True, strict=False)
-
-    field.input_values = [valid, invalid, valid]
-    assert field.validate() == [expected, expected]
-    assert field.error is None
-    assert field.error_value is None
+    field.input_values = expected
+    field.object_value = object_value
+    assert field.validate() == object_value
+    assert field.updated is False
 
 
 def test_text():
