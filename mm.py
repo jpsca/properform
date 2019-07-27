@@ -12,7 +12,7 @@ data = {
     "title": "Proper Form",
     "name": "proper_form",
     "pypi_name": "proper_form",
-    "version": "1.190730",
+    "version": "0.190726",
     "author": "Juan-Pablo Scaletti",
     "author_email": "juanpablo@jpscaletti.com",
     "description": "A not-terrible Python form library.",
@@ -29,6 +29,7 @@ data = {
     "install_requires": [
         "email-validator ~=1.0.4",
         "idna ~=2.8",
+        "markupsafe ~=1.1.1",
     ],
     "testing_requires": [
         "pytest-cov",
