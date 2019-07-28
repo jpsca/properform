@@ -14,7 +14,6 @@ class Form(object):
     errors = None
     valid_data = None
     updated_fields = None
-    deleted_fields = None
 
     def __init__(self, input_data=None, object_data=None, file_data=None, prefix=""):
         self.input_data = FakeMultiDict() if input_data is None else input_data
@@ -42,14 +41,9 @@ class Form(object):
         errors = {}
         valid_data = {}
         updated = []
-        deleted = []
 
         for name in self._fields:
             field = getattr(self, name)
-            # if field.deleted:
-            #     deleted.append(name)
-            #     continue
-
             py_value = field.validate()
 
             if field.error:
@@ -66,7 +60,6 @@ class Form(object):
 
         self.valid_data = valid_data
         self.updated_fields = updated
-        self.deleted_fields = deleted
         return valid_data
 
     # Private
@@ -74,7 +67,6 @@ class Form(object):
     def _load_fields(self):
         fields = []
         attrs = (
-            "deleted_fields",
             "errors",
             "file_data",
             "input_data",
@@ -112,9 +104,6 @@ class Form(object):
     def _load_field_data(self, name):
         field = getattr(self, name)
         full_name = field.name
-        # field.deleted = full_name + '__deleted' in self.input_data
-
-        # if not field.deleted:
         field.input_values = get_input_values(self.input_data, full_name) \
             or get_input_values(self.file_data, full_name)
         field.object_value = get_object_value(self.object_data, name)
@@ -123,7 +112,6 @@ class Form(object):
         self.errors = None
         self.valid_data = None
         self.updated_fields = None
-        self.deleted_fields = None
 
 
 def get_input_values(data, name):

@@ -43,7 +43,6 @@ class Field(FieldRenderable):
         "extra",
     )
 
-    deleted = False
     object_value = None
     input_values = None
     input_type = "text"

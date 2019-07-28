@@ -13,7 +13,6 @@ def test_declare_form():
     assert form.errors is None
     assert form.valid_data is None
     assert form.updated_fields is None
-    assert form.deleted_fields is None
 
     assert form.subject.name == "subject"
     assert form.email.name == "email"
@@ -44,7 +43,6 @@ def test_validate_empty_form():
     assert form.validate() == {"lorem": None, "ipsum": None}
     assert form.errors is None
     assert form.updated_fields == []
-    assert form.deleted_fields == []
 
 
 def test_validate_blank_form():
@@ -57,7 +55,6 @@ def test_validate_blank_form():
     assert form.validate() == {"lorem": "", "ipsum": ""}
     assert form.errors is None
     assert sorted(form.updated_fields) == ["ipsum", "lorem"]
-    assert form.deleted_fields == []
 
 
 def test_validate_optional_form():
@@ -70,7 +67,6 @@ def test_validate_optional_form():
     assert form.validate() == {"lorem": "foo", "ipsum": "bar"}
     assert form.errors is None
     assert sorted(form.updated_fields) == ["ipsum", "lorem"]
-    assert form.deleted_fields == []
 
 
 def test_validate_form():
