@@ -84,63 +84,63 @@ def test_collection_sep():
     assert field.validate() == "a|b|c"
 
 
-def test_min_num_values_multiple():
-    field = Text(multiple=True, min_num_values=2)
+def test_min_num_multiple():
+    field = Text(multiple=True, min_num=2)
     field.input_values = ["a", "b", "c"]
     assert field.validate() == ["a", "b", "c"]
     assert field.error is None
 
-    field = Text(multiple=True, min_num_values=4)
+    field = Text(multiple=True, min_num=4)
     field.input_values = ["a", "b", "c"]
     assert field.validate() is None
     assert field.error == "You need at least 4 values."
 
 
-def test_min_num_values_collection():
-    field = Text(collection=True, min_num_values=2)
+def test_min_num_collection():
+    field = Text(collection=True, min_num=2)
     field.input_values = ["a,b,c"]
     assert field.validate() == "a,b,c"
     assert field.error is None
 
-    field = Text(collection=True, min_num_values=4)
+    field = Text(collection=True, min_num=4)
     field.input_values = ["a,b,c"]
     assert field.validate() is None
     assert field.error == "You need at least 4 values."
 
 
-def test_min_num_values_custom_error_message():
-    field = Text(multiple=True, min_num_values=4, error_messages={"min_num_values": "Not enough"})
+def test_min_num_custom_error_message():
+    field = Text(multiple=True, min_num=4, error_messages={"min_num": "Not enough"})
     field.input_values = ["a", "b", "c"]
     assert field.validate() is None
     assert field.error == "Not enough"
 
 
-def test_max_num_values_multiple():
-    field = Text(multiple=True, max_num_values=4)
+def test_max_num_multiple():
+    field = Text(multiple=True, max_num=4)
     field.input_values = ["a", "b", "c"]
     assert field.validate() == ["a", "b", "c"]
     assert field.error is None
 
-    field = Text(multiple=True, max_num_values=2)
+    field = Text(multiple=True, max_num=2)
     field.input_values = ["a", "b", "c"]
     assert field.validate() is None
     assert field.error == "You can have at most 2 values."
 
 
-def test_max_num_values_collection():
-    field = Text(collection=True, max_num_values=4)
+def test_max_num_collection():
+    field = Text(collection=True, max_num=4)
     field.input_values = ["a,b,c"]
     assert field.validate() == "a,b,c"
     assert field.error is None
 
-    field = Text(collection=True, max_num_values=2)
+    field = Text(collection=True, max_num=2)
     field.input_values = ["a,b,c"]
     assert field.validate() is None
     assert field.error == "You can have at most 2 values."
 
 
-def test_max_num_values_custom_error_message():
-    field = Text(multiple=True, max_num_values=2, error_messages={"max_num_values": "Too much"})
+def test_max_num_custom_error_message():
+    field = Text(multiple=True, max_num=2, error_messages={"max_num": "Too much"})
     field.input_values = ["a", "b", "c"]
     assert field.validate() is None
     assert field.error == "Too much"

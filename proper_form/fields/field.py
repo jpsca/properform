@@ -9,15 +9,27 @@ __all__ = ("Field", )
 default_error_messages = {
     "type": "Invalid type.",
     "required": "This field is required.",
-    "min_num_values": "You need at least {num} values.",
-    "max_num_values": "You can have at most {num} values.",
+    "min_num": "You need at least {num} values.",
+    "max_num": "You can have at most {num} values.",
 }
+
+HARD_MAX_NUM = 1000
 
 
 class Field(FieldRenderable):
     r"""
 
     Arguments are:
+
+        *validators,
+
+        name=None,
+        required=False,
+        strict=True,
+        error_messages=None,
+
+        prepare=None,
+        clean=None,
 
         collection (bool):
             This field takes an open number of values of the same kind.
@@ -26,6 +38,13 @@ class Field(FieldRenderable):
         sep (str):
             If `collection` is True, string to separate each value (default is ",").
             Ignored otherwise
+
+        multiple=False,
+        min_num=None,
+        max_num=None,
+
+        **extra
+
 
     """
 
@@ -38,8 +57,8 @@ class Field(FieldRenderable):
         "collection",
         "sep",
         "multiple",
-        "min_num_values",
-        "max_num_values",
+        "min_num",
+        "max_num",
         "extra",
     )
 
@@ -66,8 +85,8 @@ class Field(FieldRenderable):
         collection=False,
         sep=",",
         multiple=False,
-        min_num_values=None,
-        max_num_values=None,
+        min_num=None,
+        max_num=None,
 
         **extra
     ):
@@ -87,8 +106,10 @@ class Field(FieldRenderable):
         self.multiple = multiple
 
         if collection or multiple:
-            self.min_num_values = min_num_values
-            self.max_num_values = max_num_values
+            self.min_num = min_num
+            if max_num is not None:
+                max_num = min(max_num, HARD_MAX_NUM)
+            self.max_num = max_num
 
         self.extra = extra
 
@@ -142,6 +163,8 @@ class Field(FieldRenderable):
     def type(self, value, **kwargs):
         return str(value)
 
+    # Private
+
     def _reset(self):
         self.error = None
         self.error_value = None
@@ -183,11 +206,11 @@ class Field(FieldRenderable):
     def _validate_values(self, pyvalues):
         if self.collection or self.multiple:
             num_values = len(pyvalues)
-            if self.min_num_values is not None and self.min_num_values > num_values:
-                self._set_error("min_num_values", num=self.min_num_values)
+            if self.min_num is not None and self.min_num > num_values:
+                self._set_error("min_num", num=self.min_num)
                 return
-            if self.max_num_values is not None and self.max_num_values < num_values:
-                self._set_error("max_num_values", num=self.max_num_values)
+            if self.max_num is not None and self.max_num < num_values:
+                self._set_error("max_num", num=self.max_num)
                 return
 
         for validator in self.validators:
