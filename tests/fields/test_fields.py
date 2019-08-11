@@ -183,7 +183,6 @@ def test_fields_prepare(Field, expected, object_value):
 
     field.object_value = object_value
     assert field.values == expected
-    assert field.validate() == object_value
     assert field.error is None
     assert field.error_value is None
 

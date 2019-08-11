@@ -115,9 +115,9 @@ class Field(FieldRenderable):
 
     @property
     def values(self):
-        if self.input_values is not None:
+        if self.input_values:
             return self.input_values
-        if self.object_value is not None:
+        if self.object_value:
             return (self.custom_prepare or self.prepare)(self.object_value)
         return []
 
@@ -133,7 +133,7 @@ class Field(FieldRenderable):
 
     def validate(self):
         self._reset()
-        values = [str(value).strip() for value in self.values or []]
+        values = [str(value).strip() for value in self.input_values or []]
 
         if not values:
             if self.required:
