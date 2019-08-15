@@ -27,6 +27,7 @@ class Form(object):
         self._reset()
         input_data = FakeMultiDict() if input_data is None else input_data
         file_data = FakeMultiDict() if file_data is None else file_data
+        self._object = None if isinstance(object_data, dict) else object_data
         object_data = object_data or {}
 
         self._id = get_object_value(object_data, "id")
@@ -90,6 +91,26 @@ class Form(object):
             self.updated_fields = updated
             return valid_data
 
+    def save(self):
+        if not self.is_valid:
+            return None
+        if self._object and self._deleted:
+            self.delete_object(self._object)
+            return None
+
+        data = self._valid_data.copy()
+        for name in self._formsets:
+            formset = getattr(self, name)
+            data[name] = formset.save()
+
+        return self.create_object(data)
+
+    def create_object(self, data):
+        return data
+
+    def delete_object(self, object):
+        pass
+
     def _setup_fields(self):
         fields = []
         formsets = []
@@ -102,6 +123,9 @@ class Form(object):
             "updated_fields",
             "valid_data",
             "validate",
+            "get_db_session",
+            "create_object",
+            "delete_object",
         )
         for name in dir(self):
             if name.startswith("_") or name in attrs:

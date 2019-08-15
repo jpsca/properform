@@ -30,6 +30,7 @@ data = {
         "email-validator ~=1.0.4",
         "idna ~=2.8",
         "markupsafe ~=1.1.1",
+        "python-slugify ~=3.0.3",
     ],
     "testing_requires": [
         "pytest-cov",

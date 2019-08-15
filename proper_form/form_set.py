@@ -2,7 +2,7 @@ from .constants import SEP, NEW
 from .utils import get_object_value
 
 
-__all__ = ("FormSet", )
+__all__ = ("FormSet",)
 
 
 default_error_messages = {
@@ -23,7 +23,6 @@ class FormSet(object):
         "can_delete",
         "can_create",
         "error_messages",
-
         "prefix",
         "_is_valid",
         "_forms",
@@ -119,6 +118,11 @@ class FormSet(object):
         self._is_valid = is_valid
         if is_valid:
             return data
+
+    def save(self):
+        if not self.is_valid:
+            return None
+        return list(filter(None, [form.save() for form in self._forms]))
 
     # Private
 
