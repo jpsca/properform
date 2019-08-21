@@ -1,3 +1,5 @@
+from copy import copy
+
 from .constants import SEP, DELETED, ID
 from .fields import Field
 from .form_set import FormSet
@@ -10,8 +12,10 @@ __all__ = ("Form", )
 class Form(object):
 
     updated_fields = None
+    prefix = None
 
     _id = None
+    _model = None
     _is_valid = None
     _valid_data = None
     _fields = None
@@ -24,11 +28,17 @@ class Form(object):
         self.load_data(input_data, object_data, file_data)
 
     def load_data(self, input_data=None, object_data=None, file_data=None):
-        self._reset()
+        self._is_valid = None
+        self._valid_data = None
+        self.updated_fields = None
+
         input_data = FakeMultiDict() if input_data is None else input_data
         file_data = FakeMultiDict() if file_data is None else file_data
-        self._object = None if isinstance(object_data, dict) else object_data
         object_data = object_data or {}
+        if isinstance(object_data, dict) or object_data is None:
+            self._object = None
+        else:
+            self._object = object_data
 
         self._id = get_object_value(object_data, "id")
 
@@ -51,7 +61,6 @@ class Form(object):
         if self._valid_data is not None:
             return self._valid_data
 
-        self._reset()
         is_valid = True
         updated = []
 
@@ -91,41 +100,54 @@ class Form(object):
             self.updated_fields = updated
             return valid_data
 
-    def save(self):
+    def save(self, can_delete=False):
         if not self.is_valid:
-            return None
-        if self._object and self._deleted:
-            self.delete_object(self._object)
             return None
 
         data = self._valid_data.copy()
+        if not self._model:
+            return data
+
+        data.pop(ID, None)
+        data.pop(DELETED, None)
+
+        if self._object and self._deleted and can_delete:
+            self.delete_object(self._object)
+            return None
+
         for name in self._formsets:
             formset = getattr(self, name)
             data[name] = formset.save()
 
+        if self._object:
+            return self.update_object(data)
         return self.create_object(data)
 
-    def create_object(self, data):
+    def create_object(self, data):  # pragma: no cover
         return data
 
-    def delete_object(self, object):
+    def update_object(self, data):
+        for key, value in data.items():
+            setattr(self._object, key, value)
+        return self._object
+
+    def delete_object(self, object):  # pragma: no cover
         pass
 
     def _setup_fields(self):
         fields = []
         formsets = []
         attrs = (
-            "file_data",
-            "input_data",
-            "is_valid",
-            "object_data",
-            "prefix",
             "updated_fields",
-            "valid_data",
+            "prefix",
+            "load_data",
+            "is_valid",
             "validate",
-            "get_db_session",
+            "save",
             "create_object",
+            "update_object",
             "delete_object",
+            "get_db_session",
         )
         for name in dir(self):
             if name.startswith("_") or name in attrs:
@@ -144,6 +166,8 @@ class Form(object):
         self._formsets = formsets
 
     def _setup_field(self, field, name):
+        field = copy(field)
+        setattr(self, name, field)
         if self.prefix:
             field.name = self.prefix + SEP + name
         else:
@@ -154,15 +178,12 @@ class Form(object):
             field.custom_clean = getattr(self, "clean_" + name, None)
 
     def _setup_formset(self, formset, name):
+        formset = copy(formset)
+        setattr(self, name, formset)
         if self.prefix:
             formset.prefix = self.prefix + "." + name + SEP
         else:
             formset.prefix = name + SEP
-
-    def _reset(self):
-        self._is_valid = None
-        self._valid_data = None
-        self.updated_fields = None
 
     def _load_field_data(self, input_data, object_data, file_data):
         for name in self._fields:

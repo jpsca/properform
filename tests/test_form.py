@@ -17,6 +17,59 @@ def test_declare_form():
     assert form.message.name == "message"
 
 
+def test_form_independence():
+    class AForm(f.Form):
+        afield = f.Text()
+
+    form1 = AForm({"afield": "1"})
+    form2 = AForm({"afield": "2"})
+    form3 = AForm({"afield": "3"})
+
+    assert form1.afield != form2.afield
+    assert form1.afield != form3.afield
+    assert form2.afield != form3.afield
+
+    assert form1.afield.value == "1"
+    assert form2.afield.value == "2"
+    assert form3.afield.value == "3"
+
+
+def test_form_independence_same_input():
+    class AForm(f.Form):
+        afield = f.Text()
+
+    input_data = {"afield": "text"}
+    form1 = AForm(input_data)
+    form2 = AForm(input_data)
+    form3 = AForm(input_data)
+
+    assert form1.afield != form2.afield
+    assert form1.afield != form3.afield
+    assert form2.afield != form3.afield
+
+
+def test_form_independence_prefixes():
+    class AForm(f.Form):
+        afield = f.Text()
+
+    input_data = {
+        f"f1{SEP}afield": "1",
+        f"f2{SEP}afield": "2",
+        f"f3{SEP}afield": "3",
+    }
+    form1 = AForm(input_data, prefix="f1")
+    form2 = AForm(input_data, prefix="f2")
+    form3 = AForm(input_data, prefix="f3")
+
+    assert form1.afield != form2.afield
+    assert form1.afield != form3.afield
+    assert form2.afield != form3.afield
+
+    assert form1.afield.value == "1"
+    assert form2.afield.value == "2"
+    assert form3.afield.value == "3"
+
+
 def test_declare_form_with_prefix():
     class ContactForm(f.Form):
         subject = f.Text(required=True)

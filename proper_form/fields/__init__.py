@@ -8,6 +8,7 @@ from .hex_color import *  # noqa
 from .integer import *  # noqa
 from .month import *  # noqa
 from .password import *  # noqa
+from .slug import *  # noqa
 from .splitted import *  # noqa
 from .splitted_date_time import *  # noqa
 from .text import *  # noqa

@@ -74,5 +74,5 @@ class Slug(Text):
             **kwargs
         )
 
-    def type(self, value):
-        return type_slug(value, **self.extra)
+    def type(self, value, **options):
+        return type_slug(value, **options)

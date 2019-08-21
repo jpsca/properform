@@ -123,7 +123,7 @@ class Field(FieldRenderable):
 
     @property
     def value(self):
-        return self.values[0] if self.values else None
+        return self.values[0] if self.values else ""
 
     def prepare(self, object_value):
         return [object_value]

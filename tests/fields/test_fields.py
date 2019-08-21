@@ -218,6 +218,18 @@ def test_text():
     assert field.validate() == ["lorem", "ipsum"]
 
 
+def test_slug():
+    field = f.Slug()
+    field.input_values = ["This is a test ---", "meh"]
+    assert field.validate() == "this-is-a-test"
+    assert field.error is None
+    assert field.error_value is None
+
+    field = f.Slug(multiple=True, separator="_")
+    field.input_values = ["lorem ipsum", "This is a test ---"]
+    assert field.validate() == ["lorem_ipsum", "this_is_a_test"]
+
+
 def test_boolean():
     field = f.Boolean()
 

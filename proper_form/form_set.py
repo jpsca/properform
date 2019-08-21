@@ -50,33 +50,47 @@ class FormSet(object):
 
         self.can_delete = can_delete
         self.can_create = can_create
-        self.error_messages = error_messages
+        self.error_messages = error_messages or {}
 
         self.prefix = ""
-        self._reset()
+        self._is_valid = None
+        self.error = None
+        self.updated = False
+        self._forms = []
+
+    def __len__(self):
+        return len(self._forms)
+
+    def __getitem__(self, index):
+        return self._forms[index]
 
     @property
     def is_valid(self):
-        if self._is_valid is None:
+        if self._is_valid is None:  # pragma: no cover
             self.validate()
         return self._is_valid
 
     def load_data(self, input_data, objects_data, file_data):
-        self._reset()
+        self._is_valid = None
+        self._forms = []
+        self.error = None
+        self.updated = False
+
         objects_data = objects_data or []
-        prefixes_set = get_prefixes_set(self.prefix, input_data, file_data)
+        prefixes = get_prefixes(self.prefix, input_data, file_data)
         forms = []
 
         for object_data in objects_data:
             obj_id = get_object_value(object_data, "id")
             assert obj_id, "Object in a FormSet must have an `id` attribute."
             prefix = f"{self.prefix}{obj_id}"
-            prefixes_set.discard(prefix)
+            if prefix in prefixes:
+                prefixes.remove(prefix)
             form = self.FormClass(input_data, object_data, file_data, prefix)
             forms.append(form)
 
         if self.can_create:
-            for prefix in prefixes_set:
+            for prefix in prefixes:
                 form = self.FormClass(input_data, file_data=file_data, prefix=prefix)
                 forms.append(form)
 
@@ -88,16 +102,17 @@ class FormSet(object):
 
     def validate(self):
         data = []
-        self._reset()
 
         num_forms = len(self._forms)
 
-        if self.min_num is not None and num_forms > self.min_num:
+        if self.min_num is not None and num_forms < self.min_num:
             self._set_error("min_num", num=self.min_num)
+            self._is_valid = False
             return None
 
         if self.max_num is not None and num_forms > self.max_num:
             self._set_error("max_num", num=self.max_num)
+            self._is_valid = False
             return None
 
         is_valid = True
@@ -105,46 +120,44 @@ class FormSet(object):
         for form in self._forms:
             form_data = form.validate()
 
-            if form.updated:
+            if not form.is_valid:
+                is_valid = False
+                continue
+
+            data.append(form_data)
+
+            if form.updated_fields:
                 self.updated = True
             if self.can_delete and form._deleted:
                 self.updated = True
-
-            if form.is_valid:
-                data.push(form_data)
-            else:
-                is_valid = False
 
         self._is_valid = is_valid
         if is_valid:
             return data
 
     def save(self):
-        if not self.is_valid:
+        if not self.is_valid:  # pragma: no cover
             return None
-        return list(filter(None, [form.save() for form in self._forms]))
+        return list(filter(
+            None,
+            [form.save(can_delete=self.can_delete) for form in self._forms]
+        ))
 
     # Private
-
-    def _reset(self):
-        self._is_valid = None
-        self._forms = []
-        self.error = None
-        self.updated = False
 
     def _set_error(self, name, **kwargs):
         msg = self.error_messages.get(name) or default_error_messages.get(name, "")
         for key, repl in kwargs.items():
             msg = msg.replace("{" + key + "}", str(repl))
         self.error = msg or name
-        self._is_valid = False
 
 
-def get_prefixes_set(prefix, input_data, file_data):
-    prefixes = set()
+def get_prefixes(prefix, input_data, file_data):
+    prefixes = []
     for key in input_data:
         if SEP not in key:
             continue
         prefix, field_name = key.rsplit(SEP, maxsplit=1)
-        prefixes.add(prefix)
+        if prefix not in prefixes:
+            prefixes.append(prefix)
     return prefixes
