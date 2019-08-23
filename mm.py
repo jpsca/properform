@@ -34,6 +34,7 @@ data = {
     ],
     "testing_requires": [
         "pytest-cov",
+        "pony",
     ],
     "development_requires": [
         "pytest",

@@ -100,11 +100,11 @@ class Form(object):
             self.updated_fields = updated
             return valid_data
 
-    def save(self, can_delete=False):
+    def save(self, can_delete=False, **data):
         if not self.is_valid:
             return None
 
-        data = self._valid_data.copy()
+        data.update(self._valid_data)
         if not self._model:
             return data
 
@@ -117,11 +117,22 @@ class Form(object):
 
         for name in self._formsets:
             formset = getattr(self, name)
+            if formset.backref:
+                continue
             data[name] = formset.save()
 
         if self._object:
-            return self.update_object(data)
-        return self.create_object(data)
+            obj = self.update_object(data)
+        else:
+            obj = self.create_object(data)
+
+        for name in self._formsets:
+            formset = getattr(self, name)
+            if formset.backref is None:
+                continue
+            formset.save(parent=obj)
+
+        return obj
 
     def create_object(self, data):  # pragma: no cover
         return data

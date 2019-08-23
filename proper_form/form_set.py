@@ -17,6 +17,7 @@ class FormSet(object):
 
     __slots__ = (
         "FormClass",
+        "backref",
         "extra",
         "min_num",
         "max_num",
@@ -34,6 +35,7 @@ class FormSet(object):
         self,
         FormClass,
         *,
+        backref=None,
         extra=1,
         min_num=None,
         max_num=None,
@@ -42,6 +44,7 @@ class FormSet(object):
         error_messages=None,
     ):
         self.FormClass = FormClass
+        self.backref = backref
         self.extra = extra
         self.min_num = min_num
         if max_num is not None:
@@ -135,13 +138,20 @@ class FormSet(object):
         if is_valid:
             return data
 
-    def save(self):
+    def save(self, parent=None):
         if not self.is_valid:  # pragma: no cover
             return None
-        return list(filter(
-            None,
-            [form.save(can_delete=self.can_delete) for form in self._forms]
-        ))
+
+        data = {}
+        if self.backref:
+            data = {self.backref: parent}
+
+        return list(
+            filter(
+                None,
+                [form.save(can_delete=self.can_delete, **data) for form in self._forms],
+            )
+        )
 
     # Private
 
