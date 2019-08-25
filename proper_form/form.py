@@ -55,7 +55,7 @@ class Form(object):
             self.validate()
         return self._is_valid
 
-    def validate(self):
+    def validate(self, can_delete=True):
         if self._is_valid is False:
             return None
         if self._valid_data is not None:
@@ -63,12 +63,17 @@ class Form(object):
 
         is_valid = True
         updated = []
-
         valid_data = {}
+
         if self._id is not None:
             valid_data[ID] = self._id
-        if self._deleted:
+
+        if self._deleted and can_delete:
+            self._is_valid = True
+            self.updated_fields = updated
             valid_data[DELETED] = True
+            self._valid_data = valid_data
+            return self._valid_data
 
         for name in self._fields:
             field = getattr(self, name)
@@ -118,6 +123,7 @@ class Form(object):
         for name in self._formsets:
             formset = getattr(self, name)
             if formset.backref:
+                data.pop(name, None)
                 continue
             data[name] = formset.save()
 

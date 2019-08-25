@@ -121,7 +121,7 @@ class FormSet(object):
         is_valid = True
 
         for form in self._forms:
-            form_data = form.validate()
+            form_data = form.validate(can_delete=self.can_delete)
 
             if not form.is_valid:
                 is_valid = False
@@ -139,7 +139,9 @@ class FormSet(object):
             return data
 
     def save(self, parent=None):
-        if not self.is_valid:  # pragma: no cover
+        if self._is_valid is None:  # pragma: no cover
+            self.validate()
+        if self.is_valid is False:  # pragma: no cover
             return None
 
         data = {}

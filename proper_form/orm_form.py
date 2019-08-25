@@ -13,13 +13,10 @@ class PonyForm(Form):
 
 
 class SQLAForm(Form):
-    def get_db_session(self):
-        return self._model.sa.session()
-
     def create_object(self, data):
         object = self._model(**data)
-        self.get_db_session().add(object)
+        self._session.add(object)
         return object
 
     def delete_object(self, object):
-        return self.get_db_session().delete(object)
+        return self._session.delete(object)

@@ -57,8 +57,8 @@ def test_cant_delete_wont_delete():
     obj = form.save()
 
     assert obj == myobj
-    assert obj.a == "lorem ipsum"
-    assert obj.b == 5
+    assert obj.a == "old value"
+    assert obj.b == 0
     assert obj.deleted is False
 
 
@@ -104,4 +104,4 @@ def test_no_model_no_deleted_object():
     form = MySimpleForm(input_data, myobj)
     obj = form.save(can_delete=True)
 
-    assert obj == {ID: 42, DELETED: True, "a": "lorem ipsum", "b": 5}
+    assert obj == {ID: 42, DELETED: True}

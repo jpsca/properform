@@ -35,6 +35,7 @@ data = {
     "testing_requires": [
         "pytest-cov",
         "pony",
+        "sqlalchemy",
     ],
     "development_requires": [
         "pytest",
