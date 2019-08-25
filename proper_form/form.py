@@ -6,7 +6,7 @@ from .form_set import FormSet
 from .utils import FakeMultiDict, get_input_values, get_object_value
 
 
-__all__ = ("Form", )
+__all__ = ("Form",)
 
 
 class Form(object):
@@ -21,9 +21,19 @@ class Form(object):
     _fields = None
     _formsets = None
     _deleted = False
+    _can_delete = False
 
-    def __init__(self, input_data=None, object_data=None, file_data=None, prefix=""):
+    def __init__(
+        self,
+        input_data=None,
+        object_data=None,
+        file_data=None,
+        *,
+        prefix="",
+        can_delete=False,
+    ):
         self.prefix = prefix or ""
+        self._can_delete = can_delete
         self._setup_fields()
         self.load_data(input_data, object_data, file_data)
 
@@ -42,9 +52,10 @@ class Form(object):
 
         self._id = get_object_value(object_data, "id")
 
-        _deleted = self.prefix + SEP + DELETED if self.prefix else DELETED
-        if _deleted in input_data:
-            self._deleted = True
+        if self._can_delete:
+            _deleted = self.prefix + SEP + DELETED if self.prefix else DELETED
+            if _deleted in input_data:
+                self._deleted = True
 
         self._load_field_data(input_data, object_data, file_data)
         self._load_fieldset_data(input_data, object_data, file_data)
@@ -55,7 +66,7 @@ class Form(object):
             self.validate()
         return self._is_valid
 
-    def validate(self, can_delete=True):
+    def validate(self):
         if self._is_valid is False:
             return None
         if self._valid_data is not None:
@@ -68,7 +79,7 @@ class Form(object):
         if self._id is not None:
             valid_data[ID] = self._id
 
-        if self._deleted and can_delete:
+        if self._deleted:
             self._is_valid = True
             self.updated_fields = updated
             valid_data[DELETED] = True
@@ -105,7 +116,7 @@ class Form(object):
             self.updated_fields = updated
             return valid_data
 
-    def save(self, can_delete=False, **data):
+    def save(self, **data):
         if not self.is_valid:
             return None
 
@@ -116,7 +127,7 @@ class Form(object):
         data.pop(ID, None)
         data.pop(DELETED, None)
 
-        if self._object and self._deleted and can_delete:
+        if self._object and self._deleted:
             self.delete_object(self._object)
             return None
 
@@ -207,14 +218,13 @@ class Form(object):
             field = getattr(self, name)
             full_name = field.name
             field.object_value = get_object_value(object_data, name)
-            field.input_values = get_input_values(input_data, full_name) \
-                or get_input_values(file_data, full_name)
+            field.input_values = get_input_values(
+                input_data, full_name
+            ) or get_input_values(file_data, full_name)
 
     def _load_fieldset_data(self, input_data, object_data, file_data):
         for name in self._formsets:
             formset = getattr(self, name)
             formset.load_data(
-                input_data,
-                get_object_value(object_data, name),
-                file_data
+                input_data, get_object_value(object_data, name), file_data
             )

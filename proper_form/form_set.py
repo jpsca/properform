@@ -89,7 +89,13 @@ class FormSet(object):
             prefix = f"{self.prefix}{obj_id}"
             if prefix in prefixes:
                 prefixes.remove(prefix)
-            form = self.FormClass(input_data, object_data, file_data, prefix)
+            form = self.FormClass(
+                input_data,
+                object_data,
+                file_data,
+                prefix=prefix,
+                can_delete=self.can_delete
+            )
             forms.append(form)
 
         if self.can_create:
@@ -121,8 +127,7 @@ class FormSet(object):
         is_valid = True
 
         for form in self._forms:
-            form_data = form.validate(can_delete=self.can_delete)
-
+            form_data = form.validate()
             if not form.is_valid:
                 is_valid = False
                 continue
@@ -131,7 +136,7 @@ class FormSet(object):
 
             if form.updated_fields:
                 self.updated = True
-            if self.can_delete and form._deleted:
+            if form._deleted:
                 self.updated = True
 
         self._is_valid = is_valid
@@ -148,12 +153,7 @@ class FormSet(object):
         if self.backref:
             data = {self.backref: parent}
 
-        return list(
-            filter(
-                None,
-                [form.save(can_delete=self.can_delete, **data) for form in self._forms],
-            )
-        )
+        return list(filter(None, [form.save(**data) for form in self._forms]))
 
     # Private
 

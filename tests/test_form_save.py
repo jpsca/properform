@@ -57,19 +57,9 @@ def test_cant_delete_wont_delete():
     obj = form.save()
 
     assert obj == myobj
-    assert obj.a == "old value"
-    assert obj.b == 0
+    assert obj.a == "lorem ipsum"
+    assert obj.b == 5
     assert obj.deleted is False
-
-
-def test_puff():
-    input_data = {"a": "lorem ipsum", "b": "5", DELETED: "1"}
-    myobj = MyModel(id=42, a="old value", b=0)
-    form = MyForm(input_data, myobj)
-    result = form.save(can_delete=True)
-
-    assert result is None
-    assert myobj.deleted
 
 
 def test_no_model_no_created_object():
@@ -93,15 +83,3 @@ def test_no_model_no_updated_object():
     obj = form.save()
 
     assert obj == {ID: 42, "a": "lorem ipsum", "b": 5}
-
-
-def test_no_model_no_deleted_object():
-    class MySimpleForm(MyForm):
-        _model = None
-
-    input_data = {"a": "lorem ipsum", "b": "5", DELETED: "1"}
-    myobj = MyModel(id=42, a="old value", b=0)
-    form = MySimpleForm(input_data, myobj)
-    obj = form.save(can_delete=True)
-
-    assert obj == {ID: 42, DELETED: True}

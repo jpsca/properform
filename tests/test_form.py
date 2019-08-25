@@ -291,7 +291,7 @@ def test_dont_overwrite_field_clean_and_prepare():
     assert form.meh.custom_clean == field_clean
 
 
-def test_deleted():
+def test_cant_delete_by_default():
     class ContactForm(f.Form):
         subject = f.Text(required=True)
         email = f.Email()
@@ -305,28 +305,7 @@ def test_deleted():
     }
     form = ContactForm(data)
 
-    assert form._deleted
+    assert not form._deleted
     assert form.subject.value == data["subject"]
     assert form.email.value == data["email"]
     assert form.message.value == data["message"]
-
-
-def test_deleted_with_prefix():
-    class ContactForm(f.Form):
-        subject = f.Text(required=True)
-        email = f.Email()
-        message = f.Text(required=True)
-
-    prefix = "yass"
-    data = {
-        f"{prefix}{SEP}{DELETED}": "1",
-        f"{prefix}{SEP}subject": "Hello world",
-        f"{prefix}{SEP}email": "hello@world.com",
-        f"{prefix}{SEP}message": "Lorem ipsum.",
-    }
-    form = ContactForm(data, prefix=prefix)
-
-    assert form._deleted
-    assert form.subject.value == data[f"{prefix}{SEP}subject"]
-    assert form.email.value == data[f"{prefix}{SEP}email"]
-    assert form.message.value == data[f"{prefix}{SEP}message"]
