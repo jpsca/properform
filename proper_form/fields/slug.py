@@ -10,7 +10,8 @@ class Slug(Text):
     """A slug is a short label for something, containing only letters, numbers,
     underscores or hyphens.
 
-    Uses `python-slugify` to do the conversion so it takes the same arguments:
+    Uses [python-slugify](https://github.com/un33k/python-slugify) library to do the
+    conversion so it takes the same arguments:
 
         max_length (int):
             output string length

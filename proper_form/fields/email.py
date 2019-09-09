@@ -10,13 +10,13 @@ class Email(Text):
     """Validates and normalize an email address using the
     JoshData/python-email-validator library.
 
-    Even if the format is valid, it cannot guarantee that the email is real. The
+    Even if the format is valid, it cannot guarantee that the email is real, so the
     purpose of this function is to alert the user of a typing mistake.
 
     The normalizations include lowercasing the domain part of the email address
-    (domain names are case-insensitive), Unicode "NFC" normalization of the whole
+    (domain names are case-insensitive), unicode "NFC" normalization of the whole
     address (which turns characters plus combining characters into precomposed
-    characters where possible and replaces certain Unicode characters (such as
+    characters where possible and replaces certain unicode characters (such as
     angstrom and ohm) with other equivalent code points (a-with-ring and omega,
     respectively)), replacement of fullwidth and halfwidth characters in the domain
     part, and possibly other UTS46 mappings on the domain part.

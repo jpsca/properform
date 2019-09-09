@@ -1,14 +1,18 @@
 ---
 nav:
   - index.md
+  - fields.md
+  - validators.md
+  - formsets.md
+  - orm.md
 
 site_name: Proper Form
 site_description: A not-terrible Python form library.
 site_author: Juan-Pablo Scaletti
-site_url: https://github.com/
+site_url: https://github.com/jpscaletti/proper-form
 
-repo_name: 
-repo_url: https://github.com/
+repo_name: jpscaletti/proper-form
+repo_url: https://github.com/jpscaletti/proper-form
 edit_uri: ""
 
 theme:
@@ -31,7 +35,7 @@ extra:
     - type: globe
       link: https://github.com/jpscaletti/proper-form
     - type: github-alt
-      link: https://github.com/
+      link: https://github.com/jpscaletti/proper-form
 
 markdown_extensions:
   - admonition
@@ -41,6 +45,7 @@ markdown_extensions:
   - smarty
   - toc:
       permalink: "#"
+      toc_depth: 4
   - markdown.extensions.tables
   - pymdownx.betterem:
       smart_enable: all
@@ -54,6 +59,8 @@ markdown_extensions:
   - pymdownx.smartsymbols
   - pymdownx.superfences
   - pymdownx.tasklist
-  - pymdownx.tildegoogle_analytics:
+  - pymdownx.tilde
+
+google_analytics:
   - UA-XXXXXXXX-X
   - auto

@@ -88,7 +88,7 @@ def do_the_thing():
         ".",
         data=data,
         exclude=exclude,
-        force=True,
+        force=False,
         cleanup_on_error=False
     )
 

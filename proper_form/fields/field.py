@@ -79,25 +79,27 @@ class Field(FieldRenderable):
         strict=True,
         error_messages=None,
 
-        prepare=None,
-        clean=None,
-
         multiple=False,
         min_num=None,
         max_num=None,
         collection=False,
         sep=",",
 
+        clean=None,
+        prepare=None,
+
         **extra
     ):
         self.validators = validators
         self.name = name or ""
+
         self.required = required
         self.strict = strict
+        self.min_num = min_num
+        if max_num is not None:
+            max_num = min(max_num, HARD_MAX_NUM)
+        self.max_num = max_num
         self.error_messages = error_messages or {}
-
-        self.custom_prepare = prepare
-        self.custom_clean = clean
 
         self.collection = collection
         if collection:
@@ -105,10 +107,8 @@ class Field(FieldRenderable):
             multiple = False
         self.multiple = multiple
 
-        self.min_num = min_num
-        if max_num is not None:
-            max_num = min(max_num, HARD_MAX_NUM)
-        self.max_num = max_num
+        self.custom_clean = clean
+        self.custom_prepare = prepare
 
         self.extra = extra
 
@@ -128,11 +128,11 @@ class Field(FieldRenderable):
     def value(self):
         return self.values[0] if self.values else ""
 
-    def prepare(self, object_value):
-        return [object_value]
-
     def clean(self, pyvalues):
         return pyvalues
+
+    def prepare(self, object_value):
+        return [object_value]
 
     def validate(self):
         self._reset()
