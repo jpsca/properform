@@ -30,11 +30,6 @@ class SplittedDateTime(Splitted):
         value += object_value.strftime(" %p")
         return value
 
-    def _pre(self, values):
-        if not self.multiple:
-            return values[:2]
-        return values
-
     def _typecast_values(self, values):
         pyvalues = []
         values.append("00:00")  # So it always has a time

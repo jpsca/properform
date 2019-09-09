@@ -7,8 +7,8 @@ __all__ = ("Field", )
 
 
 default_error_messages = {
-    "type": "Invalid type.",
     "required": "This field is required.",
+    "type": "Invalid type.",
     "min_num": "You need at least {num} values.",
     "max_num": "You can have at most {num} values.",
 }
@@ -54,11 +54,11 @@ class Field(FieldRenderable):
         "required",
         "strict",
         "error_messages",
-        "collection",
-        "sep",
         "multiple",
         "min_num",
         "max_num",
+        "collection",
+        "sep",
         "extra",
     )
 
@@ -82,11 +82,11 @@ class Field(FieldRenderable):
         prepare=None,
         clean=None,
 
-        collection=False,
-        sep=",",
         multiple=False,
         min_num=None,
         max_num=None,
+        collection=False,
+        sep=",",
 
         **extra
     ):
@@ -105,13 +105,16 @@ class Field(FieldRenderable):
             multiple = False
         self.multiple = multiple
 
-        if collection or multiple:
-            self.min_num = min_num
-            if max_num is not None:
-                max_num = min(max_num, HARD_MAX_NUM)
-            self.max_num = max_num
+        self.min_num = min_num
+        if max_num is not None:
+            max_num = min(max_num, HARD_MAX_NUM)
+        self.max_num = max_num
 
         self.extra = extra
+
+    def load_data(self, input_values=None, object_value=None):
+        self.input_values = input_values
+        self.object_value = object_value
 
     @property
     def values(self):
@@ -173,10 +176,11 @@ class Field(FieldRenderable):
     def _pre(self, values):
         if self.collection:
             rxsep = r"\s*%s\s*" % re.escape(self.sep.strip())
-            return re.split(rxsep, values[0])
-        elif self.multiple:
-            return values
-        return values[:1]
+            all_values = []
+            for value in values:
+                all_values += re.split(rxsep, value)
+            return all_values
+        return values
 
     def _post(self, values):
         if self.collection:
@@ -204,18 +208,19 @@ class Field(FieldRenderable):
         return pyvalues
 
     def _validate_values(self, pyvalues):
-        if self.collection or self.multiple:
-            num_values = len(pyvalues)
-            if self.min_num is not None and self.min_num > num_values:
-                self._set_error("min_num", num=self.min_num)
-                return
-            if self.max_num is not None and self.max_num < num_values:
-                self._set_error("max_num", num=self.max_num)
-                return
+        num_values = len(pyvalues)
+
+        if self.min_num is not None and self.min_num > num_values:
+            self._set_error("min_num", num=self.min_num)
+            return
+
+        if self.max_num is not None and self.max_num < num_values:
+            self._set_error("max_num", num=self.max_num)
+            return
 
         for validator in self.validators:
             if not validator(pyvalues):
-                self.error = validator.message
+                self.error = getattr(validator, "message", "Validation failed")
                 return
 
     def _set_error(self, name, **kwargs):

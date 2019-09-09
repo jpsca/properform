@@ -6,7 +6,7 @@ from markupsafe import Markup, escape_silent
 from ..types import type_boolean
 
 
-__all__ = ("FieldRenderable", )
+__all__ = ("FieldRenderable", "get_html_attrs", "in_")
 
 
 class FieldRenderable(object):

@@ -217,10 +217,11 @@ class Form(object):
         for name in self._fields:
             field = getattr(self, name)
             full_name = field.name
-            field.object_value = get_object_value(object_data, name)
-            field.input_values = get_input_values(
+            input_values = get_input_values(
                 input_data, full_name
             ) or get_input_values(file_data, full_name)
+            object_value = get_object_value(object_data, name)
+            field.load_data(input_values, object_value)
 
     def _load_fieldset_data(self, input_data, object_data, file_data):
         for name in self._formsets:
