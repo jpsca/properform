@@ -13,6 +13,34 @@ TEST_DATA = [
         "Date must have a YYYY-MM-dd format.",
     ),
     (
+        f.DateTime,
+        "1573-09-11 16:23",
+        datetime(1573, 9, 11, 16, 23),
+        "invalid",
+        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format, seconds optional.",
+    ),
+    (
+        f.DateTime,
+        "1573-09-11 16:23:15",
+        datetime(1573, 9, 11, 16, 23, 15),
+        "invalid",
+        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format, seconds optional.",
+    ),
+    (
+        f.DateTime,
+        "1573-09-11 4:23 AM",
+        datetime(1573, 9, 11, 4, 23),
+        "invalid",
+        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format, seconds optional.",
+    ),
+    (
+        f.DateTime,
+        "1573-09-11 4:23:15 PM",
+        datetime(1573, 9, 11, 16, 23, 15),
+        "invalid",
+        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format, seconds optional.",
+    ),
+    (
         f.Email,
         "abc@def.com",
         "abc@def.com",
@@ -51,6 +79,27 @@ TEST_DATA = [
         f.Time,
         "5:34 am",
         time(5, 34, 0),
+        "invalid",
+        "Enter a time in a 12h or 24h format.",
+    ),
+    (
+        f.Time,
+        "5:34:55 am",
+        time(5, 34, 55),
+        "invalid",
+        "Enter a time in a 12h or 24h format.",
+    ),
+    (
+        f.Time,
+        "18:34",
+        time(18, 34, 0),
+        "invalid",
+        "Enter a time in a 12h or 24h format.",
+    ),
+    (
+        f.Time,
+        "18:34:55",
+        time(18, 34, 55),
         "invalid",
         "Enter a time in a 12h or 24h format.",
     ),
@@ -138,6 +187,16 @@ TEST_DATA_PREPARE = [
         f.Date,
         ["1973-09-11"],
         date(1973, 9, 11)
+    ),
+    (
+        f.DateTime,
+        ["1973-09-11 4:24 PM"],
+        datetime(1973, 9, 11, 16, 24)
+    ),
+    (
+        f.DateTime,
+        ["1973-09-11 4:24:15 AM"],
+        datetime(1973, 9, 11, 4, 24, 15)
     ),
     (
         f.Integer,

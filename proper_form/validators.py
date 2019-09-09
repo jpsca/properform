@@ -53,6 +53,8 @@ class Confirmed(Validator):
     message = "Values doesn't match."
 
     def __call__(self, values):
+        if len(values) < 2:
+            return False
         g = groupby(values)
         return next(g, True) and not next(g, False)
 
@@ -207,6 +209,9 @@ class Before(Validator):
         self.message = message
 
     def test(self, value):
+        assert isinstance(value, datetime.date)
+        if not isinstance(value, datetime.datetime):
+            value = datetime.datetime(value.year, value.month, value.day)
         return value <= self.dt
 
 
@@ -232,6 +237,9 @@ class After(Validator):
         self.message = message
 
     def test(self, value):
+        assert isinstance(value, datetime.date)
+        if not isinstance(value, datetime.datetime):
+            value = datetime.datetime(value.year, value.month, value.day)
         return value >= self.dt
 
 
