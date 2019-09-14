@@ -1,6 +1,6 @@
 from .text import Text
 
-from ..types import type_url
+from ..ftypes import type_url
 
 
 __all__ = ("URL", )

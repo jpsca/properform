@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from ..types import type_date
-from ..types import type_time
+from ..ftypes import type_date
+from ..ftypes import type_time
 
 from .splitted import Splitted
 

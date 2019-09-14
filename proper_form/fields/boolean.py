@@ -1,4 +1,4 @@
-from ..types import type_boolean
+from ..ftypes import type_boolean
 
 from .text import Text
 

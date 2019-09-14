@@ -1,4 +1,4 @@
-from ..types import type_slug
+from ..ftypes import type_slug
 
 from .text import Text
 

@@ -5,6 +5,11 @@ Lorem ipsum.
 
 
 
+“The main problem I used to have with [Django Forms] was the markup. I wanted Bootstrap fields. I wanted complex layouts like multiple columns.”
+-- Random Redditor
+
+
+
 # Things developers ~~believe~~ forget about forms
 
 - A field can be presentend in multiple ways. Even the same form could be needed "n" different contexts and have different appeareance.

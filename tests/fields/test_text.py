@@ -1,5 +1,4 @@
 from proper_form.fields import Text
-from proper_form.validators import Validator
 
 
 def test_clean_called():
@@ -146,20 +145,26 @@ def test_max_num_custom_error_message():
     assert field.error == "Too much"
 
 
-class VTrue(Validator):
+class VTrue(object):
     called = False
+
+    def __init__(self, message):
+        self.message = message
 
     def __call__(self, values):
         self.called = True
         return True
 
 
-class VFalse(Validator):
+class VFalse(object):
     called = False
+
+    def __init__(self, message):
+        self.message = message
 
     def __call__(self, values):
         self.called = True
-        return False
+        return False, self.message
 
 
 def test_validators_called():

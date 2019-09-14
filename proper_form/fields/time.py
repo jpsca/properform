@@ -1,4 +1,4 @@
-from ..types import type_time
+from ..ftypes import type_time
 
 from .text import Text
 

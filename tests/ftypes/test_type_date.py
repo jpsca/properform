@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from proper_form.types import type_date
+from proper_form.ftypes import type_date
 
 
 VALID_DATES = [

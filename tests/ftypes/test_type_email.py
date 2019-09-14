@@ -1,6 +1,6 @@
 import pytest
 
-from proper_form.types import type_email
+from proper_form.ftypes import type_email
 
 
 VALID_EMAILS = [

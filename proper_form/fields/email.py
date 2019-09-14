@@ -1,6 +1,6 @@
 from .text import Text
 
-from ..types import type_email
+from ..ftypes import type_email
 
 
 __all__ = ("Email", )

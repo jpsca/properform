@@ -1,4 +1,4 @@
-from ..types import type_date
+from ..ftypes import type_date
 
 from .text import Text
 

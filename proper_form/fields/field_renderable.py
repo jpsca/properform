@@ -3,7 +3,7 @@ from xml.sax.saxutils import quoteattr
 
 from markupsafe import Markup, escape_silent
 
-from ..types import type_boolean
+from ..ftypes import type_boolean
 
 
 __all__ = ("FieldRenderable", "get_html_attrs", "in_")

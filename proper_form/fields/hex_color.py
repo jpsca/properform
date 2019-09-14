@@ -1,4 +1,4 @@
-from ..types import type_hex_color
+from ..ftypes import type_hex_color
 
 from .text import Text
 
