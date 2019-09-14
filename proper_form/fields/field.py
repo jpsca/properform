@@ -219,8 +219,13 @@ class Field(FieldRenderable):
             return
 
         for validator in self.validators:
-            if not validator(pyvalues):
-                self.error = getattr(validator, "message", "Validation failed")
+            message = "Invalid value"
+            valid = validator(pyvalues)
+            if valid not in (True, False):
+                valid, message = valid
+
+            if not valid:
+                self.error = message
                 return
 
     def _set_error(self, name, **kwargs):

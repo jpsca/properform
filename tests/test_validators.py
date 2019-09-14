@@ -9,12 +9,6 @@ from proper_form import Integer
 from proper_form import validators as v
 
 
-def test_base_validator_message():
-    validator = v.Validator()
-    assert validator.message == "Invalid value."
-    assert v.Validator(message="custom").message == "custom"
-
-
 def test_confirmed_message():
     validator = v.Confirmed()
     assert validator.message == "Values doesn't match."
@@ -78,8 +72,6 @@ def test_after_now_message():
 
 
 DATA = [
-    [Field, v.Validator(), ["lorem", "ipsum"], True],
-
     [Field, v.Confirmed(), ["password", "password"], True],
     [Field, v.Confirmed(), ["password", "password", "password"], True],
     [Field, v.Confirmed(), ["password"], False],

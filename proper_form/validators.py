@@ -1,9 +1,8 @@
-import datetime
 from itertools import groupby
+import datetime
 
 
 __all__ = (
-    "Validator",
     "Confirmed",
     "LongerThan",
     "ShorterThan",
@@ -17,31 +16,14 @@ __all__ = (
 )
 
 
-class Validator(object):
-    """Base field Validator.
-
-    message (str):
-        Error message to raise in case of a validation error.
-
-    """
-
-    message = "Invalid value."
-
-    def __init__(self, message=None):
-        if message is not None:
-            self.message = message
-
-    def test(self, value):
-        return True
-
-    def __call__(self, values):
-        for value in values:
-            if not self.test(value):
-                return False
-        return True
+def validate_values(values, test, message):
+    for value in values:
+        if not test(value):
+            return False, message
+    return True
 
 
-class Confirmed(Validator):
+class Confirmed(object):
     """Validates that a value is identical every time has been repeated.
     Classic use is for password confirmation fields.
 
@@ -52,14 +34,20 @@ class Confirmed(Validator):
 
     message = "Values doesn't match."
 
+    def __init__(self, message=None):
+        if message is not None:
+            self.message = message
+
     def __call__(self, values):
         if len(values) < 2:
             return False
         g = groupby(values)
-        return next(g, True) and not next(g, False)
+        if next(g, True) and not next(g, False):
+            return True
+        return False, self.message
 
 
-class LongerThan(Validator):
+class LongerThan(object):
     """Validates the length of a value is longer or equal than minimum.
 
     length (int):
@@ -79,11 +67,14 @@ class LongerThan(Validator):
             message = self.message % (length,)
         self.message = message
 
-    def test(self, value):
-        return len(value) >= self.length
+    def __call__(self, values):
+        def test(value):
+            return len(value) >= self.length
+
+        return validate_values(values, test, self.message)
 
 
-class ShorterThan(Validator):
+class ShorterThan(object):
     """Validates the length of a value is shorter or equal than maximum.
 
     length (int):
@@ -103,11 +94,14 @@ class ShorterThan(Validator):
             message = self.message % (length,)
         self.message = message
 
-    def test(self, value):
-        return len(value) <= self.length
+    def __call__(self, values):
+        def test(value):
+            return len(value) <= self.length
+
+        return validate_values(values, test, self.message)
 
 
-class LessThan(Validator):
+class LessThan(object):
     """Validates that a value is less or equal than another.
     This will work with integers, floats, decimals and strings.
 
@@ -127,11 +121,14 @@ class LessThan(Validator):
             message = self.message % (value,)
         self.message = message
 
-    def test(self, value):
-        return value <= self.value
+    def __call__(self, values):
+        def test(value):
+            return value <= self.value
+
+        return validate_values(values, test, self.message)
 
 
-class MoreThan(Validator):
+class MoreThan(object):
     """Validates that a value is greater or equal than another.
     This will work with any integers, floats, decimals and strings.
 
@@ -151,11 +148,14 @@ class MoreThan(Validator):
             message = self.message % (value,)
         self.message = message
 
-    def test(self, value):
-        return value >= self.value
+    def __call__(self, values):
+        def test(value):
+            return value >= self.value
+
+        return validate_values(values, test, self.message)
 
 
-class InRange(Validator):
+class InRange(object):
     """Validates that a value is of a minimum and/or maximum value.
     This will work with integers, floats, decimals and strings.
 
@@ -179,15 +179,18 @@ class InRange(Validator):
             message = self.message % (minval, maxval)
         self.message = message
 
-    def test(self, value):
-        if value < self.minval:
-            return False
-        if value > self.maxval:
-            return False
-        return True
+    def __call__(self, values):
+        def test(value):
+            if value < self.minval:
+                return False
+            if value > self.maxval:
+                return False
+            return True
+
+        return validate_values(values, test, self.message)
 
 
-class Before(Validator):
+class Before(object):
     """Validates than the date happens before another.
 
     date (date|datetime):
@@ -205,17 +208,22 @@ class Before(Validator):
             dt = datetime.datetime(dt.year, dt.month, dt.day)
         self.dt = dt
         if message is None:
-            message = self.message % "{}-{:02d}-{:02d}".format(dt.year, dt.month, dt.day)
+            message = self.message % "{}-{:02d}-{:02d}".format(
+                dt.year, dt.month, dt.day
+            )
         self.message = message
 
-    def test(self, value):
-        assert isinstance(value, datetime.date)
-        if not isinstance(value, datetime.datetime):
-            value = datetime.datetime(value.year, value.month, value.day)
-        return value <= self.dt
+    def __call__(self, values):
+        def test(value):
+            assert isinstance(value, datetime.date)
+            if not isinstance(value, datetime.datetime):
+                value = datetime.datetime(value.year, value.month, value.day)
+            return value <= self.dt
+
+        return validate_values(values, test, self.message)
 
 
-class After(Validator):
+class After(object):
     """Validates than the date happens after another.
 
     date (date|datetime):
@@ -233,17 +241,22 @@ class After(Validator):
             dt = datetime.datetime(dt.year, dt.month, dt.day)
         self.dt = dt
         if message is None:
-            message = self.message % "{}-{:02d}-{:02d}".format(dt.year, dt.month, dt.day)
+            message = self.message % "{}-{:02d}-{:02d}".format(
+                dt.year, dt.month, dt.day
+            )
         self.message = message
 
-    def test(self, value):
-        assert isinstance(value, datetime.date)
-        if not isinstance(value, datetime.datetime):
-            value = datetime.datetime(value.year, value.month, value.day)
-        return value >= self.dt
+    def __call__(self, values):
+        def test(value):
+            assert isinstance(value, datetime.date)
+            if not isinstance(value, datetime.datetime):
+                value = datetime.datetime(value.year, value.month, value.day)
+            return value >= self.dt
+
+        return validate_values(values, test, self.message)
 
 
-class BeforeNow(Before):
+class BeforeNow(object):
     """Validates than the date happens before now.
     This will work with both date and datetime values.
 
@@ -258,12 +271,12 @@ class BeforeNow(Before):
         if message is not None:
             self.message = message
 
-    def test(self, value):
-        self.dt = datetime.datetime.utcnow()
-        return super().test(value)
+    def __call__(self, values):
+        v = Before(datetime.datetime.utcnow(), self.message)
+        return v(values)
 
 
-class AfterNow(After):
+class AfterNow(object):
     """Validates than the date happens after now.
     This will work with both date and datetime values.
 
@@ -278,6 +291,6 @@ class AfterNow(After):
         if message is not None:
             self.message = message
 
-    def test(self, value):
-        self.dt = datetime.datetime.utcnow()
-        return super().test(value)
+    def __call__(self, values):
+        v = After(datetime.datetime.utcnow(), self.message)
+        return v(values)
