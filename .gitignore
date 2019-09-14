@@ -35,3 +35,4 @@ pip-wheel-metadata
 */site/*
 */.mypy_cache/*
 .cache
+examples
