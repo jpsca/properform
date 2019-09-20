@@ -37,6 +37,9 @@ class Form(object):
         self._setup_fields()
         self.load_data(input_data, object_data, file_data)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.prefix})"
+
     def load_data(self, input_data=None, object_data=None, file_data=None):
         self._is_valid = None
         self._valid_data = None

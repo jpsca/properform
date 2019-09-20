@@ -1,10 +1,12 @@
 ---
 nav:
   - index.md
+  - forms.md
   - fields.md
   - validators.md
-  - formsets.md
+  - form_sets.md
   - orm.md
+  - FAQ: faq.md
 
 site_name: Proper Form
 site_description: A not-terrible Python form library.
@@ -39,6 +41,7 @@ extra:
 
 markdown_extensions:
   - admonition
+  - attr_list
   - codehilite:
       css_class: highlight
       guess_lang: false

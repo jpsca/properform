@@ -5,7 +5,7 @@ Lorem ipsum.
 
 
 
-“The main problem I used to have with [Django Forms] was the markup. I wanted Bootstrap fields. I wanted complex layouts like multiple columns.”
+“The main problem I used to have with it was the markup. I wanted Bootstrap fields. I wanted complex layouts like multiple columns.”
 -- Random Redditor
 
 

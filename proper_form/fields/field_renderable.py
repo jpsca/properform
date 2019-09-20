@@ -212,6 +212,11 @@ class FieldRenderable(object):
         tag = "<option {}>{}</option>".format(get_html_attrs(attrs), label)
         return Markup(tag)
 
+    def render_error(self, tag="div"):
+        if not self.error:
+            return ""
+        return f"<{tag}>{self.error}</{tag}>"
+
 
 rx_spaces = re.compile(r"\s+")
 

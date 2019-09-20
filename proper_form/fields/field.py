@@ -158,10 +158,11 @@ class Field(FieldRenderable):
         if self.error:
             return None
 
-        pyvalues = self._post(pyvalues)
-        value = (self.custom_clean or self.clean)(pyvalues)
-        self.updated = value != self.object_value
-        return value
+        pyvalue = self._post(pyvalues)
+        if self.custom_clean:
+            pyvalue = self.custom_clean(pyvalue)
+        self.updated = pyvalue != self.object_value
+        return pyvalue
 
     def type(self, value, **kwargs):
         return str(value)
