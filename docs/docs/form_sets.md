@@ -38,7 +38,7 @@ In the console:
 
 or in a template like this one
 
-```jinja
+```html+jinja
 <div class="form-group">
   <label>Name <small>(required)</small></label>
   {{ form.name.as_input(class="form-control") }}
@@ -112,6 +112,10 @@ FormSet(
 )
 ```
 
+### FormClass
+
+### backref <small>(`None`)</small>
+
 #### Without backref
 
 
@@ -131,6 +135,44 @@ class PersonForm(Form):
 ```
 
 ![With backref](img/with-backref.png)
+
+
+### extra <small>(`1`)</small>
+
+Number of extra empty forms added to the list, even if there is no data available.
+
+
+### min_num <small>(`None`)</small>
+
+Validates that the number of sub-forms, existing plus new, is *at least* this.
+
+
+### max_num <small>(`None`)</small>
+
+Validates that the number of sub-forms, existing plus new, is *at most* this.
+
+
+### can_delete <small>(`True`)</small>
+
+
+
+### can_create <small>(`True`)</small>
+
+
+
+### error_messages <small>(`None`)</small>
+
+The `min_num`, and `max_num` validations fail with this predefined error messages:
+
+```python
+default_error_messages = {
+    "min_num": "Please submit at least {num} forms.",
+    "max_num": "Please submit at most {num} forms.",
+}
+```
+
+The `error_messages` argument allows you to overwrite all or one of these messages by passing a dictionary with your custom error messages for those validations.
+
 
 ## Rendering
 

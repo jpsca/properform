@@ -85,8 +85,8 @@ class Field(FieldRenderable):
         collection=False,
         sep=",",
 
-        clean=None,
         prepare=None,
+        clean=None,
 
         **extra
     ):
@@ -107,8 +107,8 @@ class Field(FieldRenderable):
             multiple = False
         self.multiple = multiple
 
-        self.custom_clean = clean
         self.custom_prepare = prepare
+        self.custom_clean = clean
 
         self.extra = extra
 
@@ -127,9 +127,6 @@ class Field(FieldRenderable):
     @property
     def value(self):
         return self.values[0] if self.values else ""
-
-    def clean(self, pyvalues):
-        return pyvalues
 
     def prepare(self, object_value):
         return [object_value]

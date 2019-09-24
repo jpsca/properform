@@ -3,6 +3,7 @@ nav:
   - index.md
   - forms.md
   - fields.md
+  - rendering.md
   - validators.md
   - form_sets.md
   - orm.md

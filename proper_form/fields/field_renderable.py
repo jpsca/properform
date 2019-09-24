@@ -185,7 +185,7 @@ class FieldRenderable(object):
         html.append("</optgroup>")
         return Markup("\n".join(html))
 
-    def render_option(self, item, values=None, **attrs):
+    def render_option(self, item, values=Nonetag="div"):
         """Renders an <option> tag
 
         item (tuple|list):
@@ -212,10 +212,15 @@ class FieldRenderable(object):
         tag = "<option {}>{}</option>".format(get_html_attrs(attrs), label)
         return Markup(tag)
 
-    def render_error(self, tag="div"):
+    def render_error(self, tag="div", **attrs):
         if not self.error:
             return ""
-        return f"<{tag}>{self.error}</{tag}>"
+
+        return Markup("<{tag} {attrs}>{error}</{tag}>".format(
+            tag=tag,
+            attrs=get_html_attrs(attrs),
+            error=self.error,
+        ))
 
 
 rx_spaces = re.compile(r"\s+")

@@ -45,3 +45,14 @@ def test_input_value_over_object_value():
     field.object_value = "bar"
     assert field.values == ["foo"]
     assert field.value == "foo"
+
+
+def test_render_error():
+    field = f.Text(required=True)
+    assert str(field.render_error()) == ""
+
+    field.validate()
+    error = "This field is required."
+
+    assert str(field.render_error()) == f"<div>{error}</div>"
+    assert str(field.render_error("p")) == f"<p>{error}</p>"
