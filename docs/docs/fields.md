@@ -131,28 +131,6 @@ class MyForm(Form):
 
 ```
 
-## Properties & Methods
-
-### name
-
-The name attribute of the field for the HTML form, setted by the parent `Form` class. 
-
-### values
-
-List of values, already formatted for showing them in the HTML form.
-
-### value
-
-The first of the values or an empty string if none is found.
-
-### validate( )
-
-Called by the parent `Form` class. Coerce of the input values to that field's data type and run the validators. Returns the validated and normalized value or `None` if something fail.
-
-### required
-
-The same as the attribute.
-
 
 ## Built-in Field classes
 

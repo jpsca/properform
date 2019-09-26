@@ -10,8 +10,10 @@ def test_render_attrs():
         "checked": True,
         "ignore": False,
     }
-    assert str(field.render_attrs(**attrs)) == \
-        'class="myclass" data-id="1" id="text1" checked'
+    assert (
+        str(field.render_attrs(**attrs))
+        == 'class="myclass" data-id="1" id="text1" checked'
+    )
 
 
 def test_render_attrs_empty():
@@ -21,8 +23,10 @@ def test_render_attrs_empty():
 
 def test_render_attrs_bad():
     field = f.Text()
-    assert str(field.render_attrs(myattr="a'b\"><script>bad();</script>")) == \
-        'myattr="a\'b&quot;&gt;&lt;script&gt;bad();&lt;/script&gt;"'
+    assert (
+        str(field.render_attrs(myattr="a'b\"><script>bad();</script>"))
+        == 'myattr="a\'b&quot;&gt;&lt;script&gt;bad();&lt;/script&gt;"'
+    )
 
 
 def test_object_value():
@@ -54,5 +58,9 @@ def test_render_error():
     field.validate()
     error = "This field is required."
 
-    assert str(field.render_error()) == f"<div>{error}</div>"
-    assert str(field.render_error("p")) == f"<p>{error}</p>"
+    assert str(field.render_error()) == f'<div class="error">{error}</div>'
+    assert str(field.render_error("p")) == f'<p class="error">{error}</p>'
+    assert (
+        str(field.render_error(className="errorMessage"))
+        == f'<div class="errorMessage">{error}</div>'
+    )

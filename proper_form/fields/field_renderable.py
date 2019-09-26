@@ -19,7 +19,7 @@ class FieldRenderable(object):
         """Renders the field as a `<input type="text">` element, although the type
         can be changed.
 
-        kwargs (dict):
+        attrs (dict):
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -39,7 +39,7 @@ class FieldRenderable(object):
     def as_textarea(self, *, label=None, **attrs):
         """Renders the field as a `<textarea>` tag.
 
-        kwargs (dict):
+        attrs (dict):
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -59,7 +59,7 @@ class FieldRenderable(object):
     def as_checkbox(self, *, label=None, **attrs):
         """Renders the field as a `<input type="checkbox">` tag.
 
-        kwargs (dict):
+        attrs (dict):
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -85,7 +85,7 @@ class FieldRenderable(object):
     def as_radio(self, *, label=None, **attrs):
         """Renders the field as a `<input type="radio">` tag.
 
-        kwargs (dict):
+        attrs (dict):
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -115,7 +115,7 @@ class FieldRenderable(object):
         This is intended to be used with `<option>` tags writted by hand or genereated
         by other means.
 
-        kwargs (dict):
+        attrs (dict):
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -139,7 +139,7 @@ class FieldRenderable(object):
         items (list):
             ...
 
-        kwargs (dict):
+        attrs (dict):
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -150,15 +150,16 @@ class FieldRenderable(object):
         for item in items:
             label, value = item[:2]
             if isinstance(value, (list, tuple)):
-                tags = self.render_optgroup(label, value, self.values)
+                tags = self.render_optgroup(label, value)
             else:
-                tags = self.render_option(item, self.values)
+                opattrs = item[2] if len(item) > 2 else {}
+                tags = self.render_option(label, value, **opattrs)
             html.append(str(tags))
 
         html.append("</select>")
         return Markup("\n".join(html))
 
-    def render_optgroup(self, label, items, values=None, **attrs):
+    def render_optgroup(self, label, items, **attrs):
         """Renders an <optgroup> tag with <options>.
 
         label (str):
@@ -170,42 +171,39 @@ class FieldRenderable(object):
         values (any|list|None):
             A value or a list of "selected" values.
 
-        kwargs (dict):
+        attrs (dict):
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
         """
-        label = escape_silent(str(label))
-        html = ['<optgroup label="{}">'.format(label)]
+        attrs["label"] = escape_silent(str(label))
+        html = ['<optgroup {}>'.format(get_html_attrs(attrs))]
 
         for item in items:
-            tag = self.render_option(item, values, **attrs)
+            oplabel, opvalue = item[:2]
+            opattrs = item[2] if len(item) > 2 else {}
+            tag = self.render_option(oplabel, opvalue, **opattrs)
             html.append(str(tag))
 
         html.append("</optgroup>")
         return Markup("\n".join(html))
 
-    def render_option(self, item, values=Nonetag="div"):
+    def render_option(self, label, value=None, **attrs):
         """Renders an <option> tag
 
-        item (tuple|list):
-            A (value, label) or (value, label, {attrs}) tuple.
+        label:
+            Text of the option
 
-        values (any|list|None):
-            A value or a list of "selected" values.
+        value:
+            Value for the option (sames as the label by default).
 
-        kwargs (dict):
+        attrs (dict):
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
         """
-        values = values or []
-        assert isinstance(values, (list, tuple))
-
-        label, value = item[:2]
-        if len(item) > 2:
-            attrs.update(item[2])
-
+        values = self.values or []
+        value = label if value is None else value
         attrs.setdefault("value", value)
         attrs["selected"] = in_(value, values)
         label = escape_silent(str(label))
@@ -216,6 +214,7 @@ class FieldRenderable(object):
         if not self.error:
             return ""
 
+        attrs.setdefault("className", "error")
         return Markup("<{tag} {attrs}>{error}</{tag}>".format(
             tag=tag,
             attrs=get_html_attrs(attrs),
@@ -230,7 +229,7 @@ def get_html_attrs(attrs=None):
     """Generate HTML attributes from the provided attributes.
 
     - To provide consistent output, the attributes and properties are sorted by name
-    and rendered liek this: `<sorted attributes> + <sorted properties>`.
+    and rendered like this: `<sorted attributes> + <sorted properties>`.
     - "className" can be used intead of "class", to avoid clashes with the
     reserved word.
     - Also, all underscores are translated to regular dashes.
@@ -249,7 +248,7 @@ def get_html_attrs(attrs=None):
     attrs_list = []
     props_list = []
 
-    classes = (attrs.pop("class", "") + " " + attrs.pop("className", "")).strip()
+    classes = attrs.pop("className", "").strip()
     if classes:
         attrs["class"] = " ".join(rx_spaces.split(classes))
 
