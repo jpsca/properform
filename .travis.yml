@@ -1,16 +1,16 @@
+dist: bionic
 language: python
+python:
+  - '3.6'
+  - '3.7'
+  - '3.8-dev'
+  - 'nightly'
 
 matrix:
-  include:
-    - python: 3.6
-    - python: 3.7
-      dist: xenial
-      sudo: true
+  allow_failures:
+    - python: 'nightly'
 
-before_install:
-  - pip install -U pip
-
-install:
-  - pip install .[testing]
-
-script: pytest -x proper_form tests
+before_install: pip install -U pip coveralls
+install: pip install .[testing]
+script: pytest --cov proper_form proper_form tests
+after_success: coveralls

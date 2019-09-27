@@ -5,9 +5,6 @@ COPY THIS FILE TO YOUR PROJECT.
 This file generates all the necessary files for packaging for the project.
 Read more about it at https://github.com/jpscaletti/mastermold/
 """
-from pathlib import Path
-
-
 data = {
     "title": "Proper Form",
     "name": "proper_form",
@@ -33,24 +30,24 @@ data = {
         "python-slugify ~=3.0.3",
     ],
     "testing_requires": [
+        "pytest",
         "pytest-cov",
         "pony",
         "sqlalchemy",
     ],
     "development_requires": [
-        "pytest",
         "pytest-flake8",
         "flake8",
         "ipdb",
         "tox",
+        "mkdocs",
+        "pymdown-extensions",
+        "pygments",
+        "pygments-github-lexers",
     ],
     "entry_points": "",
 
     "coverage_omit": [],
-
-    "has_docs": True,
-    "google_analytics": "UA-XXXXXXXX-X",
-    "docs_nav": [],
 }
 
 exclude = [
@@ -66,21 +63,6 @@ exclude = [
 
 def do_the_thing():
     import copier
-    from ruamel.yaml import YAML
-
-    def save_current_nav():
-        yaml = YAML()
-        mkdocs_path = Path("docs") / "mkdocs.yml"
-        if not mkdocs_path.exists():
-            return
-        mkdocs = yaml.load(mkdocs_path)
-        nav = list(filter(None, mkdocs.get("nav") or []))
-        data["docs_nav"] = nav or ["index.md"]
-
-    if data["has_docs"]:
-        save_current_nav()
-    else:
-        data["docs_nav"] = []
 
     copier.copy(
         # "gh:jpscaletti/mastermold.git",
