@@ -3,7 +3,7 @@
 
 Form sets are the secret weapon of Proper Form. Imagine you have models like this:
 
-![Person has many websites](img/form-set-model.png){: width=525 }
+![Person has many websites](img/form-set-model.png){: width=400 }
 {: style=text-align:center }
 
 With most form libraries, you would need to have a page for creating/updating the URLs and, only then, you would be able to create/update the person data. What a waste of time!

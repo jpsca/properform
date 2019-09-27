@@ -355,17 +355,18 @@ class BaseForm(Form):
         name = self.__class__.__name__.lower()
         tmpl = f"forms/{name}.html.jinja2"
         return render_template(tmpl, form=self)
-
-class MyForm(BaseForm):
-  name = Text()
-  ...
-
 ```
 
 If you make all of your forms inherit from that base form, you will now be able of rendering a form just calling its `.render()` method.
 
-```html+jinja
-{{ myform.render() }}
+```python
+class MyForm(BaseForm):
+  name = Text()
+  ...
 ```
 
-This can be specially useful with `FormSet`s
+```jinja
+<p>lorem ipsum</p>
+{{ myform.render() }}
+<p>lorem ipsum</p>
+```
