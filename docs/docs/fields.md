@@ -380,3 +380,24 @@ The normalizations include lowercasing (domain names are case-insensitive), and 
 **require_tld** (bool):
 
 Indicates if the domain-name portion of the URL must contain a .tld suffix. Set this to `True` if you want to disallow domains like `localhost`.
+
+
+## Field properties
+
+There are some properties of fields that can be useful when rendering fields, specially if you need to do something unusual.
+
+### name
+
+The name attribute of the field for the HTML form, setted by the parent `Form` class. 
+
+### required
+
+The same as the attribute.
+
+### values
+
+List of values, already formatted for showing them in the HTML form.
+
+### value
+
+The first of the values or an empty string if none is found.

@@ -1,5 +1,5 @@
 
-# Rendering fields
+# Rendering
 
 Instead of rendering a form with a predefined static markup, wih Proper Form you render its individual fields. For example:
 
@@ -34,7 +34,14 @@ that will render to:
 As in the eexample, the usual thing to do is to also to add the rendering code for the field error right below (or at the top) of it. If there is no error nothing will be rendered there anyway.
 
 
-## About HTML attributes
+## Available methods
+
+One of the thing Proper Form does different is that it doesn't tie a field type to a specific HTML tag. You might think an URL field it's always going to be displayed as an `<input>`, but *it doesn't have to*. You could also have URLs as values of checkboxes, radio buttons, or selects.
+
+For that reason, all of these method are available for all fields, no matter its data type.
+
+
+### About HTML attributes
 
 All of these methods accept any number of `key=value` optional arguments. These'll be included as HTML attributes. Use `className` instead of `class`.
 
@@ -49,13 +56,6 @@ If you need an attribute with a dash, like `data-id`, use an underscore `data_id
 >>> field.as_input(data_id=123, data_target=True)
 '<input data_id="123" name="field" type="text" data-target>'
 ```
-
-
-## Available methods
-
-One of the thing Proper Form does different is that it doesn't tie a field type to a specific HTML tag. You might think an URL field it's always going to be displayed as an `<input>`, but *it doesn't have to*. You could also have URLs as values of checkboxes, radio buttons, or selects.
-
-For that reason, all of these method are available for all fields, no matter its data type.
 
 
 ### as_input( )
@@ -340,22 +340,32 @@ Examples:
 ```
 
 
-## Field properties
+## Using form templates
 
-There are some properties of fields that can be useful when rendering fields, specially if you need to do something unusual.
+Proper Form doesn't have a default `form.render()` method, but you can write one yourself on each of your forms or, better yet, in a base form.
 
-### name
+For example you could have a separated template for each if your forms in a `templates/forms/` folder:
 
-The name attribute of the field for the HTML form, setted by the parent `Form` class. 
+```python
+from flask import render_template
+from proper_form import Form
 
-### required
+class BaseForm(Form):
+    def render(self):
+        name = self.__class__.__name__.lower()
+        tmpl = f"forms/{name}.html.jinja2"
+        return render_template(tmpl, form=self)
 
-The same as the attribute.
+class MyForm(BaseForm):
+  name = Text()
+  ...
 
-### values
+```
 
-List of values, already formatted for showing them in the HTML form.
+If you make all of your forms inherit from that base form, you will now be able of rendering a form just calling its `.render()` method.
 
-### value
+```html+jinja
+{{ myform.render() }}
+```
 
-The first of the values or an empty string if none is found.
+This can be specially useful with `FormSet`s

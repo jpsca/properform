@@ -32,7 +32,7 @@ data = {
     "testing_requires": [
         "pytest",
         "pytest-cov",
-        "pony",
+        'pony;python_version<"3.8"',
         "sqlalchemy",
     ],
     "development_requires": [
