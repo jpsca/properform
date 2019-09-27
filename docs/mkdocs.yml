@@ -67,3 +67,4 @@ markdown_extensions:
 
 google_analytics:
   - UA-XXXXXXXX-X
+  - auto
