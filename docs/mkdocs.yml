@@ -5,7 +5,7 @@ nav:
   - fields.md
   - rendering.md
   - validators.md
-  - form_sets.md
+  - formsets.md
   - orm.md
   - FAQ: faq.md
 

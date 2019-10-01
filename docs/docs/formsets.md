@@ -26,7 +26,7 @@ class PersonForm(Form):
 
 a `FormSet` is a special kind of `Field` that represents a list of forms, to create or edit several items, in the same page, at once.
 
-Now that you have a `FormSet` you can iterate over the forms in it and display them as you would with a regular form.
+Now that you have a formset you can iterate over the forms in it and display them as you would with a regular form.
 
 In the console:
 
@@ -89,12 +89,82 @@ As you can see it only displayed one, empty, `WebPageForm`. It creates one for e
 Iterating over the formset will render the forms in the order they were created. FormSets can also be indexed into, which returns the corresponding form.
 
 
-## Using initial data with a formset
+## Using object data with a formset
+
+As shown above you can define the number of extra forms. What this means is that you are telling the formset how many additional forms to show in addition to the number of forms it generates from the object data. Let’s take a look at an example:
+
+```python
+>>> class WebPageForm(Form):
+...     url = URL()
+...     title = Text()
+
+>>> class PersonForm(Form):
+...     name = Text()
+...     webs = FormSet(WebPageForm)
+
+>>> form = PersonForm(object_data={
+...     "webs": [
+...         {"id": 1, "url": "http://example.com/1", "title": "Example 1"},
+...         {"id": 2, "url": "http://example.com/2", "title": "Example 2"},
+...     ]
+... })
+
+>>> list(form.webs)
+[WebPageForm, WebPageForm, WebPageForm]
+
+>>> form.webs[1].url.name
+'webs--2--url'
+
+```
+
+There are now a total of three forms showing above. Two for the object data that was passed in and one extra form. Also note that we are passing in a list of dictionaries as the object data, but the most common scenario will be using the result of a query using an ORM.
+
+The format of the HTML names of the fields in the forms of the formset is another thing you should pay attention to. It follows this format:
+
+*form_prefix*. *formset_name* \-\- **OBJECT_ID** \-\- *field_name*
+{: style="text-align:center;font-family:monospace;font-size:larger" }
+
+Notice how this imply each object **must** have a distinct ID, even if the data comes as dictionaries.
+
+Why Proper Form doesn't use a a simple counter, like the rest of form libraries? The answer it's to protect you from *race conditions*. You want to update a specific object, not just "the second object from the list", because there is no guarantee the list hasn't changed while the form was filled by the user.  Using IDs guarantees that you are updating the object you wanted to, even if is not in the same order as before.
+
+!!! note
+    *“But... what if the user manually change the IDs in the names? Would they be able to change the data of any other objects, like the one from another users?!”*
+
+    No, don't worry! Proper Form ignore any ID that isn't in the current list of objects. This feature prevents anyone to access/update data they shouldn't.
 
 
+## Using input data with a formset
+
+A formset can accept any number of new forms. A "new form" are those that aren't created for editing an existing object, but added client side. To do so, the names of the fields must follow this pattern:
+
+*prefix*. *formset_name* \-\- \_NEWx \-\- *field_name*
+{: style="text-align:center;font-family:monospace;font-size:larger" }
+
+where "x" is a number shared by all the fields of a form. They doesn't have to be correlative, but they must be different for each form, example:
+
+```javascript
+webs--_NEW1--url
+webs--_NEW1--title
+
+webs--_NEW2--url
+webs--_NEW2--title
+
+webs--_NEW3--url
+webs--_NEW3--title
+```
+
+If you create a formset with `can_create=False`, all the new forms are ignored.
 
 
+## Deleting existing forms
 
+Formsets monitor the presence of a special name to know if it has to delete a form and, more importantly, its related object. Not including the form fields doesn't do anything, to actually delete its object you must send to the form field with a name that follows this pattern:
+
+*prefix*. *formset_name* \-\- *OBJECT_ID* \-\- \_DELETED
+{: style="text-align:center;font-family:monospace;font-size:larger" }
+
+If you create a formset with `can_delete=False`, this special name is ignored.
 
 
 ## Arguments
@@ -174,9 +244,7 @@ default_error_messages = {
 The `error_messages` argument allows you to overwrite all or one of these messages by passing a dictionary with your custom error messages for those validations.
 
 
-## Rendering
+## Adding new forms with JavaScript
 
-## Naming convention for the sub-forms
-
-## ?
+...
 
