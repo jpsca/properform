@@ -4,7 +4,7 @@
 Instead of rendering a form with a predefined static markup, wih Proper Form you render its individual fields. For example:
 
 ```html+jinja
-<form method="post">
+<form method="post" action="">
   <div class="col">
     {{ form.myname.as_input(label="Name:") }}
     {{ form.myname.render_error() }}
@@ -19,7 +19,7 @@ Instead of rendering a form with a predefined static markup, wih Proper Form you
 that will render to:
 
 ```html
-<form method="post">
+<form method="post" action="">
   <div class="col">
     <label for="myname">Name:</label>
     <input id="myname" name="myname" type="text">
@@ -31,7 +31,7 @@ that will render to:
 </form>
 ```
 
-As in the eexample, the usual thing to do is to also to add the rendering code for the field error right below (or at the top) of it. If there is no error nothing will be rendered there anyway.
+As in the example, the usual thing to do is to also to add the rendering code for the field error right below (or at the top) of it. If there is no error nothing will be rendered there anyway.
 
 
 ## Available methods

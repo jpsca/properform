@@ -1,6 +1,7 @@
 ---
 nav:
-  - index.md
+  - Welcome: index.md
+  - crash.md
   - forms.md
   - fields.md
   - rendering.md

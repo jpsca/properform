@@ -21,7 +21,7 @@ The most important thing to remember about fields, is that they always take a **
 3. Can be used by the `Confirmed` validator to check if a value has been repeated. The classic use is for password confirmation fields.
 
 
-## Common arguments
+## Fields common arguments
 
 Each `Field` class constructor takes at least these arguments. Some `Field` classes take additional, field-specific arguments, but the following should always be accepted:
 
@@ -130,6 +130,31 @@ class MyForm(Form):
 		return "some str value"
 
 ```
+
+## Field attributes
+
+The attributes of fields can be useful when rendering fields, specially if you need to do something unusual.
+
+### name
+
+The name attribute of the field for the HTML form, setted by the parent `Form` class. 
+
+### required
+
+The same as the attribute.
+
+### values
+
+List of values, already formatted for showing them in the HTML form.
+
+### value
+
+The first of the values or an empty string if none is found.
+
+
+## Field methods
+
+All field methods are about rendering, so they are covered in the [Rendering page](/rendering/)
 
 
 ## Built-in Field classes
@@ -380,24 +405,3 @@ The normalizations include lowercasing (domain names are case-insensitive), and 
 **require_tld** (bool):
 
 Indicates if the domain-name portion of the URL must contain a .tld suffix. Set this to `True` if you want to disallow domains like `localhost`.
-
-
-## Field properties
-
-There are some properties of fields that can be useful when rendering fields, specially if you need to do something unusual.
-
-### name
-
-The name attribute of the field for the HTML form, setted by the parent `Form` class. 
-
-### required
-
-The same as the attribute.
-
-### values
-
-List of values, already formatted for showing them in the HTML form.
-
-### value
-
-The first of the values or an empty string if none is found.

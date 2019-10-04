@@ -117,12 +117,10 @@ As shown above you can define the number of extra forms. What this means is that
 
 ```
 
-There are now a total of three forms showing above. Two for the object data that was passed in and one extra form. Also note that we are passing in a list of dictionaries as the object data, but the most common scenario will be using the result of a query using an ORM.
-
-The format of the HTML names of the fields in the forms of the formset is another thing you should pay attention to. It follows this format:
+There are now a total of three forms showing above. Two for the object data that was passed in and one extra form. Also note the format of the HTML names of the fields in the forms of the formset. It follows this format:
 
 *form_prefix*. *formset_name* \-\- **OBJECT_ID** \-\- *field_name*
-{: style="text-align:center;font-family:monospace;font-size:larger" }
+{: style="text-align:center;font-family:monospace;font-size:larger;font-weight:bold" }
 
 Notice how this imply each object **must** have a distinct ID, even if the data comes as dictionaries.
 
@@ -133,13 +131,16 @@ Why Proper Form doesn't use a a simple counter, like the rest of form libraries?
 
     No, don't worry! Proper Form ignore any ID that isn't in the current list of objects. This feature prevents anyone to access/update data they shouldn't.
 
+!!! note
+    In the example we are passing in a list of dictionaries as the object data, but the most common scenario will be using the result of a query using an ORM. In any case, it makes no difference.
+
 
 ## Using input data with a formset
 
 A formset can accept any number of new forms. A "new form" are those that aren't created for editing an existing object, but added client side. To do so, the names of the fields must follow this pattern:
 
 *prefix*. *formset_name* \-\- \_NEWx \-\- *field_name*
-{: style="text-align:center;font-family:monospace;font-size:larger" }
+{: style="text-align:center;font-family:monospace;font-size:larger;font-weight:bold" }
 
 where "x" is a number shared by all the fields of a form. They doesn't have to be correlative, but they must be different for each form, example:
 
@@ -162,7 +163,7 @@ If you create a formset with `can_create=False`, all the new forms are ignored.
 Formsets monitor the presence of a special name to know if it has to delete a form and, more importantly, its related object. Not including the form fields doesn't do anything, to actually delete its object you must send to the form field with a name that follows this pattern:
 
 *prefix*. *formset_name* \-\- *OBJECT_ID* \-\- \_DELETED
-{: style="text-align:center;font-family:monospace;font-size:larger" }
+{: style="text-align:center;font-family:monospace;font-size:larger;font-weight:bold" }
 
 If you create a formset with `can_delete=False`, this special name is ignored.
 
@@ -186,25 +187,54 @@ FormSet(
 
 ### backref <small>(`None`)</small>
 
+If your forms inside the formset have a `_model` attribute, they will update/create rows in a database when saving the parent form, as expected.
+
+When that's the case, the `backref` attribute is something you might need to add.
+
 #### Without backref
 
-
 ![Without backref](img/without-backref.png)
+
+**Without** a `backref` attribute, Proper Form will try to save the child forms first, and them assign the list of them to the parent form. If you are dealing with models instead of dictionaries, your database might not like that.
+
+In the example above, a WebPage model will have a non-nullable `person_id` field. If we save those forms first, you will not have yet a `person` to get the ID from, so the save operation is going to fail.
+
+We'll need to create a person first, *and then* create the child objects using the person as an argument.
 
 
 #### With backref
 
 ```python
-class WebPageForm(Form):
-	url = URL()
-	title = Text()
+# Possible SQLAlchemy models
 
-class PersonForm(Form):
-	name = Text()
-	webs = FormSet(WebPageForm, backref="owner")
+class WebPage(Model):
+  url = Column(Text)
+  title = Column(Text)
+  owner_id = Column(Integer, ForeignKey("owner.id"))
+  owner = relationship("Person", back_populates="webs")
+
+class Person(Model):
+  name = Column(Text)
+
 ```
 
+A `backref` is how the child models call its parents, in this example, is "owner", so we use that as a backref attribute:
+
+```python
+class WebPageForm(Form):
+  url = URL()
+  title = Text()
+
+class PersonForm(Form):
+  name = Text()
+  webs = FormSet(WebPageForm, backref="owner")
+```
+
+When Proper Form receives a `backref`, it reverse the order of the form saving. Now first it creates the parent object, and then the child objects using the parent object as an attribute.
+
 ![With backref](img/with-backref.png)
+
+In this way, no database constraints are broken and the saving of the form finish without problems.
 
 
 ### extra <small>(`1`)</small>
@@ -224,11 +254,11 @@ Validates that the number of sub-forms, existing plus new, is *at most* this.
 
 ### can_delete <small>(`True`)</small>
 
-
+If this option is `False`, [the special name](#deleting-existing-forms) to delete a form is ignored and no objects are deleted.
 
 ### can_create <small>(`True`)</small>
 
-
+If this option is `False`, [the data from all new forms](#using-input-data-with-a-formset) is ignored. You can only use the formset to edit the data of pre-existing objects.
 
 ### error_messages <small>(`None`)</small>
 
@@ -246,5 +276,5 @@ The `error_messages` argument allows you to overwrite all or one of these messag
 
 ## Adding new forms with JavaScript
 
-...
+[TODO]
 

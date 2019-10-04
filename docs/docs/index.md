@@ -1,21 +1,49 @@
 
-# Welcome
+# Proper Form Documentation
 
-Lorem ipsum.
+Proper Form is a python library for modern form input handling and validation.
+
+It tries very hard not to be terrible like all the others:
+
+<blockquote style="max-width:480px; margin:0 auto;">
+<p>The main problem I used to have with it was the markup. 
+<br>I wanted Bootstrap <em>classes</em>. 
+<br>I wanted <em>complex layouts</em> like multiple columns.</p>
+<footer>— <cite>Random Redditor</cite></footer>
+</blockquote>
 
 
+## How Proper Form is different
 
-“The main problem I used to have with it was the markup. I wanted Bootstrap fields. I wanted complex layouts like multiple columns.”
--- Random Redditor
+- Your form can have nested subforms, to create or update several objects, in the same page, at once. No need for modals or separated pages.
+
+- Any field can accept multiple values; as a list or as a comma-separated text.
+
+- A field isn't tied to a specific HTML tag, so can be presentend in multiple ways. Even the same form can be used in different contexts and have different widgets and styles on each.
+
+- All error messages are editable. We are not robots, the tone of the messages must be able to change or to be translated.
+
+- Commonly used built-in validators, but you can write a simple function to use a custom one.
+
+- Incredible easy to integrate with any ORM (object-relational mapper). Built-in adaptators for SQLAlchemy and Pony.
 
 
+## Install
 
-# Things developers ~~believe~~ forget about forms
+```python
+# Create a virtual environment
+python -m venv .venv
+# Activate said environment
+source .venv/bin/activate
+# Install the library
+pip install proper_form
+```
 
-- A field can be presentend in multiple ways. Even the same form could be needed "n" different contexts and have different appeareance.
+## Key Concepts
 
-- A field type isn't tied to a specific HTML tag. You might think an URL field it's always going to be displayed as an `<input>`, but it doesn't have to. You could also have URLs as values of checkboxes, radio buttons, or selects. And I need them to be validated just the same (is still editable by the user after all).
+- Forms are the core container of Proper Form, they are classes that group fields and/or formsets and, sometimes, connect them to models.
+- Fields do most of the heavy lifting. Each field represents a data type and the field handles coercing form the input string to that datatype. They can also run validations on the values.
+- Every field can be rendered as any form widget (inputs, selects, checboxes), even if a particular widget don't make sense for the data type.
+- In order to specify validation rules, fields contain a list of Validators.
+- Formsets are lists of subforms. Additional validations can be added to the minimum and maximum number of forms are allowed. Also, you can control if adding new forms or deleteing old ones is allowed.
 
-- The error messages need to be *custom* error messages most of the time. We are not robots, the tone of the messages must be able to change or to be translated.
-
-- A simple `form.render()` is an idea that only work for the web 10 years ago. Nowadays the markup for a form need to be flexible, responsive, and with added attributes *everywhere*.
