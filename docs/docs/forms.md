@@ -7,52 +7,62 @@ At the heart of Proper Form is the Form class. A form contain your field definit
 ## Form attributes
 
 ```python
-Field(input_data=None, object=None, file_data=None, *, prefix="")
+Form(input_data=None, object=None, file_data=None, *, prefix="")
 ```
 
 ### input_data
 
-[TODO]
+A *MultiDict* containing the data from a form request.
+Form requests are typically POST requests and many web frameworks returns it under the name `request.POST`.
     
 ### object
 
-[TODO]
+Pre-existing data used to populate the form. This can be a dictionary or an instance of a class, typically an ORM Model.
 
 ### file_data
 
-[TODO]
+Optional *MultiDict* with the file data. In some web frameworks this data can be read from the rest of the POST data, so you don't need to (or can) include it again here.
+
+In other frameworks, like Flask, this data is called `request.files`.
 
 ### prefix
 
-[TODO]
+Optional namespace for the form. 
 
 
 ## Form methods
 
 ### is_valid *(property)*
 
-[TODO]
+An alias for `validate()`.
 
 ### validate()
 
-[TODO]
+[ TODO ]
 
 ### save()
 
-[TODO]
+[ TODO ]
 
 ### create_object()
 
-[TODO]
+[ TODO ]
 
 ### update_object()
 
-[TODO]
+[ TODO ]
 
 ### delete_object()
 
-[TODO]
+[ TODO ]
 
 ### load_data()
 
-[TODO]
+This method can be used to replace the data passed when instantiating the form.
+Eg:
+
+```python
+form = Form()
+...
+form.load_data(input_data, object_data)
+```

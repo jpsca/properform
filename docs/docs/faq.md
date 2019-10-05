@@ -44,7 +44,7 @@ No.
 
 (However, you can use `loop.run_in_executor()` to run it from asyncio, without blocking the main event loop).
 
-I hope a future Python version (4?) removes this forced separation, so you can transparently call the same code from sync and async functions (like JavaScript does, for example).
+I hope that a future version of Python (4?) removes this forced separation, so you can transparently call the same code from sync and async functions (like you do in JavaScript, for example).
 
 
 ## How can I contribute to Proper Form?
@@ -55,6 +55,7 @@ For bugs and feature requests, you can open an issue on the [GitHub page](https:
 ## Does Proper Form handle file uploads or image thumbanils?
 
 It does not. Those are concerns for your framework or for other specialized libraries. Proper Form has a `File` field which will let you render a file input, but it doesn't do more than that.
+
 
 ## I have a question not covered in this documentation
 
