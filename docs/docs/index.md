@@ -38,12 +38,3 @@ source .venv/bin/activate
 # Install the library
 pip install proper_form
 ```
-
-## Key Concepts
-
-- Forms are the core container of Proper Form, they are classes that group fields and/or formsets and, sometimes, connect them to models.
-- Fields do most of the heavy lifting. Each field represents a data type and the field handles coercing form the input string to that datatype. They can also run validations on the values.
-- Every field can be rendered as any form widget (inputs, selects, checboxes), even if a particular widget don't make sense for the data type.
-- In order to specify validation rules, fields contain a list of Validators.
-- Formsets are lists of subforms. Additional validations can be added to the minimum and maximum number of forms are allowed. Also, you can control if adding new forms or deleteing old ones is allowed.
-

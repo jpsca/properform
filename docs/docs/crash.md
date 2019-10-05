@@ -1,11 +1,24 @@
 
 # Crash course
 
-This is an example of a simple form:
+Unless you’re planning to build websites that do nothing but show content, and don’t accept input from your visitors, you’re going to need to understand and use forms.
+
+## Key Concepts
+
+- `Form`s are the core container of Proper Form, they are classes that group fields and/or formsets and, sometimes, connect them to models.
+- Fields do most of the heavy lifting. Each field represents a data type and the field handles coercing form the input string to that datatype. They can also run validations on the values.
+- Every field can be rendered as any form widget (inputs, selects, checboxes), even if a particular widget don't make sense for the data type.
+- In order to specify validation rules, fields contain a list of validator functions.
+- Formsets are lists of subforms. You can control if adding new forms or deleting old ones is allowed.
+
+
+## Diving into it
+
+This is an example of a simple form connected to a Model:
 
 ```python
 # forms.py
-from proper_form import SQLAForm, Email, Text, LongerThan
+from proper_form import SQLAForm, Text, LongerThan
 from .models import Message
 
 
@@ -21,9 +34,9 @@ class MessageForm(SQLAForm):
 
 Our form has two text fields, both required. The second one has a validator to ensure that the value is longer than five characters. You can have several validators on each field.
 
-There are three steps steps to use a form.
+There are three steps involved in using a form.
 
-**[1] First**, we need to show the form to the user. Let's see it with an example in Flask. First, in your controller, we create a form instance using the input data and the existing object data (that could be `None`, if it doesn't exist yet):
+**[1] First**, we need to show the form to the user. Let's see it with an example in Flask. First, in your controller, we create a form instance using the input data and the existing object (that could be `None`, if it doesn't exist yet):
 
 ```python hl_lines="15" tab="Controller"
 from flask import request, render_template
@@ -100,7 +113,7 @@ def edit(msg_id=None):
     )
 ```
 
-Note that we have it so validate() is only called if there is POST data. The reason we gate the validation check this way is that when there is no POST data (like in step [1]) we don’t want to cause validation errors.
+Note that we have it so validate() is only called if there is POST data. The reason we gate the validation check this way is that, when there is no POST data (like in step [1]), we don’t want to cause validation errors.
 
 If the form was submitted and has errors, it'll be shown again to the user, only this time with error messages.
 

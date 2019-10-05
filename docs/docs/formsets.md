@@ -1,7 +1,7 @@
 
 # Form sets
 
-Form sets are the secret weapon of Proper Form. Imagine you have models like this:
+Form sets are the secret weapon ofthis library. Imagine you have models like this:
 
 ![Person has many websites](img/form-set-model.png){: width=400 }
 {: style=text-align:center }

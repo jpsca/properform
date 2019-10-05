@@ -5,7 +5,7 @@ Validators are functions that take the list of values of a filed, already type c
  
 ## Built-in validators
 
-**Proper Form** includes several validators for common data needs. These are technically validator *factories*, because they take some arguments and return a validator as a function, tailored to your specific need. Example:
+Proper Form includes several validators for common data needs. These are technically validator *factories*, because they take some arguments and return a validator as a function, tailored to your specific need. Example:
 
 ```python
 class MyForm(Form):

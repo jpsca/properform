@@ -12,7 +12,7 @@ class MyForm(f.Form):
     birthday = f.Date()
 ```
 
-Unlike most (all?) the other form libraries, **Proper Form** doesn't tie a field to a specific HTML representation. For example, an `Email` field can be rendered as a `<input type="email">`, but also as a `<select>`, a `<input type="checkbox">`, etc. The important part is that the received input is normalized and checked to have the shape of an email address, no matter how the input gets to the field.
+Unlike most (all?) the other form libraries, Proper Form doesn't tie a field to a specific HTML representation. For example, an `Email` field can be rendered as a `<input type="email">`, but also as a `<select>`, a `<input type="checkbox">`, etc. The important part is that the received input is normalized and checked to have the shape of an email address, no matter how the input gets to the field.
 
 The most important thing to remember about fields, is that they always take a **list** of input values, even if only one is sent or needed. All received values are processed even if you only need the first one. It does that for several reasons:
 
@@ -31,7 +31,7 @@ Field(*validators, **options)
 
 ### `*`validators
 
-Zero or more callables that get the type-casted values and have to return `True` if is ok or `False` if not. **Proper Form** comes with several pre-made validators (see the [Validators](/validators) page), but any custom function or callable object can be used.
+Zero or more callables that get the type-casted values and have to return `True` if is ok or `False` if not. Proper Form comes with several pre-made validators (see the [Validators](/validators) page), but any custom function or callable object can be used.
 
 ### required <small>(`False`)</small>
 
@@ -159,7 +159,7 @@ All field methods are about rendering, so they are covered in the [Rendering pag
 
 ## Built-in Field classes
 
-Naturally, **Proper Form** includes several Field classes that represent common data types needs. This section documents each built-in field.
+Naturally, Proper Form includes several Field classes that represent common data types needs. This section documents each built-in field.
 
 
 ### Boolean( )
@@ -228,7 +228,7 @@ This is disabled by default because these email addresses require that your mail
 File(*validators, **options)
 ```
 
-A field for rendering an `<input type="file">`. **Proper Form** does not deal with any file handling or validation.
+A field for rendering an `<input type="file">`. Proper Form does not deal with any file handling or validation.
 
 
 ### Float( )

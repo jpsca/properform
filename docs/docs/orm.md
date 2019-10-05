@@ -87,9 +87,11 @@ def update_object(self, data):
 
 ```
 
+`self._object` is the original object passed as an argument. `delete_object` and `update_object` will not be called if there isn't one.
+
 You might not need to write the three methods, in fact, the built-in adapters for SQLAlchemy an PonyORm only ovewrite the `create_object` and `delete_object` methods.
 
-This is the *complete* (and incredible short) code for the PonyORM and SQLAlchemy adapters:
+This is the *complete* (and incredible short) code for the built-in adapters:
 
 ```python
 from proper_form import Form
