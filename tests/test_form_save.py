@@ -18,8 +18,8 @@ class MyForm(f.Form):
     def create_object(self, data):
         return self._model(**data)
 
-    def delete_object(self, obj):
-        obj.deleted = True
+    def delete_object(self):
+        self.object.deleted = True
 
 
 def test_save_and_create():
@@ -34,8 +34,8 @@ def test_save_and_create():
 
 def test_save_and_update():
     input_data = {"a": "lorem ipsum", "b": "5"}
-    object_data = MyModel(id=42, a="old value", b=0)
-    form = MyForm(input_data, object_data)
+    object = MyModel(id=42, a="old value", b=0)
+    form = MyForm(input_data, object)
     obj = form.save()
 
     assert isinstance(obj, MyModel)

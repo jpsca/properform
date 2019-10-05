@@ -5,11 +5,11 @@ This is an example of a simple form:
 
 ```python
 # forms.py
-from proper_form import Form, Email, Text, LongerThan
+from proper_form import SQLAForm, Email, Text, LongerThan
 from .models import Message
 
 
-class MessageForm(Form):
+class MessageForm(SQLAForm):
     _model = Message
 
     your_name = Text(required=True)
@@ -25,7 +25,7 @@ There are three steps steps to use a form.
 
 **[1] First**, we need to show the form to the user. Let's see it with an example in Flask. First, in your controller, we create a form instance using the input data and the existing object data (that could be `None`, if it doesn't exist yet):
 
-```python hl_lines="16" tab="Controller"
+```python hl_lines="15" tab="Controller"
 from flask import request, render_template
 from .app import app
 from .forms import MessageForm
@@ -36,10 +36,9 @@ from .models import db, Message
 @app.route("/messages/<int:msg_id>/edit/", methods=["GET", "POST"])
 def edit(msg_id=None):
     # Load the message if exists
+    message = None
     if msg_id:
         message = db.query(Message).filter_by(id=msg_id).first()
-    else:
-        message = None  
 
     form = MessageForm(request.form, message)
 
@@ -89,7 +88,7 @@ def edit(msg_id=None):
 
     form = MessageForm(request.form, message)
     # [2]
-    if request.method == 'POST' and form.is_valid:
+    if request.method == 'POST' and form.validate():
         # [3]
         form.save()
         flash("Message saved.", 'success')
@@ -101,6 +100,8 @@ def edit(msg_id=None):
     )
 ```
 
-We know the form has been submitted because the methos is "POST" instead of "GET". If the form has error it'll be  shown again to the user, only this time with erros messages.
+Note that we have it so validate() is only called if there is POST data. The reason we gate the validation check this way is that when there is no POST data (like in step [1]) we don’t want to cause validation errors.
+
+If the form was submitted and has errors, it'll be shown again to the user, only this time with error messages.
 
 **[3] Finally**, if the form is valid, we do something with the data. In this example, `form.save()` creates/update a `Message` object in the database. After we finish processing the form, we do a redirect to another page.

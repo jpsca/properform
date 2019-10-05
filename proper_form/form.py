@@ -26,7 +26,7 @@ class Form(object):
     def __init__(
         self,
         input_data=None,
-        object_data=None,
+        object=None,
         file_data=None,
         *,
         prefix="",
@@ -35,33 +35,33 @@ class Form(object):
         self.prefix = prefix or ""
         self._can_delete = can_delete
         self._setup_fields()
-        self.load_data(input_data, object_data, file_data)
+        self.load_data(input_data, object, file_data)
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.prefix})"
 
-    def load_data(self, input_data=None, object_data=None, file_data=None):
+    def load_data(self, input_data=None, object=None, file_data=None):
         self._is_valid = None
         self._valid_data = None
         self.updated_fields = None
 
         input_data = FakeMultiDict() if input_data is None else input_data
         file_data = FakeMultiDict() if file_data is None else file_data
-        object_data = object_data or {}
-        if isinstance(object_data, dict) or object_data is None:
-            self._object = None
+        object = object or {}
+        if isinstance(object, dict) or object is None:
+            self.object = None
         else:
-            self._object = object_data
+            self.object = object
 
-        self._id = get_object_value(object_data, "id")
+        self._id = get_object_value(object, "id")
 
         if self._can_delete:
             _deleted = self.prefix + SEP + DELETED if self.prefix else DELETED
             if _deleted in input_data:
                 self._deleted = True
 
-        self._load_field_data(input_data, object_data, file_data)
-        self._load_fieldset_data(input_data, object_data, file_data)
+        self._load_field_data(input_data, object, file_data)
+        self._load_fieldset_data(input_data, object, file_data)
 
     @property
     def is_valid(self):
@@ -130,8 +130,8 @@ class Form(object):
         data.pop(ID, None)
         data.pop(DELETED, None)
 
-        if self._object and self._deleted:
-            self.delete_object(self._object)
+        if self.object and self._deleted:
+            self.delete_object()
             return None
 
         for name in self._formsets:
@@ -141,7 +141,7 @@ class Form(object):
                 continue
             data[name] = formset.save()
 
-        if self._object:
+        if self.object:
             obj = self.update_object(data)
         else:
             obj = self.create_object(data)
@@ -159,10 +159,10 @@ class Form(object):
 
     def update_object(self, data):
         for key, value in data.items():
-            setattr(self._object, key, value)
-        return self._object
+            setattr(self.object, key, value)
+        return self.object
 
-    def delete_object(self, object):  # pragma: no cover
+    def delete_object(self):  # pragma: no cover
         pass
 
     def _setup_fields(self):
@@ -216,19 +216,19 @@ class Form(object):
         else:
             formset.prefix = name + SEP
 
-    def _load_field_data(self, input_data, object_data, file_data):
+    def _load_field_data(self, input_data, object, file_data):
         for name in self._fields:
             field = getattr(self, name)
             full_name = field.name
             input_values = get_input_values(
                 input_data, full_name
             ) or get_input_values(file_data, full_name)
-            object_value = get_object_value(object_data, name)
+            object_value = get_object_value(object, name)
             field.load_data(input_values, object_value)
 
-    def _load_fieldset_data(self, input_data, object_data, file_data):
+    def _load_fieldset_data(self, input_data, object, file_data):
         for name in self._formsets:
             formset = getattr(self, name)
             formset.load_data(
-                input_data, get_object_value(object_data, name), file_data
+                input_data, get_object_value(object, name), file_data
             )

@@ -7,14 +7,14 @@ At the heart of Proper Form is the Form class. A form contain your field definit
 ## Form attributes
 
 ```python
-Field(input_data=None, object_data=None, file_data=None, *, prefix="")
+Field(input_data=None, object=None, file_data=None, *, prefix="")
 ```
 
 ### input_data
 
 [TODO]
-
-### object_data
+    
+### object
 
 [TODO]
 

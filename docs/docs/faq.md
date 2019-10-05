@@ -17,21 +17,18 @@ Here are some of the popular libraries to are known to work with Proper Form, bu
 
 ### Database ORMs
 
-If you don't save directly to models, pretty much any ORM should work, as long as data objects allow attribute access to their members.
-
-To directly create objects when saving, there is built-in support por [SQLAlchemy](https://www.sqlalchemy.org/) and [PonyORM](https://ponyorm.org/) but writing your own adapter is just a few lines of code. For instance, this is the complete adapter for PonyORM:
+Pretty much any ORM should work, as long as data objects allow attribute access to their members. There is built-in support por [SQLAlchemy](https://www.sqlalchemy.org/) and [PonyORM](https://ponyorm.org/) but writing your own adapter is just a few lines of code. For instance, this is the complete code for the adapter to PonyORM:
 
 ```python
 class PonyForm(Form):
     def create_object(self, data):
         return self._model(**data)
 
-    def delete_object(self, object):
-        return object.delete()
+    def delete_object(self):
+        return self.object.delete()
 ```
 
-That's really it.
-
+That's it.
 
 
 ## What versions of Python are supported?
@@ -45,7 +42,7 @@ No.
 
 However, you can use `loop.run_in_executor()` to run a blocking synchronous methods, like `validate` or `save`, from asyncio, without blocking the main event loop.
 
-I hope a future Python version (4?) removes thid forced separation, so you can call the same code from sync and async functions (like JavaSscript does, for example).
+I hope a future Python version (4?) removes this forced separation, so you can call the same code from sync and async functions (like JavaSscript does, for example).
 
 
 ## How can I contribute to Proper Form?

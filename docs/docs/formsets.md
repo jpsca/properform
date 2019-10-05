@@ -102,7 +102,7 @@ As shown above you can define the number of extra forms. What this means is that
 ...     name = Text()
 ...     webs = FormSet(WebPageForm)
 
->>> form = PersonForm(object_data={
+>>> form = PersonForm(object={
 ...     "webs": [
 ...         {"id": 1, "url": "http://example.com/1", "title": "Example 1"},
 ...         {"id": 2, "url": "http://example.com/2", "title": "Example 2"},

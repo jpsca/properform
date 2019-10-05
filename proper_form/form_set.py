@@ -83,15 +83,15 @@ class FormSet(object):
         prefixes = get_prefixes(self.prefix, input_data, file_data)
         forms = []
 
-        for object_data in objects_data:
-            obj_id = get_object_value(object_data, "id")
+        for object in objects_data:
+            obj_id = get_object_value(object, "id")
             assert obj_id, "Object in a FormSet must have an `id` attribute."
             prefix = f"{self.prefix}{obj_id}"
             if prefix in prefixes:
                 prefixes.remove(prefix)
             form = self.FormClass(
                 input_data,
-                object_data,
+                object,
                 file_data,
                 prefix=prefix,
                 can_delete=self.can_delete

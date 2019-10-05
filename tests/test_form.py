@@ -120,7 +120,7 @@ def test_validate_optional_form():
     assert sorted(form.updated_fields) == ["ipsum", "lorem"]
 
 
-def test_load_object_data():
+def test_load_object():
     class ContactForm(f.Form):
         subject = f.Text(required=True)
         email = f.Email()
