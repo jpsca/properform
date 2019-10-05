@@ -49,9 +49,9 @@ class Form(object):
         file_data = FakeMultiDict() if file_data is None else file_data
         object = object or {}
         if isinstance(object, dict) or object is None:
-            self.object = None
+            self._object = None
         else:
-            self.object = object
+            self._object = object
 
         self._id = get_object_value(object, "id")
 
@@ -130,7 +130,7 @@ class Form(object):
         data.pop(ID, None)
         data.pop(DELETED, None)
 
-        if self.object and self._deleted:
+        if self._object and self._deleted:
             self.delete_object()
             return None
 
@@ -141,7 +141,7 @@ class Form(object):
                 continue
             data[name] = formset.save()
 
-        if self.object:
+        if self._object:
             obj = self.update_object(data)
         else:
             obj = self.create_object(data)
@@ -159,8 +159,8 @@ class Form(object):
 
     def update_object(self, data):
         for key, value in data.items():
-            setattr(self.object, key, value)
-        return self.object
+            setattr(self._object, key, value)
+        return self._object
 
     def delete_object(self):  # pragma: no cover
         pass

@@ -11,13 +11,15 @@ Most likely **yes**.
 Here are some of the popular libraries to are known to work with Proper Form, but if it’s not listed, it doesn’t mean it won’t work.
 
 - Django.
-- Werkzeug, like Flask and many other.
-- Webob, like Pyramid, Morepath, Turbogears, Google App Engine, etc.
-- Any other cgi.FieldStorage-type multidict, like Falcon, Bottle, etc.
+- Werkzeug: Flask, etc.
+- Webob: Pyramid, Morepath, Turbogears, Google App Engine, etc.
+- Any other `cgi.FieldStorage`-type multidict: Falcon, Bottle, etc.
 
 ### Database ORMs
 
-Pretty much any ORM should work, as long as data objects allow attribute access to their members. There is built-in support por [SQLAlchemy](https://www.sqlalchemy.org/) and [PonyORM](https://ponyorm.org/) but writing your own adapter is just a few lines of code. For instance, this is the complete code for the adapter to PonyORM:
+Pretty much ~~any ORM~~ anything should work, as long as data objects allow attribute access to their members. There is built-in support por [SQLAlchemy](https://www.sqlalchemy.org/) and [PonyORM](https://ponyorm.org/) but writing your own adapter is just a few lines of code.
+
+For example, this is the *complete* code for the adapter to PonyORM:
 
 ```python
 class PonyForm(Form):
@@ -25,7 +27,7 @@ class PonyForm(Form):
         return self._model(**data)
 
     def delete_object(self):
-        return self.object.delete()
+        return self._object.delete()
 ```
 
 That's it.
@@ -40,9 +42,9 @@ Python 3.6 and beyond.
 
 No.
 
-However, you can use `loop.run_in_executor()` to run a blocking synchronous methods, like `validate` or `save`, from asyncio, without blocking the main event loop.
+(However, you can use `loop.run_in_executor()` to run it from asyncio, without blocking the main event loop).
 
-I hope a future Python version (4?) removes this forced separation, so you can call the same code from sync and async functions (like JavaSscript does, for example).
+I hope a future Python version (4?) removes this forced separation, so you can transparently call the same code from sync and async functions (like JavaScript does, for example).
 
 
 ## How can I contribute to Proper Form?

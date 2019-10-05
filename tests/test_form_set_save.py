@@ -18,7 +18,7 @@ class ORMForm(f.Form):
         return self._model(**data)
 
     def delete_object(self):
-        self.object.deleted = True
+        self._object.deleted = True
 
 
 def test_load_data_object():

@@ -9,7 +9,7 @@ class PonyForm(Form):
         return self._model(**data)
 
     def delete_object(self):
-        return self.object.delete()
+        return self._object.delete()
 
 
 class SQLAForm(Form):
@@ -19,4 +19,4 @@ class SQLAForm(Form):
         return object
 
     def delete_object(self):
-        return self._session.delete(self.object)
+        return self._session.delete(self._object)
