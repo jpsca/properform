@@ -2,6 +2,7 @@
 	background: #272822;
 	color: #f8f8f2;
 	border-radius: 4px;
+	overflow: auto;
 }
 .md-typeset div.highlight .hll { background-color: #49483e }
 .md-typeset div.highlight .c { color: #75715e } /* Comment */

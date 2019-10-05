@@ -1,8 +1,24 @@
 
 # Forms
 
-At the heart of Proper Form is the Form class. A form contain your field definitions, delegate validation, take input, and in general function as the glue holding everything together.
+At the heart of Proper Form is the `Form` class. A form contain your field definitions, delegate validation, take input, and in general function as the glue holding everything together.
 
+Form are classes that inherit from the `proper_form.Form` class. You then create instances of those classes in your controllers, using the request and maybe object data.
+
+```python
+from proper_form  import Form, Email, Password
+
+class LoginForm(Form):
+    login = Email(required=True)
+    password = Password(required=True)
+
+def login():
+    form = LoginForm(request.POST)
+    if request.method == "POST" and form.validate():
+        ...
+    return render_template("login.html", form=form)
+
+```
 
 ## Form attributes
 

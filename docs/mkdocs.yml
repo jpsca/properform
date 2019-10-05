@@ -29,7 +29,8 @@ theme:
     accent: pink
 
 extra_css:
-  - css/monokai.css
+  - css/colorful.css
+  # - css/monokai.css
   - css/extra.css
 
 # Customization

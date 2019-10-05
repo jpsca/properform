@@ -1,8 +1,6 @@
 
 # Crash course
 
-Unless you’re planning to build websites that do nothing but show content, and don’t accept input from your visitors, you’re going to need to understand and use forms.
-
 ## Key Concepts
 
 - `Form`s are the core container of Proper Form, they are classes that group fields and/or formsets and, sometimes, connect them to models.
@@ -19,10 +17,14 @@ This is an example of a simple form connected to a Model:
 ```python
 # forms.py
 from proper_form import SQLAForm, Text, LongerThan
-from .models import Message
+from .models import db, Message
 
 
-class MessageForm(SQLAForm):
+class BaseForm(SQLAForm):
+    _session = db.session
+
+
+class MessageForm(BaseForm):
     _model = Message
 
     your_name = Text(required=True)

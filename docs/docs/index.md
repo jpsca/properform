@@ -21,14 +21,38 @@ It tries very hard not to be terrible like all the others:
 
 - A field isn't tied to a specific HTML tag, so can be presentend in multiple ways. Even the same form can be used in different contexts and have different widgets and styles on each.
 
-- All error messages are editable. We are not robots, the tone of the messages must be able to change or to be translated.
-
-- Commonly used built-in validators, but you can write a simple function to use a custom one.
-
 - Incredible easy to integrate with any ORM (object-relational mapper). Built-in adaptators for SQLAlchemy and Pony.
 
+- Commonly used built-in validators, but you can write simple functions to use as custom ones.
 
-## Install
+- All error messages are editable. We are not robots, the tone of the messages must be able to change or to be translated.
+
+
+## Just show me how it looks
+
+```python
+from proper_form  import Form, Email, Text
+
+
+class CommentForm(Form):
+    email = Email(required=True, check_dns=True)
+    message = Text(
+    	LongerThan(5, "Please write a longer message"),
+    	required=True
+    )
+
+
+def comment():
+    form = CommentForm(request.POST)
+    if request.method == "POST" and form.is_valid:
+    	data = form.save()
+        ...
+    return render_template("comment.html", form=form)
+
+
+```
+
+## Installation
 
 ```python
 # Create a virtual environment
