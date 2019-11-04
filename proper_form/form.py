@@ -11,6 +11,7 @@ __all__ = ("Form",)
 
 class Form(object):
 
+    error = None
     updated_fields = None
     prefix = None
 
@@ -75,6 +76,7 @@ class Form(object):
         if self._valid_data is not None:
             return self._valid_data
 
+        self.error = None
         is_valid = True
         updated = []
         valid_data = {}
