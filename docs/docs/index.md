@@ -60,5 +60,5 @@ python -m venv .venv
 # Activate said environment
 source .venv/bin/activate
 # Install the library
-pip install proper_form
+python -m pip install proper_form
 ```
