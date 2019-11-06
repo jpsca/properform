@@ -1,0 +1,1244 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="A not-terrible Python form library.">
+      
+      
+        <link rel="canonical" href="https://github.com/jpscaletti/proper-form/fields/">
+      
+      
+        <meta name="author" content="Juan-Pablo Scaletti">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Fields - Proper Form</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.28b5997c.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.958c72b0.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ef5350">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../css/colorful.css">
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-XXXXXXXX-X", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="red" data-md-color-accent="pink">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#fields" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://github.com/jpscaletti/proper-form" title="Proper Form" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud_done</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Proper Form
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Fields
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/jpscaletti/proper-form" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    jpscaletti/proper-form
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://github.com/jpscaletti/proper-form" title="Proper Form" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud_done</i>
+      
+    </a>
+    Proper Form
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/jpscaletti/proper-form" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    jpscaletti/proper-form
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../crash/" title="Crash course" class="md-nav__link">
+      Crash course
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../forms/" title="Forms" class="md-nav__link">
+      Forms
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Fields
+      </label>
+    
+    <a href="./" title="Fields" class="md-nav__link md-nav__link--active">
+      Fields
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fields-common-arguments" class="md-nav__link">
+    Fields common arguments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validators" class="md-nav__link">
+    *validators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-false" class="md-nav__link">
+    required (False)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strict-true" class="md-nav__link">
+    strict (True)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-false" class="md-nav__link">
+    multiple (False)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#min_num-none" class="md-nav__link">
+    min_num (None)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#max_num-none" class="md-nav__link">
+    max_num (None)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error_messages-none" class="md-nav__link">
+    error_messages (None)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collection-false" class="md-nav__link">
+    collection (False)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sep" class="md-nav__link">
+    sep (",")
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clean-none" class="md-nav__link">
+    clean (None)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-none" class="md-nav__link">
+    prepare (None)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-attributes" class="md-nav__link">
+    Field attributes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#name" class="md-nav__link">
+    name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required" class="md-nav__link">
+    required
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#values" class="md-nav__link">
+    values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    value
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-methods" class="md-nav__link">
+    Field methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-field-classes" class="md-nav__link">
+    Built-in Field classes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boolean" class="md-nav__link">
+    Boolean( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#date" class="md-nav__link">
+    Date( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datetime" class="md-nav__link">
+    DateTime( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#email" class="md-nav__link">
+    Email( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file" class="md-nav__link">
+    File( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#float" class="md-nav__link">
+    Float( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hexcolor" class="md-nav__link">
+    HexColor( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integer" class="md-nav__link">
+    Integer( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#month" class="md-nav__link">
+    Month( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#password" class="md-nav__link">
+    Password( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slug" class="md-nav__link">
+    Slug( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#splitteddatetime" class="md-nav__link">
+    SplittedDateTime( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    Text( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time" class="md-nav__link">
+    Time( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#url" class="md-nav__link">
+    URL( )
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../rendering/" title="Rendering" class="md-nav__link">
+      Rendering
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../validators/" title="Validators" class="md-nav__link">
+      Validators
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../formsets/" title="Form sets" class="md-nav__link">
+      Form sets
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../orm/" title="ORM integration" class="md-nav__link">
+      ORM integration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../faq/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fields-common-arguments" class="md-nav__link">
+    Fields common arguments
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validators" class="md-nav__link">
+    *validators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-false" class="md-nav__link">
+    required (False)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strict-true" class="md-nav__link">
+    strict (True)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-false" class="md-nav__link">
+    multiple (False)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#min_num-none" class="md-nav__link">
+    min_num (None)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#max_num-none" class="md-nav__link">
+    max_num (None)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error_messages-none" class="md-nav__link">
+    error_messages (None)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collection-false" class="md-nav__link">
+    collection (False)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sep" class="md-nav__link">
+    sep (",")
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clean-none" class="md-nav__link">
+    clean (None)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-none" class="md-nav__link">
+    prepare (None)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-attributes" class="md-nav__link">
+    Field attributes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#name" class="md-nav__link">
+    name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required" class="md-nav__link">
+    required
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#values" class="md-nav__link">
+    values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    value
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-methods" class="md-nav__link">
+    Field methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-field-classes" class="md-nav__link">
+    Built-in Field classes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boolean" class="md-nav__link">
+    Boolean( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#date" class="md-nav__link">
+    Date( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datetime" class="md-nav__link">
+    DateTime( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#email" class="md-nav__link">
+    Email( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file" class="md-nav__link">
+    File( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#float" class="md-nav__link">
+    Float( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hexcolor" class="md-nav__link">
+    HexColor( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integer" class="md-nav__link">
+    Integer( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#month" class="md-nav__link">
+    Month( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#password" class="md-nav__link">
+    Password( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slug" class="md-nav__link">
+    Slug( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#splitteddatetime" class="md-nav__link">
+    SplittedDateTime( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    Text( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time" class="md-nav__link">
+    Time( )
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#url" class="md-nav__link">
+    URL( )
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">#</a></h1>
+<p>A field represent a data type. It handles coercing of the input to that data type and following validations. For example, <code>Text</code>, <code>Integer</code>, <code>Date</code>, and <code>Email</code> are some of the available fields.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">proper_form</span> <span class="kn">as</span> <span class="nn">f</span>
+
+<span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">birthday</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
+</pre></div>
+
+<p>Unlike most (all?) the other form libraries, Proper Form doesn&rsquo;t tie a field to a specific HTML representation. For example, an <code>Email</code> field can be rendered as a <code>&lt;input type="email"&gt;</code>, but also as a <code>&lt;select&gt;</code>, a <code>&lt;input type="checkbox"&gt;</code>, etc. The important part is that the received input is normalized and checked to have the shape of an email address, no matter how the input gets to the field.</p>
+<p>The most important thing to remember about fields, is that they always take a <strong>list</strong> of input values, even if only one is sent or needed. All received values are processed even if you only need the first one. It does that for several reasons:</p>
+<ol>
+<li>You can configure any field to take and return a list of values by setting to <code>True</code> its <code>multiple</code> option.</li>
+<li>Some special fields work with groups of two separated <code>&lt;input&gt;</code>. For example, a <code>SplittedDateTime</code> expects to receive at least two values with the same name, and cast the first as a date and the second as a time.</li>
+<li>Can be used by the <code>Confirmed</code> validator to check if a value has been repeated. The classic use is for password confirmation fields.</li>
+</ol>
+<h2 id="fields-common-arguments">Fields common arguments<a class="headerlink" href="#fields-common-arguments" title="Permanent link">#</a></h2>
+<p>Each <code>Field</code> class constructor takes at least these arguments. Some <code>Field</code> classes take additional, field-specific arguments, but the following should always be accepted:</p>
+<div class="highlight"><pre><span></span><span class="n">Field</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<h3 id="validators"><code>*</code>validators<a class="headerlink" href="#validators" title="Permanent link">#</a></h3>
+<p>Zero or more callables that get the type-casted values and have to return <code>True</code> if is ok or <code>False</code> if not. Proper Form comes with several pre-made validators (see the <a href="/validators">Validators</a> page), but any custom function or callable object can be used.</p>
+<h3 id="required-false">required <small>(<code>False</code>)</small><a class="headerlink" href="#required-false" title="Permanent link">#</a></h3>
+<p>By default, each <code>Field</code> class assumes the value is optional, but if you set this option to <code>True</code>, an empty value – either None or the empty string (&ldquo;&rdquo;) – then <code>validate()</code> will fail.</p>
+<h3 id="strict-true">strict <small>(<code>True</code>)</small><a class="headerlink" href="#strict-true" title="Permanent link">#</a></h3>
+<p>By default, if the coercion of the input to the field&rsquo;s data type fails, <code>validate()</code> will also fail.
+You can ignore it and continue without that value by setting this option to <code>False</code>.</p>
+<p>Of course, even if this option is set to <code>False</code>, if all values are invalid and <code>required</code> is <code>True</code>, <code>validate()</code> will still fails for that other reason.</p>
+<h3 id="multiple-false">multiple <small>(<code>False</code>)</small><a class="headerlink" href="#multiple-false" title="Permanent link">#</a></h3>
+<p>Since the input is always a list, and all values are processed, this argument only indicates if the field returns the full list of values or just the first one.</p>
+<p>In the HTML, you tipically want this to be <code>True</code> for something like a list of checkboxes or a <code>&lt;select multiple&gt;</code> tag.</p>
+<p>For fields that by default take two values to represent one, like the <code>SplittedDateTime</code>, the values will be processed in <em>pairs</em>. Example: <code>["date1", "time1", "date2", "time2", ]</code>.</p>
+<h3 id="min_num-none">min_num <small>(<code>None</code>)</small><a class="headerlink" href="#min_num-none" title="Permanent link">#</a></h3>
+<p>Validates that the number of values with this name is <em>at least</em> this.</p>
+<h3 id="max_num-none">max_num <small>(<code>None</code>)</small><a class="headerlink" href="#max_num-none" title="Permanent link">#</a></h3>
+<p>Validates that the number of values with this name is <em>at most</em> this.</p>
+<h3 id="error_messages-none">error_messages <small>(<code>None</code>)</small><a class="headerlink" href="#error_messages-none" title="Permanent link">#</a></h3>
+<p>The <code>required</code>, <code>strict</code>, <code>min_num</code>, and <code>max_num</code> validations fail with this predefined error messages:</p>
+<div class="highlight"><pre><span></span><span class="n">default_error_messages</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="s2">&quot;This field is required.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid type.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;min_num&quot;</span><span class="p">:</span> <span class="s2">&quot;You need at least {num} values.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;max_num&quot;</span><span class="p">:</span> <span class="s2">&quot;You can have at most {num} values.&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>The <code>error_messages</code> argument allows you to overwrite all or some of these messages by passing a dictionary with your custom error messages for those validations.</p>
+<h3 id="collection-false">collection <small>(<code>False</code>)</small><a class="headerlink" href="#collection-false" title="Permanent link">#</a></h3>
+<p>This will treat all inputs as a comma-separated list of values, process them, validate them independently, and join them again at the end. Classic examples are lists of emails or URLs</p>
+<p>If <code>strict</code> is <code>False</code>, any value that can&rsquo;t be type-casted is filtered out, so you can end with a valid final result even if some of the input values weren&rsquo;t.</p>
+<p>Setting this to <code>True</code> forces <code>multiple</code> to be <code>False</code>, the result will always be comma-separated list of values in a single string.</p>
+<h3 id="sep">sep <small>(<code>","</code>)</small><a class="headerlink" href="#sep" title="Permanent link">#</a></h3>
+<p>I wrote &ldquo;comma-separated&rdquo;, but in fact, a collection will be splitted and joined by whatever character(s) you specify in the <code>sep</code> option.</p>
+<h3 id="clean-none">clean <small>(<code>None</code>)</small><a class="headerlink" href="#clean-none" title="Permanent link">#</a></h3>
+<p>Just before the field return the type-casted and validated values, you might want to adjust them a little more.</p>
+<p>This option allows you to pass a function that recieves the final value, or a list of values, if <code>multiple</code> is <code>True</code>, process it/them in some way and returns it.</p>
+<p>For redability, instead of passing it as an argument, you can alternatively define a method in the parent form named <code>clean_NAME()</code> for the same effect.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+    <span class="c1"># as an argument</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">))</span>
+    <span class="n">mydate</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">()</span>
+
+    <span class="c1"># as method in the parent form</span>
+    <span class="k">def</span> <span class="nf">clean_mydate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pyvalue</span><span class="p">):</span>
+        <span class="c1"># change timezone or something</span>
+        <span class="o">...</span>
+        <span class="k">return</span> <span class="n">clean_value</span>
+</pre></div>
+
+<h3 id="prepare-none">prepare <small>(<code>None</code>)</small><a class="headerlink" href="#prepare-none" title="Permanent link">#</a></h3>
+<p>Some data types, like dates, need to be converted to strings before can be shown in the HTML. You don&rsquo;t usually have to worry about this because the each field take care of it by default, but in some rare cases, you might need to use your own custom function. This option allows you to pass a function to do that.</p>
+<p>The function passed as <code>prepare</code>, must take a <em>stored</em> value and return a string.</p>
+<p>For redability, instead of passing it as an argument, you can alternatively define a method in the parent form named <code>prepare_NAME()</code> for the same effect.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+    <span class="c1"># as an argument</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">prepare</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">f</span><span class="s2">&quot;--{v}--&quot;</span><span class="p">)</span>
+    <span class="n">mydate</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">()</span>
+
+    <span class="c1"># as method in the parent form</span>
+    <span class="k">def</span> <span class="nf">prepare_mydate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pyvalue</span><span class="p">):</span>
+        <span class="c1"># change timezone or something</span>
+        <span class="o">...</span>
+        <span class="k">return</span> <span class="s2">&quot;some str value&quot;</span>
+</pre></div>
+
+<h2 id="field-attributes">Field attributes<a class="headerlink" href="#field-attributes" title="Permanent link">#</a></h2>
+<p>The attributes of fields can be useful when rendering fields, specially if you need to do something unusual.</p>
+<h3 id="name">name<a class="headerlink" href="#name" title="Permanent link">#</a></h3>
+<p>The name attribute of the field for the HTML form, setted by the parent <code>Form</code> class. </p>
+<h3 id="required">required<a class="headerlink" href="#required" title="Permanent link">#</a></h3>
+<p>The same as the attribute.</p>
+<h3 id="values">values<a class="headerlink" href="#values" title="Permanent link">#</a></h3>
+<p>List of values, already formatted for showing them in the HTML form.</p>
+<h3 id="value">value<a class="headerlink" href="#value" title="Permanent link">#</a></h3>
+<p>The first of the values or an empty string if none is found.</p>
+<h2 id="field-methods">Field methods<a class="headerlink" href="#field-methods" title="Permanent link">#</a></h2>
+<p>All field methods are about rendering, so they are covered in the <a href="/rendering/">Rendering page</a></p>
+<h2 id="built-in-field-classes">Built-in Field classes<a class="headerlink" href="#built-in-field-classes" title="Permanent link">#</a></h2>
+<p>Naturally, Proper Form includes several Field classes that represent common data types needs. This section documents each built-in field.</p>
+<h3 id="boolean">Boolean( )<a class="headerlink" href="#boolean" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">Boolean</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>Normalizes to a <code>True</code> or <code>False</code> value.</p>
+<p>A value is normalized to <code>False</code> if, stripped and lowercased, is one of <code>""</code>, <code>"none"</code>, <code>"0"</code>, <code>"no"</code>, <code>"nope"</code>, <code>"nah"</code>, <code>"off"</code>, or <code>"false"</code>. Otherwise is normalized to <code>True</code>.</p>
+<h3 id="date">Date( )<a class="headerlink" href="#date" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">Date</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>Validate that the given values are dates with the format <code>YYYY-MM-dd</code>.</p>
+<p>Normalizes to a <code>datetime.date</code> value.</p>
+<p>Shows the stored values using the format <code>YYYY-MM-dd</code>.</p>
+<h3 id="datetime">DateTime( )<a class="headerlink" href="#datetime" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">DateTime</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>Validate that the given values are dates or datetimes with the format <code>YYYY-MM-dd</code> plus an optional time. The time can be in a 12-hours or 24-hours format, with or without seconds.</p>
+<p>Normalizes to a <code>datetime.datetime</code> value.</p>
+<p>Shows the stored values using the format <code>YYYY-MM-dd HH:mm:ss AM/PM</code> or <code>YYYY-MM-dd HH:mm AM/PM</code> if the seconds are zero.</p>
+<h3 id="email">Email( )<a class="headerlink" href="#email" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">Email</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="n">check_dns</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">allow_smtputf8</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>Validates and normalize an email address using the <a href="https://github.com/JoshData/python-email-validator">python-email-validator</a> library. Even if the format is valid, it cannot guarantee that the email is real, so the purpose of this validation is to alert the user of a typing mistake.</p>
+<p>The normalizations include lowercasing the domain part of the email address (domain names are case-insensitive), and unicode &ldquo;NFC&rdquo; normalization of the whole address.</p>
+<p><strong>check_dns</strong> (bool):</p>
+<p>Check if the domain name in the email address resolves. This still doesn&rsquo;t guarantee that the email is real, but at least you can discard domain mistypes and completely bogus email addresses.</p>
+<p>There is nothing to be gained by trying to actually contact an SMTP server, so that&rsquo;s not done.</p>
+<p><strong>allow_smtputf8</strong> (bool):</p>
+<p>Accept non-ASCII characters in the local part of the address (before the @-sign).</p>
+<p>This is disabled by default because these email addresses require that your mail submission library and the mail servers along the route to the destination, including your own outbound mail server, all support the <a href="https://tools.ietf.org/html/rfc6531">SMTPUTF8 (RFC 6531)</a> extension.</p>
+<h3 id="file">File( )<a class="headerlink" href="#file" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">File</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>A field for rendering an <code>&lt;input type="file"&gt;</code>. Proper Form does not deal with any file handling or validation.</p>
+<h3 id="float">Float( )<a class="headerlink" href="#float" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">Float</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>Normalizes to a float value.</p>
+<h3 id="hexcolor">HexColor( )<a class="headerlink" href="#hexcolor" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">HexColor</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>Accepts a color in hex, rgb, or rgba color and normalize it to a hex value of 6 digits or 6 digits plus one for alpha.</p>
+<p>Examples:</p>
+<ul>
+<li>&ldquo;#f2e&rdquo; → &ldquo;#ff22ee&rdquo;</li>
+<li>&ldquo;rgb(255, 0, 255)&rdquo; → &ldquo;#ff00ff&rdquo;</li>
+<li>&ldquo;rgb(221, 96, 89)&rdquo; → &ldquo;#dd6059&rdquo;</li>
+<li>&ldquo;rgba(221, 96, 89, 0.3)&rdquo; → &ldquo;#dd60594c&rdquo;</li>
+</ul>
+<h3 id="integer">Integer( )<a class="headerlink" href="#integer" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">Integer</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>Normalizes to an integer value.</p>
+<h3 id="month">Month( )<a class="headerlink" href="#month" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">Month</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>Validate that the given values are dates with the <code>YYYY-MM</code> format. Example: &ldquo;1980-07&rdquo;.</p>
+<p>Normalizes to a <code>datetime.date</code> value.</p>
+<p>Shows the stored values using the <code>YYYY-MM</code> format.</p>
+<h3 id="password">Password( )<a class="headerlink" href="#password" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">Password</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>A text field. Doesn&rsquo;t normalize or validates it.</p>
+<p>Whatever value is accepted by this field is not rendered back to the browser like normal fields.</p>
+<h3 id="slug">Slug( )<a class="headerlink" href="#slug" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">Slug</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">validators</span><span class="p">,</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">separator</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+    <span class="n">stopwords</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">regex_pattern</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">replacements</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">lowercase</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">word_boundary</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">entities</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">decimal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">hexadecimal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">options</span>
+<span class="p">)</span>
+</pre></div>
+
+<p>A slug is a short label for something, containing only letters, numbers, underscores, or hyphens. Is tipically used for using a name in a URL.</p>
+<p>To do the conversion, this field uses the powerful <a href="https://github.com/un33k/python-slugify">python-slugify</a> library, so it takes the same arguments:</p>
+<p><strong>max_length</strong> (int):</p>
+<p>output string length</p>
+<p><strong>separator</strong> (str):</p>
+<p>separator between words</p>
+<p><strong>stopwords</strong> (iterable):</p>
+<p>words to discount</p>
+<p><strong>regex_pattern</strong> (str):</p>
+<p>regex pattern for allowed characters</p>
+<p><strong>replacements</strong> (iterable):</p>
+<p>list of replacement rules e.g. [[&lsquo;|&rsquo;, &lsquo;or&rsquo;], [&lsquo;%&rsquo;, &lsquo;percent&rsquo;]]</p>
+<p><strong>lowercase</strong> (bool):</p>
+<p>activate case sensitivity by setting it to False</p>
+<p><strong>word_boundary</strong> (bool):</p>
+<p>truncates to end of full words (length may be shorter than max_length)</p>
+<p><strong>entities</strong> (bool):</p>
+<p>converts html entities to unicode (foo &amp; bar -&gt; foo-bar)</p>
+<p><strong>decimal</strong> (bool):</p>
+<p>converts html decimal to unicode (&#381; -&gt; Ž -&gt; z)</p>
+<p><strong>hexadecimal</strong> (bool):</p>
+<p>converts html hexadecimal to unicode (&#x17D; -&gt; Ž -&gt; z)</p>
+<h3 id="splitteddatetime">SplittedDateTime( )<a class="headerlink" href="#splitteddatetime" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">SplittedDateTime</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>A Datetime field splitted in a date and a time field (with the same name). The input values are grouped in pairs, with the first one is the date and the second one the time.</p>
+<p>Validates that the first items of the pairs are dates with the format <code>YYYY-MM-dd</code>, and the seconds are empty strings (which is equivalent to &ldquo;00:00&rdquo;) or times in a 12-hours or 24-hours format, with or without seconds.</p>
+<p>Normalizes to a <code>datetime.datetime</code> value.</p>
+<p>Shows the date part of the stored values using the format <code>YYYY-MM-dd</code>, and the time parts as <code>HH:mm:ss AM/PM</code> or <code>HH:mm AM/PM</code> if the seconds are zero.</p>
+<h3 id="text">Text( )<a class="headerlink" href="#text" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>A simple text field that normalize the input by stripping the leading and final spaces.</p>
+<h3 id="time">Time( )<a class="headerlink" href="#time" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">Time</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>A 12-hours or 24-hours time field, seconds optional. Examples: &ldquo;5:03 AM&rdquo;, &ldquo;11:00 PM&rdquo;, &ldquo;4:20:16 PM.</p>
+<p>Normalizes to a <code>datetime.time</code> value.</p>
+<p>Shows the stored value as <code>HH:mm:ss AM/PM</code> or <code>HH:mm AM/PM</code> if the seconds are zero.</p>
+<h3 id="url">URL( )<a class="headerlink" href="#url" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><span class="n">URL</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="n">require_tld</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<p>Validates and normalize an URL address.</p>
+<p>Even if the format is valid, it cannot guarantee that the URL is real. The purpose of this function is to alert the user of a typing mistake.</p>
+<p>The normalizations include lowercasing (domain names are case-insensitive), and unicode &ldquo;NFC&rdquo; normalization.</p>
+<p><strong>require_tld</strong> (bool):</p>
+<p>Indicates if the domain-name portion of the URL must contain a .tld suffix. Set this to <code>True</code> if you want to disallow domains like <code>localhost</code>.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <footer class="md-footer"><div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid"><a href="../forms/" title="Forms" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Previous</span>Forms</span>
+            </div>
+          </a><a href="../rendering/" title="Rendering" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Next</span>Rendering</span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a></nav>
+    </div><div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid"><div class="md-footer-copyright">
+        <p>
+          This work is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a> License.
+        </p>
+        <p>
+          Powered by <a href="https://www.mkdocs.org">MkDocs</a>.
+        </p>
+      </div>
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/jpscaletti/proper-form" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/jpscaletti/proper-form" class="md-footer-social__link fa fa-github-alt"></a>
+    
+  </div>
+</div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.28f21e1d.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>

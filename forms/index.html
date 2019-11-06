@@ -1,0 +1,747 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="A not-terrible Python form library.">
+      
+      
+        <link rel="canonical" href="https://github.com/jpscaletti/proper-form/forms/">
+      
+      
+        <meta name="author" content="Juan-Pablo Scaletti">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Forms - Proper Form</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.28b5997c.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.958c72b0.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ef5350">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../css/colorful.css">
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-XXXXXXXX-X", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="red" data-md-color-accent="pink">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#forms" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://github.com/jpscaletti/proper-form" title="Proper Form" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud_done</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Proper Form
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Forms
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/jpscaletti/proper-form" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    jpscaletti/proper-form
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://github.com/jpscaletti/proper-form" title="Proper Form" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud_done</i>
+      
+    </a>
+    Proper Form
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/jpscaletti/proper-form" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    jpscaletti/proper-form
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../crash/" title="Crash course" class="md-nav__link">
+      Crash course
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Forms
+      </label>
+    
+    <a href="./" title="Forms" class="md-nav__link md-nav__link--active">
+      Forms
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#form-attributes" class="md-nav__link">
+    Form attributes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input_data" class="md-nav__link">
+    input_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object" class="md-nav__link">
+    object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file_data" class="md-nav__link">
+    file_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefix" class="md-nav__link">
+    prefix
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#form-methods" class="md-nav__link">
+    Form methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#is_valid-property" class="md-nav__link">
+    is_valid (property)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    validate()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save" class="md-nav__link">
+    save()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_object" class="md-nav__link">
+    create_object()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update_object" class="md-nav__link">
+    update_object()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete_object" class="md-nav__link">
+    delete_object()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_data" class="md-nav__link">
+    load_data()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../fields/" title="Fields" class="md-nav__link">
+      Fields
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../rendering/" title="Rendering" class="md-nav__link">
+      Rendering
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../validators/" title="Validators" class="md-nav__link">
+      Validators
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../formsets/" title="Form sets" class="md-nav__link">
+      Form sets
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../orm/" title="ORM integration" class="md-nav__link">
+      ORM integration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../faq/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#form-attributes" class="md-nav__link">
+    Form attributes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input_data" class="md-nav__link">
+    input_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object" class="md-nav__link">
+    object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file_data" class="md-nav__link">
+    file_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefix" class="md-nav__link">
+    prefix
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#form-methods" class="md-nav__link">
+    Form methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#is_valid-property" class="md-nav__link">
+    is_valid (property)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    validate()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save" class="md-nav__link">
+    save()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_object" class="md-nav__link">
+    create_object()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update_object" class="md-nav__link">
+    update_object()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete_object" class="md-nav__link">
+    delete_object()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_data" class="md-nav__link">
+    load_data()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="forms">Forms<a class="headerlink" href="#forms" title="Permanent link">#</a></h1>
+<p>At the heart of Proper Form is the <code>Form</code> class. A form contain your field definitions, delegate validation, take input, and in general function as the glue holding everything together.</p>
+<p>Form are classes that inherit from the <code>proper_form.Form</code> class. You then create instances of those classes in your controllers, using the request and maybe object data.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">proper_form</span>  <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">Email</span><span class="p">,</span> <span class="n">Password</span>
+
+<span class="k">class</span> <span class="nc">LoginForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">login</span> <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">Password</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">LoginForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
+        <span class="o">...</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;login.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
+</pre></div>
+
+<h2 id="form-attributes">Form attributes<a class="headerlink" href="#form-attributes" title="Permanent link">#</a></h2>
+<div class="highlight"><pre><span></span><span class="n">Form</span><span class="p">(</span><span class="n">input_data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">object</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">file_data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+
+<h3 id="input_data">input_data<a class="headerlink" href="#input_data" title="Permanent link">#</a></h3>
+<p>A <em>MultiDict</em> containing the data from a form request.
+Form requests are typically POST requests and many web frameworks returns it under the name <code>request.POST</code>.</p>
+<h3 id="object">object<a class="headerlink" href="#object" title="Permanent link">#</a></h3>
+<p>Pre-existing data used to populate the form. This can be a dictionary or an instance of a class, typically an ORM Model.</p>
+<h3 id="file_data">file_data<a class="headerlink" href="#file_data" title="Permanent link">#</a></h3>
+<p>Optional <em>MultiDict</em> with the file data. In some web frameworks this data can be read from the rest of the POST data, so you don&rsquo;t need to (or can) include it again here.</p>
+<p>In other frameworks, like Flask, this data is called <code>request.files</code>.</p>
+<h3 id="prefix">prefix<a class="headerlink" href="#prefix" title="Permanent link">#</a></h3>
+<p>Optional namespace for the form. </p>
+<h2 id="form-methods">Form methods<a class="headerlink" href="#form-methods" title="Permanent link">#</a></h2>
+<h3 id="is_valid-property">is_valid <em>(property)</em><a class="headerlink" href="#is_valid-property" title="Permanent link">#</a></h3>
+<p>An alias for <code>validate()</code>.</p>
+<h3 id="validate">validate()<a class="headerlink" href="#validate" title="Permanent link">#</a></h3>
+<p>[ TODO ]</p>
+<h3 id="save">save()<a class="headerlink" href="#save" title="Permanent link">#</a></h3>
+<p>[ TODO ]</p>
+<h3 id="create_object">create_object()<a class="headerlink" href="#create_object" title="Permanent link">#</a></h3>
+<p>[ TODO ]</p>
+<h3 id="update_object">update_object()<a class="headerlink" href="#update_object" title="Permanent link">#</a></h3>
+<p>[ TODO ]</p>
+<h3 id="delete_object">delete_object()<a class="headerlink" href="#delete_object" title="Permanent link">#</a></h3>
+<p>[ TODO ]</p>
+<h3 id="load_data">load_data()<a class="headerlink" href="#load_data" title="Permanent link">#</a></h3>
+<p>This method can be used to replace the data passed when instantiating the form.
+Eg:</p>
+<div class="highlight"><pre><span></span><span class="n">form</span> <span class="o">=</span> <span class="n">Form</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="n">form</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">object_data</span><span class="p">)</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <footer class="md-footer"><div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid"><a href="../crash/" title="Crash course" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Previous</span>Crash course</span>
+            </div>
+          </a><a href="../fields/" title="Fields" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Next</span>Fields</span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a></nav>
+    </div><div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid"><div class="md-footer-copyright">
+        <p>
+          This work is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a> License.
+        </p>
+        <p>
+          Powered by <a href="https://www.mkdocs.org">MkDocs</a>.
+        </p>
+      </div>
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/jpscaletti/proper-form" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/jpscaletti/proper-form" class="md-footer-social__link fa fa-github-alt"></a>
+    
+  </div>
+</div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.28f21e1d.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
