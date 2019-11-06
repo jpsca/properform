@@ -43,7 +43,7 @@ def test_load_data_object():
     assert len(form.items) == 3
     assert form.items[0].name.value == "a"
     assert form.items[-1].name.value == "c"
-    assert form.is_valid
+    assert form.validate()
 
 
 def test_assert_ids():
@@ -89,7 +89,7 @@ def test_save_without_model():
     obj = WrapperObject()
     form = WrapperForm(input_data, obj)
 
-    assert form.is_valid
+    assert form.validate()
     assert form.save() == {
         "items": [
             {ID: 124, "name": "name 1"},
@@ -144,7 +144,7 @@ def test_save_with_model():
     obj = WrapperObject()
     form = WrapperForm(input_data, obj)
 
-    assert form.is_valid
+    assert form.validate()
     assert obj == form.save()
     assert len(obj.items) == 3
     assert obj.items[0].name == "name 1"

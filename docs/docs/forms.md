@@ -48,10 +48,6 @@ Optional namespace for the form.
 
 ## Form methods
 
-### is_valid *(property)*
-
-An alias for `validate()`.
-
 ### validate()
 
 [ TODO ]

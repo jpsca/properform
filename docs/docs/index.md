@@ -44,7 +44,7 @@ class CommentForm(Form):
 
 def comment():
     form = CommentForm(request.POST)
-    if request.method == "POST" and form.is_valid:
+    if request.method == "POST" and form.validate():
     	data = form.save()
         ...
     return render_template("comment.html", form=form)

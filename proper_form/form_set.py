@@ -67,12 +67,6 @@ class FormSet(object):
     def __getitem__(self, index):
         return self._forms[index]
 
-    @property
-    def is_valid(self):
-        if self._is_valid is None:  # pragma: no cover
-            self.validate()
-        return self._is_valid
-
     def load_data(self, input_data, objects_data, file_data):
         self._is_valid = None
         self._forms = []
@@ -128,7 +122,7 @@ class FormSet(object):
 
         for form in self._forms:
             form_data = form.validate()
-            if not form.is_valid:
+            if not form.validate():
                 is_valid = False
                 continue
 
@@ -146,7 +140,7 @@ class FormSet(object):
     def save(self, parent=None):
         if self._is_valid is None:  # pragma: no cover
             self.validate()
-        if self.is_valid is False:  # pragma: no cover
+        if self.validate() is False:  # pragma: no cover
             return None
 
         data = {}

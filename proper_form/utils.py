@@ -1,6 +1,8 @@
+import re
+from xml.sax.saxutils import quoteattr
 
 
-__all__ = ("FakeMultiDict", "get_input_values", "get_object_value", )
+__all__ = ("FakeMultiDict", "get_input_values", "get_object_value", "get_html_attrs", )
 
 
 class FakeMultiDict(dict):
@@ -37,3 +39,47 @@ def get_object_value(obj, name):
     if isinstance(obj, dict):
         return obj.get(name, None)
     return getattr(obj, name, None)
+
+
+rx_spaces = re.compile(r"\s+")
+
+
+def get_html_attrs(attrs=None):
+    """Generate HTML attributes from the provided attributes.
+
+    - To provide consistent output, the attributes and properties are sorted by name
+    and rendered like this: `<sorted attributes> + <sorted properties>`.
+    - "className" can be used intead of "class", to avoid clashes with the
+    reserved word.
+    - Also, all underscores are translated to regular dashes.
+    - Set properties with a `True` value.
+
+    >>> get_html_attrs({
+    ...     "id": "text1",
+    ...     "className": "myclass",
+    ...     "data_id": 1,
+    ...     "checked": True,
+    ... })
+    'class="myclass" data-id="1" id="text1" checked'
+
+    """
+    attrs = attrs or {}
+    attrs_list = []
+    props_list = []
+
+    classes = attrs.pop("className", "").strip()
+    if classes:
+        attrs["class"] = " ".join(rx_spaces.split(classes))
+
+    for key, value in attrs.items():
+        key = key.replace("_", "-")
+        if value is True:
+            props_list.append(key)
+        elif value not in (False, None):
+            value = quoteattr(str(value))
+            attrs_list.append("{}={}".format(key, value))
+
+    attrs_list.sort()
+    props_list.sort()
+    attrs_list.extend(props_list)
+    return " ".join(attrs_list)

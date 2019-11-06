@@ -1,9 +1,11 @@
 from copy import copy
 
+from markupsafe import Markup
+
 from .constants import SEP, DELETED, ID
 from .fields import Field
 from .form_set import FormSet
-from .utils import FakeMultiDict, get_input_values, get_object_value
+from .utils import FakeMultiDict, get_input_values, get_object_value, get_html_attrs
 
 
 __all__ = ("Form",)
@@ -64,11 +66,16 @@ class Form(object):
         self._load_field_data(input_data, object, file_data)
         self._load_fieldset_data(input_data, object, file_data)
 
-    @property
-    def is_valid(self):
-        if self._is_valid is None:
-            self.validate()
-        return self._is_valid
+    def render_error(self, tag="div", **attrs):
+        if not self.error:
+            return ""
+
+        attrs.setdefault("className", "error")
+        return Markup("<{tag} {attrs}>{error}</{tag}>".format(
+            tag=tag,
+            attrs=get_html_attrs(attrs),
+            error=self.error,
+        ))
 
     def validate(self):
         if self._is_valid is False:
@@ -107,7 +114,7 @@ class Form(object):
             formset = getattr(self, name)
             py_value = formset.validate()
 
-            if not formset.is_valid:
+            if not formset.validate():
                 is_valid = False
                 continue
 
@@ -122,7 +129,7 @@ class Form(object):
             return valid_data
 
     def save(self, **data):
-        if not self.is_valid:
+        if not self.validate():
             return None
 
         data.update(self._valid_data)
@@ -174,7 +181,6 @@ class Form(object):
             "updated_fields",
             "prefix",
             "load_data",
-            "is_valid",
             "validate",
             "save",
             "create_object",

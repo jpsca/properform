@@ -48,7 +48,7 @@ if orm:
         }
         form = PersonForm(input_data)
 
-        assert form.is_valid
+        assert form.validate()
         obj = form.save()
         assert isinstance(obj, Person)
         assert obj.name == input_data["name"]
@@ -76,7 +76,7 @@ if orm:
 
         form = PersonForm(input_data, p1)
 
-        assert form.is_valid
+        assert form.validate()
         obj = form.save()
         assert isinstance(obj, Person)
         cars = list(obj.cars)

@@ -90,9 +90,7 @@ def test_validate_empty_form():
         ipsum = f.Text()
 
     form = MyForm()
-    assert form.is_valid
     assert form.validate() == {"lorem": None, "ipsum": None}
-    assert form.is_valid
     assert form.updated_fields == []
 
 
@@ -102,9 +100,7 @@ def test_validate_blank_form():
         ipsum = f.Text()
 
     form = MyForm({"lorem": "", "ipsum": ""})
-    assert form.is_valid
     assert form.validate() == {"lorem": "", "ipsum": ""}
-    assert form.is_valid
     assert sorted(form.updated_fields) == ["ipsum", "lorem"]
 
 
@@ -114,9 +110,7 @@ def test_validate_optional_form():
         ipsum = f.Text()
 
     form = MyForm({"lorem": "foo", "ipsum": "bar"})
-    assert form.is_valid
     assert form.validate() == {"lorem": "foo", "ipsum": "bar"}
-    assert form.is_valid
     assert sorted(form.updated_fields) == ["ipsum", "lorem"]
 
 
@@ -169,7 +163,6 @@ def test_validate_form_input():
     }
     form = ContactForm(data)
     assert form.validate() == data
-    assert form.is_valid
 
 
 def test_do_not_validate_form_object():
@@ -187,7 +180,6 @@ def test_do_not_validate_form_object():
 
     form = ContactForm({}, obj)
     assert form.validate() is None
-    assert not form.is_valid
 
 
 def test_validate_form_error():
@@ -207,10 +199,8 @@ def test_idempotent_valid_is_valid():
         lorem = f.Text()
 
     form = MyForm()
-    assert form.is_valid
-    assert form.is_valid
     assert form.validate()
-    assert form.is_valid
+    assert form.validate()
     assert form.validate()
 
 
@@ -219,10 +209,8 @@ def test_idempotent_invalid_is_valid():
         lorem = f.Text(required=True)
 
     form = MyForm()
-    assert not form.is_valid
-    assert not form.is_valid
     assert form.validate() is None
-    assert not form.is_valid
+    assert form.validate() is None
     assert form.validate() is None
 
 
@@ -234,7 +222,7 @@ def test_updated_fields_from_empty():
         d = f.Text()
 
     form = MyForm({"b": "foo", "d": "bar"})
-    assert form.is_valid
+    assert form.validate()
     assert sorted(form.updated_fields) == ["b", "d"]
 
 
@@ -249,7 +237,7 @@ def test_updated_fields_from_object():
         {"a": "a", "b": "new", "c": "c", "d": "new"},
         {"a": "a", "b": "b", "c": "c", "d": "d"}
     )
-    assert form.is_valid
+    assert form.validate()
     assert sorted(form.updated_fields) == ["b", "d"]
 
 

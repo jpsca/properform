@@ -5,6 +5,7 @@ Instead of rendering a form with a predefined static markup, wih Proper Form you
 
 ```html+jinja
 <form method="post" action="">
+  {{ form.render_error() }}
   <div class="col">
     {{ form.myname.as_input(label="Name:") }}
     {{ form.myname.render_error() }}
@@ -32,6 +33,8 @@ that will render to:
 ```
 
 As in the example, the usual thing to do is to also to add the rendering code for the field error right below (or at the top) of it. If there is no error nothing will be rendered there anyway.
+
+The form can also have a `form.error` attribute manually set by you.
 
 
 ## Available methods

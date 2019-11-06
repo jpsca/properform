@@ -9,7 +9,7 @@ data = {
     "title": "Proper Form",
     "name": "proper_form",
     "pypi_name": "proper_form",
-    "version": "0.190726",
+    "version": "0.191105",
     "author": "Juan-Pablo Scaletti",
     "author_email": "juanpablo@jpscaletti.com",
     "description": "A not-terrible Python form library.",

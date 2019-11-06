@@ -62,7 +62,7 @@ def test_orm_save():
     }
     form = PersonForm(input_data)
 
-    assert form.is_valid
+    assert form.validate()
 
     obj = form.save()
     session.commit()
@@ -96,7 +96,7 @@ def test_orm_save_update_and_delete():
 
     form = PersonForm(input_data, p1)
 
-    assert form.is_valid
+    assert form.validate()
     obj = form.save()
     session.commit()
 

@@ -157,7 +157,7 @@ def test_form_set_validate():
         f"sections{SEP}{NEW}3{SEP}title": "title 3",
     }
     form = WrapperForm(input_data)
-    assert form.is_valid
+    assert form.validate()
     assert form.sections.updated
 
 
@@ -192,7 +192,6 @@ def test_form_set_validate_invalid_subform():
     assert form3.title.value == ""
     assert form3.body.value == "body 3"
 
-    assert not form.is_valid
     assert form.validate() is None
 
 
