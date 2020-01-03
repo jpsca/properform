@@ -1,15 +1,15 @@
+---
 dist: bionic
 language: python
 python:
   - '3.6'
   - '3.7'
   - '3.8-dev'
-  - 'nightly'
 
 matrix:
   allow_failures:
-    - python: 'nightly'
-
+    - python: '3.8-dev'
+ 
 before_install: pip install -U pip coveralls
 install: pip install .[testing]
 script: pytest --cov proper_form proper_form tests
