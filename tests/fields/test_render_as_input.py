@@ -32,9 +32,18 @@ def test_text_as_input_with_label():
     field = f.Text(name="name")
     expected = (
         '<label for="name">Hello World</label>\n'
-        '<input id="name" name="name" type="text" value="">'
+        '<input name="name" type="text" value="">'
     )
     assert field.as_input(label="Hello World") == expected
+
+
+def test_text_as_input_with_label_and_custom_id():
+    field = f.Text(name="name")
+    expected = (
+        '<label for="hello2">Hello World</label>\n'
+        '<input id="hello2" name="name" type="text" value="">'
+    )
+    assert field.as_input(id="hello2", label="Hello World") == expected
 
 
 def test_text_as_input_with_custom_type():

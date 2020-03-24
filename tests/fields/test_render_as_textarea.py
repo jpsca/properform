@@ -18,7 +18,7 @@ def test_text_as_textarea_with_label():
     field = f.Text(name="name")
     expected = (
         '<label for="name">Hello World</label>\n'
-        '<textarea id="name" name="name"></textarea>'
+        '<textarea name="name"></textarea>'
     )
     assert field.as_textarea(label="Hello World") == expected
 

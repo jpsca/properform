@@ -154,7 +154,7 @@ The first of the values or an empty string if none is found.
 
 ## Field methods
 
-All field methods are about rendering, so they are covered in the [Rendering page](/rendering/)
+All field methods are about rendering, so they are covered in the [Rendering page](rendering/)
 
 
 ## Built-in Field classes

@@ -60,6 +60,9 @@ If you need an attribute with a dash, like `data-id`, use an underscore `data_id
 '<input data_id="123" name="field" type="text" data-target>'
 ```
 
+All fields also can accept an `error` attribute with extra classes to add to
+the HTML if the field has an error (by default this is "error").
+
 
 ### as_input( )
 
@@ -69,7 +72,7 @@ field.as_input(label=None, **attrs)
 
 Renders the field as a `<input type="text">` element, although the type can be overwritten.
 
-If you use a `label` argument, a `<label>` will be added before the input, and also an `id` attribute to connect both (that can also be overwritten).
+If you use a `label` argument, a `<label>` will be added before the input with its `for` attribute pointing to the field id (if defined) or its name.
 
 Examples:
 
@@ -100,7 +103,7 @@ field.as_textarea(label=None, **attrs)
 
 Renders the field as a `<textarea>` element.
 
-If you use a `label` argument, a `<label>` will be added before the input, and also an `id` attribute to connect both (that can also be overwritten).
+If you use a `label` argument, a `<label>` will be added before the input with its `for` attribute pointing to the field id (if defined) or its name.
 
 Examples:
 
@@ -175,7 +178,7 @@ Renders *just* the opening `<select>` tag for a field, not any options nor the c
 This is intended to be used with `<option>` tags writted by hand or genereated
 by other means.
 
-If you use a `label` argument, a `<label>` will be added before the input, and also an `id` attribute to connect both  (that can also be overwritten).
+If you use a `label` argument, a `<label>` will be added before the input, with its `for` attribute pointing to the field id (if defined) or its name.
 
 Examples:
 
@@ -203,7 +206,7 @@ field.as_select(items, label=None, **attrs)
 
 Renders the field as a `<select>` element.
 
-If you use a `label` argument, a `<label>` will be added before the input, and also an `id` attribute to connect both  (that can also be overwritten).
+If you use a `label` argument, a `<label>` will be added before the input, with its `for` attribute pointing to the field id (if defined) or its name.
 
 The `items` argument is a list that can have two type of elements:
 

@@ -34,13 +34,11 @@ class FieldRenderable(object):
         attrs.setdefault("required", self.required)
         attrs.setdefault("type", self.input_type)
         attrs.setdefault("value", self.value or "")
-        if label:
-            attrs.setdefault("id", self.name)
         html_attrs = get_html_attrs(attrs, show_error=self.error)
 
         html = "<input {}>".format(html_attrs)
-        if label and label != True:
-            kwargs = {"for": attrs.get("id")}
+        if label:
+            kwargs = {"for": attrs.get("id", self.name)}
             html = self.label(label, **kwargs) + "\n" + html
         return Markup(html)
 
@@ -54,14 +52,12 @@ class FieldRenderable(object):
         """
         attrs.setdefault("name", self.name)
         attrs.setdefault("required", self.required)
-        if label:
-            attrs.setdefault("id", self.name)
         html_attrs = get_html_attrs(attrs, show_error=self.error)
 
         value = attrs.pop("value", None) or self.value or ""
         html = "<textarea {}>{}</textarea>".format(html_attrs, value)
-        if label and label != True:
-            kwargs = {"for": attrs.get("id")}
+        if label:
+            kwargs = {"for": attrs.get("id", self.name)}
             html = self.label(label, **kwargs) + "\n" + html
         return Markup(html)
 
@@ -85,11 +81,8 @@ class FieldRenderable(object):
         html_attrs = get_html_attrs(attrs, show_error=self.error)
 
         html = "<input {}>".format(html_attrs)
-        if label and label != True:
-            kwargs = {
-                "for": attrs.get("id"),
-                "classes": attrs.get("classes", "checkbox"),
-            }
+        if label:
+            kwargs = {"for": None, "classes": attrs.get("classes", "checkbox")}
             html = self.label(label, html=html, **kwargs)
 
         return Markup(html)
@@ -114,11 +107,8 @@ class FieldRenderable(object):
         html_attrs = get_html_attrs(attrs, show_error=self.error)
 
         html = "<input {}>".format(html_attrs)
-        if label and label != True:
-            kwargs = {
-                "for": attrs.get("id"),
-                "classes": attrs.get("classes", "radio"),
-            }
+        if label:
+            kwargs = {"for": None, "classes": attrs.get("classes", "radio")}
             html = self.label(label, html=html, **kwargs)
 
         return Markup(html)
@@ -138,13 +128,11 @@ class FieldRenderable(object):
         attrs.setdefault("name", self.name)
         attrs.setdefault("required", self.required)
         attrs.setdefault("multiple", self.multiple)
-        if label:
-            attrs.setdefault("id", self.name)
         html_attrs = get_html_attrs(attrs, show_error=self.error)
 
         html = "<select {}>".format(html_attrs)
-        if label and label != True:
-            kwargs = {"for": attrs.get("id")}
+        if label:
+            kwargs = {"for": attrs.get("id", self.name)}
             html = self.label(label, **kwargs) + "\n" + html
 
         return Markup(html)
