@@ -5,7 +5,7 @@ def test_render_attrs():
     field = f.Text()
     attrs = {
         "id": "text1",
-        "className": "myclass",
+        "classes": "myclass",
         "data_id": 1,
         "checked": True,
         "ignore": False,
@@ -61,6 +61,6 @@ def test_render_error():
     assert str(field.render_error()) == f'<div class="error">{error}</div>'
     assert str(field.render_error("p")) == f'<p class="error">{error}</p>'
     assert (
-        str(field.render_error(className="errorMessage"))
+        str(field.render_error(classes="errorMessage"))
         == f'<div class="errorMessage">{error}</div>'
     )

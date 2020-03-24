@@ -70,7 +70,7 @@ class Form(object):
         if not self.error:
             return ""
 
-        attrs.setdefault("className", "error")
+        attrs.setdefault("classes", "error")
         return Markup("<{tag} {attrs}>{error}</{tag}>".format(
             tag=tag,
             attrs=get_html_attrs(attrs),

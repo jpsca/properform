@@ -46,10 +46,10 @@ For that reason, all of these method are available for all fields, no matter its
 
 ### About HTML attributes
 
-All of these methods accept any number of `key=value` optional arguments. These'll be included as HTML attributes. Use `className` instead of `class`.
+All of these methods accept any number of `key=value` optional arguments. These'll be included as HTML attributes. Use `classes` instead of `class`.
 
 ```python
->>> field.as_input(className="someclass anotherone", zzz="bar")
+>>> field.as_input(classes="someclass anotherone", zzz="bar")
 '<input class="someclass anotherone" name="field" type="text" zzz="bar">'
 ```
 
@@ -81,7 +81,7 @@ Examples:
 >>> form.url.as_input()
 '<input name="url" type="url" required>'
 
->>> form.url.as_input(type="text", className="form-control")
+>>> form.url.as_input(type="text", classes="form-control")
 '<input class="form-control" name="url" type="text">'
 
 >>> form.url.as_input(label="Webpage:")
@@ -108,7 +108,7 @@ Examples:
 >>> form.bio.as_textarea()
 '<textarea name="bio"></textarea>'
 
->>> form.bio.as_textarea(className="form-control")
+>>> form.bio.as_textarea(classes="form-control")
 '<textarea class="form-control" name="bio"></textarea>'
 
 >>> form.bio.as_textarea(label="Your bio:")
@@ -132,7 +132,7 @@ Examples:
 >>> form.tos.as_checkbox()
 '<input name="tos" type="checkbox">'
 
->>> form.tos.as_checkbox(className="form-control")
+>>> form.tos.as_checkbox(classes="form-control")
 '<input class="form-control" name="tos" type="checkbox">'
 
 >>> form.tos.as_checkbox(label="I didn’t read this")
@@ -156,7 +156,7 @@ Examples:
 >>> form.size.as_radio()
 '<input name="size" type="radio">'
 
->>> form.size.as_radio(className="form-control")
+>>> form.size.as_radio(classes="form-control")
 '<input class="form-control" name="size" type="radio">'
 
 >>> form.size.as_radio(label="XL")
@@ -187,7 +187,7 @@ Examples:
 >>> form.city.as_select_tag()
 '<select name="city" multiple>'
 
->>> form.city.as_select_tag(className="form-control")
+>>> form.city.as_select_tag(classes="form-control")
 '<select class="form-control" name="city">'
 
 >>> form.city.as_select_tag(label="Choose a city")
@@ -334,7 +334,7 @@ Examples:
 '<div class="error">This field is required</div>'
 
 # Custom tag and class
->>> form.email.render_error(tag="p", className="errorMessage")
+>>> form.email.render_error(tag="p", classes="errorMessage")
 '<p class="errorMessage">This field is required</p>'
 
 # If the field has no error
