@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.4.2">
     
     
       
@@ -622,22 +622,22 @@
                 <h1 id="forms">Forms<a class="headerlink" href="#forms" title="Permanent link">#</a></h1>
 <p>At the heart of Proper Form is the <code>Form</code> class. A form contain your field definitions, delegate validation, take input, and in general function as the glue holding everything together.</p>
 <p>Form are classes that inherit from the <code>proper_form.Form</code> class. You then create instances of those classes in your controllers, using the request and maybe object data.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">proper_form</span>  <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">Email</span><span class="p">,</span> <span class="n">Password</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">proper_form</span>  <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">Email</span><span class="p">,</span> <span class="n">Password</span>
 
 <span class="k">class</span> <span class="nc">LoginForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
-    <span class="n">login</span> <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">password</span> <span class="o">=</span> <span class="n">Password</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">login</span> <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">Password</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
     <span class="n">form</span> <span class="o">=</span> <span class="n">LoginForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
         <span class="o">...</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;login.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 <h2 id="form-attributes">Form attributes<a class="headerlink" href="#form-attributes" title="Permanent link">#</a></h2>
-<div class="highlight"><pre><span></span><span class="n">Form</span><span class="p">(</span><span class="n">input_data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">object</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">file_data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Form</span><span class="p">(</span><span class="n">input_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">object</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">file_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</code></pre></div>
 
 <h3 id="input_data">input_data<a class="headerlink" href="#input_data" title="Permanent link">#</a></h3>
 <p>A <em>MultiDict</em> containing the data from a form request.
@@ -663,10 +663,10 @@ Form requests are typically POST requests and many web frameworks returns it und
 <h3 id="load_data">load_data()<a class="headerlink" href="#load_data" title="Permanent link">#</a></h3>
 <p>This method can be used to replace the data passed when instantiating the form.
 Eg:</p>
-<div class="highlight"><pre><span></span><span class="n">form</span> <span class="o">=</span> <span class="n">Form</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">form</span> <span class="o">=</span> <span class="n">Form</span><span class="p">()</span>
 <span class="o">...</span>
 <span class="n">form</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">object_data</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
                 
                   
                 
@@ -724,7 +724,7 @@ Eg:</p>
     
       <script src="../assets/javascripts/application.28f21e1d.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.1",url:{base:".."}})</script>
       
     
   </body>

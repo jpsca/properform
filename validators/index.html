@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.4.2">
     
     
       
@@ -611,72 +611,72 @@
 <p>Validators are functions that take the list of values of a filed, already type casted, and check if they meet some condition, like a minimum length.</p>
 <h2 id="built-in-validators">Built-in validators<a class="headerlink" href="#built-in-validators" title="Permanent link">#</a></h2>
 <p>Proper Form includes several validators for common data needs. These are technically validator <em>factories</em>, because they take some arguments and return a validator as a function, tailored to your specific need. Example:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
     <span class="n">birthday</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span>
         <span class="n">BeforeNow</span><span class="p">(),</span>  <span class="c1"># You need the &quot;()&quot; even without arguments</span>
         <span class="n">After</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
-        <span class="n">required</span><span class="o">=</span><span class="bp">True</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 <p>All of these have default error messages, but you can overwrite them using a <code>message</code> attribute if you like.</p>
 <h3 id="after">After<a class="headerlink" href="#after" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">After</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">After</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Works with <code>Date</code>, <code>DateTime</code>, <code>SplittedDateTime</code>, and any other field that cast the values to dates.</p>
 <p>Validate that all of the dates happens <em>after</em> another one.</p>
 <h3 id="afternow">AfterNow<a class="headerlink" href="#afternow" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">AfterNow</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">AfterNow</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Works with <code>Date</code>, <code>DateTime</code>, <code>SplittedDateTime</code>, and any other field that cast the values to dates.</p>
 <p>Validates that all of the dates happens in the future (the &ldquo;now&rdquo; at the moment of the validation).</p>
 <h3 id="before">Before<a class="headerlink" href="#before" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Before</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Before</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Works with <code>Date</code>, <code>DateTime</code>, <code>SplittedDateTime</code>, and any other field that cast the values to dates.</p>
 <p>Validate that all of the dates happens <em>before</em> another one.</p>
 <h3 id="beforenow">BeforeNow<a class="headerlink" href="#beforenow" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">BeforeNow</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">BeforeNow</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Works with <code>Date</code>, <code>DateTime</code>, <code>SplittedDateTime</code>, and any other field that cast the values to dates.</p>
 <p>Validates that all of the dates happens in the past (the &ldquo;now&rdquo; at the moment of the validation).</p>
 <h3 id="confirmed">Confirmed<a class="headerlink" href="#confirmed" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Confirmed</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Confirmed</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validates that a value is identical every time has been repeated. Classic use is for password confirmation fields.</p>
 <p>Work with every type of field.</p>
 <h3 id="inrange">InRange<a class="headerlink" href="#inrange" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">InRange</span><span class="p">(</span><span class="n">minval</span><span class="p">,</span> <span class="n">maxval</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">InRange</span><span class="p">(</span><span class="n">minval</span><span class="p">,</span> <span class="n">maxval</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validates that a value is of a minimum (<code>minval</code>) and a maximum (<code>maxval</code>) value.</p>
 <p>This will work with integers, floats, decimals, strings, and any data type that can be compared.</p>
 <h3 id="lessthan">LessThan<a class="headerlink" href="#lessthan" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">LessThan</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">LessThan</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validates that a value is <em>less or equal</em> than another <code>value</code> (that can be an integer, a float, etc.)</p>
 <p>This will work with integers, floats, decimals, strings, and any data type that can be compared.</p>
 <h3 id="morethan">MoreThan<a class="headerlink" href="#morethan" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">MoreThan</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">MoreThan</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validates that a value is <em>more or equal</em> than another (that can be an integer, a float, etc.)</p>
 <p>This will work with integers, floats, decimals, strings, and any data type that can be compared.</p>
 <h3 id="longerthan">LongerThan<a class="headerlink" href="#longerthan" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">LongerThan</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">LongerThan</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validates the length of a value is <em>longer or equal</em> than a minimum <code>length</code>.</p>
 <p>This will work with strings, and any data type that has a &ldquo;length&rdquo;.</p>
 <h3 id="shorterthan">ShorterThan<a class="headerlink" href="#shorterthan" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">ShorterThan</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">ShorterThan</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validates the length of a value is <em>shorter or equal</em> than a maximum <code>length</code>.</p>
 <p>This will work with strings, and any data type that has a &ldquo;length&rdquo;.</p>
@@ -687,17 +687,17 @@
 <li>The must return <code>True</code> if all values &ldquo;are ok&rdquo;, or a tuple <code>(False, "error message")</code> if not.</li>
 </ol>
 <p>Let&rsquo;s write a custom validator to see it in practice:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">must_yell</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">must_yell</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span>
-            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="s2">&quot;Please YELL.&quot;</span>
-    <span class="k">return</span> <span class="bp">True</span>
-</pre></div>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Please YELL.&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
 
 <p>And to use in a field, you pass it as an argument, like other validators:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">must_yell</span><span class="p">,</span> <span class="n">LongerThan</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">must_yell</span><span class="p">,</span> <span class="n">LongerThan</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
                 
                   
                 
@@ -755,7 +755,7 @@
     
       <script src="../assets/javascripts/application.28f21e1d.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.1",url:{base:".."}})</script>
       
     
   </body>

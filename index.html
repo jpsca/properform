@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.4.2">
     
     
       
@@ -501,14 +501,14 @@
 </li>
 </ul>
 <h2 id="just-show-me-how-it-looks">Just show me how it looks<a class="headerlink" href="#just-show-me-how-it-looks" title="Permanent link">#</a></h2>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">proper_form</span>  <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">Email</span><span class="p">,</span> <span class="n">Text</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">proper_form</span>  <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">Email</span><span class="p">,</span> <span class="n">Text</span>
 
 
 <span class="k">class</span> <span class="nc">CommentForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">check_dns</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check_dns</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">message</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span>
         <span class="n">LongerThan</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;Please write a longer message&quot;</span><span class="p">),</span>
-        <span class="n">required</span><span class="o">=</span><span class="bp">True</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">)</span>
 
 
@@ -518,16 +518,16 @@
         <span class="n">data</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
         <span class="o">...</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;comment.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">#</a></h2>
-<div class="highlight"><pre><span></span><span class="c1"># Create a virtual environment</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a virtual environment</span>
 <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="o">.</span><span class="n">venv</span>
 <span class="c1"># Activate said environment</span>
 <span class="n">source</span> <span class="o">.</span><span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 <span class="c1"># Install the library</span>
 <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">proper_form</span>
-</pre></div>
+</code></pre></div>
                 
                   
                 
@@ -577,7 +577,7 @@
     
       <script src="assets/javascripts/application.28f21e1d.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
+      <script>app.initialize({version:"1.1",url:{base:"."}})</script>
       
     
   </body>

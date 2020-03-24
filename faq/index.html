@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.4.2">
     
     
       
@@ -565,13 +565,13 @@
 <h3 id="database-orms">Database ORMs<a class="headerlink" href="#database-orms" title="Permanent link">#</a></h3>
 <p>Pretty much <del>any ORM</del> anything should work, as long as data objects allow attribute access to their members. There is built-in support por <a href="https://www.sqlalchemy.org/">SQLAlchemy</a> and <a href="https://ponyorm.org/">PonyORM</a> but writing your own adapter is just a few lines of code.</p>
 <p>For example, this is the <em>complete</em> code for the adapter to PonyORM:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PonyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PonyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">create_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">delete_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_object</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 
 <p>That&rsquo;s it.</p>
 <h2 id="what-versions-of-python-are-supported">What versions of Python are supported?<a class="headerlink" href="#what-versions-of-python-are-supported" title="Permanent link">#</a></h2>
@@ -635,7 +635,7 @@
     
       <script src="../assets/javascripts/application.28f21e1d.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.1",url:{base:".."}})</script>
       
     
   </body>

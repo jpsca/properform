@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.4.2">
     
     
       
@@ -609,7 +609,7 @@
                 
                 <h1 id="rendering">Rendering<a class="headerlink" href="#rendering" title="Permanent link">#</a></h1>
 <p>Instead of rendering a form with a predefined static markup, wih Proper Form you render its individual fields. For example:</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
   <span class="cp">{{</span> <span class="nv">form.render_error</span><span class="o">()</span> <span class="cp">}}</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col&quot;</span><span class="p">&gt;</span>
     <span class="cp">{{</span> <span class="nv">form.myname.as_input</span><span class="o">(</span><span class="nv">label</span><span class="o">=</span><span class="s2">&quot;Name:&quot;</span><span class="o">)</span> <span class="cp">}}</span>
@@ -620,10 +620,10 @@
     <span class="cp">{{</span> <span class="nv">form.myemail.render_error</span><span class="o">()</span> <span class="cp">}}</span>
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</pre></div>
+</code></pre></div>
 
 <p>that will render to:</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;myname&quot;</span><span class="p">&gt;</span>Name:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;myname&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;myname&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="p">&gt;</span>
@@ -633,7 +633,7 @@
     <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;myemail&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;myemail&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;email&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</pre></div>
+</code></pre></div>
 
 <p>As in the example, the usual thing to do is to also to add the rendering code for the field error right below (or at the top) of it. If there is no error nothing will be rendered there anyway.</p>
 <p>The form can also have a <code>form.error</code> attribute manually set by you.</p>
@@ -641,31 +641,33 @@
 <p>One of the thing Proper Form does different is that it doesn&rsquo;t tie a field type to a specific HTML tag. You might think an URL field it&rsquo;s always going to be displayed as an <code>&lt;input&gt;</code>, but <em>it doesn&rsquo;t have to</em>. You could also have URLs as values of checkboxes, radio buttons, or selects.</p>
 <p>For that reason, all of these method are available for all fields, no matter its data type.</p>
 <h3 id="about-html-attributes">About HTML attributes<a class="headerlink" href="#about-html-attributes" title="Permanent link">#</a></h3>
-<p>All of these methods accept any number of <code>key=value</code> optional arguments. These&rsquo;ll be included as HTML attributes. Use <code>className</code> instead of <code>class</code>.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">field</span><span class="o">.</span><span class="n">as_input</span><span class="p">(</span><span class="n">className</span><span class="o">=</span><span class="s2">&quot;someclass anotherone&quot;</span><span class="p">,</span> <span class="n">zzz</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<p>All of these methods accept any number of <code>key=value</code> optional arguments. These&rsquo;ll be included as HTML attributes. Use <code>classes</code> instead of <code>class</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">field</span><span class="o">.</span><span class="n">as_input</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="s2">&quot;someclass anotherone&quot;</span><span class="p">,</span> <span class="n">zzz</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;input class=&quot;someclass anotherone&quot; name=&quot;field&quot; type=&quot;text&quot; zzz=&quot;bar&quot;&gt;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <p>If you need an attribute with a dash, like <code>data-id</code>, use an underscore <code>data_id=123</code>. For properties (attributes without values) just use <code>True</code> as its value.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">field</span><span class="o">.</span><span class="n">as_input</span><span class="p">(</span><span class="n">data_id</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">data_target</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">field</span><span class="o">.</span><span class="n">as_input</span><span class="p">(</span><span class="n">data_id</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">data_target</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="s1">&#39;&lt;input data_id=&quot;123&quot; name=&quot;field&quot; type=&quot;text&quot; data-target&gt;&#39;</span>
-</pre></div>
+</code></pre></div>
 
+<p>All fields also can accept an <code>error</code> attribute with extra classes to add to
+the HTML if the field has an error (by default this is &ldquo;error&rdquo;).</p>
 <h3 id="as_input">as_input( )<a class="headerlink" href="#as_input" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">field</span><span class="o">.</span><span class="n">as_input</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">field</span><span class="o">.</span><span class="n">as_input</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Renders the field as a <code>&lt;input type="text"&gt;</code> element, although the type can be overwritten.</p>
-<p>If you use a <code>label</code> argument, a <code>&lt;label&gt;</code> will be added before the input, and also an <code>id</code> attribute to connect both (that can also be overwritten).</p>
+<p>If you use a <code>label</code> argument, a <code>&lt;label&gt;</code> will be added before the input with its <code>for</code> attribute pointing to the field id (if defined) or its name.</p>
 <p>Examples:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">as_input</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">as_input</span><span class="p">()</span>
 <span class="s1">&#39;&lt;input name=&quot;url&quot; type=&quot;url&quot;&gt;&#39;</span>
 
 <span class="c1"># If the field has `required=True&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">as_input</span><span class="p">()</span>
 <span class="s1">&#39;&lt;input name=&quot;url&quot; type=&quot;url&quot; required&gt;&#39;</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">as_input</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">className</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">as_input</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;input class=&quot;form-control&quot; name=&quot;url&quot; type=&quot;text&quot;&gt;&#39;</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">as_input</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Webpage:&quot;</span><span class="p">)</span>
@@ -673,88 +675,88 @@
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">as_input</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Webpage:&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;12345&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;label for=&quot;12345&quot;&gt;Webpage:&lt;/label&gt;</span><span class="se">\n</span><span class="s1">&lt;input id=&quot;12345&quot; name=&quot;url&quot; type=&quot;url&quot;&gt;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="as_textarea">as_textarea( )<a class="headerlink" href="#as_textarea" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">field</span><span class="o">.</span><span class="n">as_textarea</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">field</span><span class="o">.</span><span class="n">as_textarea</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Renders the field as a <code>&lt;textarea&gt;</code> element.</p>
-<p>If you use a <code>label</code> argument, a <code>&lt;label&gt;</code> will be added before the input, and also an <code>id</code> attribute to connect both (that can also be overwritten).</p>
+<p>If you use a <code>label</code> argument, a <code>&lt;label&gt;</code> will be added before the input with its <code>for</code> attribute pointing to the field id (if defined) or its name.</p>
 <p>Examples:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">bio</span><span class="o">.</span><span class="n">as_textarea</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">bio</span><span class="o">.</span><span class="n">as_textarea</span><span class="p">()</span>
 <span class="s1">&#39;&lt;textarea name=&quot;bio&quot;&gt;&lt;/textarea&gt;&#39;</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">bio</span><span class="o">.</span><span class="n">as_textarea</span><span class="p">(</span><span class="n">className</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">bio</span><span class="o">.</span><span class="n">as_textarea</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;textarea class=&quot;form-control&quot; name=&quot;bio&quot;&gt;&lt;/textarea&gt;&#39;</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">bio</span><span class="o">.</span><span class="n">as_textarea</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Your bio:&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;label for=&quot;bio&quot;&gt;Your bio:&lt;/label&gt;</span><span class="se">\n</span><span class="s1">&lt;textarea id=&quot;bio&quot; name=&quot;bio&quot;&gt;&lt;/textarea&gt;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="as_checkbox">as_checkbox( )<a class="headerlink" href="#as_checkbox" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">field</span><span class="o">.</span><span class="n">as_checkbox</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">field</span><span class="o">.</span><span class="n">as_checkbox</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Renders the field as a <code>&lt;input type="checkbox"&gt;</code> element.</p>
 <p>If you use a <code>label</code> argument, a <code>&lt;label&gt;</code> will be added <em>surrounding</em> the input with a class &ldquo;checkbox&rdquo; and the text <em>after</em> the checkbox. </p>
 <p>Examples:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">as_checkbox</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">as_checkbox</span><span class="p">()</span>
 <span class="s1">&#39;&lt;input name=&quot;tos&quot; type=&quot;checkbox&quot;&gt;&#39;</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">as_checkbox</span><span class="p">(</span><span class="n">className</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">as_checkbox</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;input class=&quot;form-control&quot; name=&quot;tos&quot; type=&quot;checkbox&quot;&gt;&#39;</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">as_checkbox</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;I didn’t read this&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;label class=&quot;checkbox&quot;&gt;&lt;input name=&quot;tos&quot; type=&quot;checkbox&quot;&gt; I didn’t read this&lt;/label&gt;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="as_radio">as_radio( )<a class="headerlink" href="#as_radio" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">field</span><span class="o">.</span><span class="n">as_radio</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">field</span><span class="o">.</span><span class="n">as_radio</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Renders the field as a single <code>&lt;input type="radio"&gt;</code> element.</p>
 <p>If you use a <code>label</code> argument, a <code>&lt;label&gt;</code> will be added <em>surrounding</em> the input with a class &ldquo;radio&rdquo; and the text <em>after</em> the radio button.</p>
 <p>Examples:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">as_radio</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">as_radio</span><span class="p">()</span>
 <span class="s1">&#39;&lt;input name=&quot;size&quot; type=&quot;radio&quot;&gt;&#39;</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">as_radio</span><span class="p">(</span><span class="n">className</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">as_radio</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;input class=&quot;form-control&quot; name=&quot;size&quot; type=&quot;radio&quot;&gt;&#39;</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">as_radio</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;XL&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;label class=&quot;radio&quot;&gt;&lt;input name=&quot;size&quot; type=&quot;radio&quot;&gt; XL&lt;/label&gt;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="as_select_tag">as_select_tag( )<a class="headerlink" href="#as_select_tag" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">field</span><span class="o">.</span><span class="n">as_select_tag</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">field</span><span class="o">.</span><span class="n">as_select_tag</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Renders <em>just</em> the opening <code>&lt;select&gt;</code> tag for a field, not any options nor the closing &ldquo;</select>&ldquo;.</p>
 <p>This is intended to be used with <code>&lt;option&gt;</code> tags writted by hand or genereated
 by other means.</p>
-<p>If you use a <code>label</code> argument, a <code>&lt;label&gt;</code> will be added before the input, and also an <code>id</code> attribute to connect both  (that can also be overwritten).</p>
+<p>If you use a <code>label</code> argument, a <code>&lt;label&gt;</code> will be added before the input, with its <code>for</code> attribute pointing to the field id (if defined) or its name.</p>
 <p>Examples:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">as_select_tag</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">as_select_tag</span><span class="p">()</span>
 <span class="s1">&#39;&lt;select name=&quot;city&quot;&gt;&#39;</span>
 
 <span class="c1"># If the field has `multiple=True`</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">as_select_tag</span><span class="p">()</span>
 <span class="s1">&#39;&lt;select name=&quot;city&quot; multiple&gt;&#39;</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">as_select_tag</span><span class="p">(</span><span class="n">className</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">as_select_tag</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;select class=&quot;form-control&quot; name=&quot;city&quot;&gt;&#39;</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">as_select_tag</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Choose a city&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;label for=&quot;city&quot;&gt;Choose a city&lt;/label&gt;</span><span class="se">\n</span><span class="s1">&lt;select name=&quot;city&quot;&gt;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="as_select">as_select( )<a class="headerlink" href="#as_select" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">field</span><span class="o">.</span><span class="n">as_select</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">field</span><span class="o">.</span><span class="n">as_select</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Renders the field as a <code>&lt;select&gt;</code> element.</p>
-<p>If you use a <code>label</code> argument, a <code>&lt;label&gt;</code> will be added before the input, and also an <code>id</code> attribute to connect both  (that can also be overwritten).</p>
+<p>If you use a <code>label</code> argument, a <code>&lt;label&gt;</code> will be added before the input, with its <code>for</code> attribute pointing to the field id (if defined) or its name.</p>
 <p>The <code>items</code> argument is a list that can have two type of elements:</p>
 <ol>
 <li>
@@ -766,7 +768,7 @@ by other means.</p>
 </ol>
 <p>You can mix the two types of elements to have first-level <code>&lt;option&gt;</code> and <code>&lt;optgroup&gt;</code>s in the same <code>&lt;select&gt;</code>.</p>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
 <span class="o">...</span>     <span class="p">(</span><span class="s2">&quot;Sidney&quot;</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span>
 <span class="o">...</span>     <span class="p">(</span><span class="s2">&quot;Tokyo&quot;</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span>
 <span class="o">...</span>     <span class="s2">&quot;America&quot;</span><span class="p">,</span> <span class="p">[</span>
@@ -806,16 +808,16 @@ by other means.</p>
 <span class="sd">  &lt;/optgroup&gt;</span>
 <span class="sd">&lt;/select&gt;</span>
 <span class="sd">&#39;&#39;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="render_optgroup">render_optgroup( )<a class="headerlink" href="#render_optgroup" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">field</span><span class="o">.</span><span class="n">render_optgroup</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">field</span><span class="o">.</span><span class="n">render_optgroup</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Renders an <code>&lt;optgroup&gt;</code> tag with <code>&lt;options&gt;</code>. Used by <a href="#as_select">as_select()</a> to render its groups, but you can call it yourself to build your options list by hand.</p>
 <p>The <code>label</code> is the title of the group and <code>items</code> is a list of <code>label, value</code> tuples for the options.</p>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
 <span class="o">...</span>     <span class="p">(</span><span class="s2">&quot;Rome&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
 <span class="o">...</span>     <span class="p">(</span><span class="s2">&quot;London&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
 <span class="o">...</span>     <span class="p">(</span><span class="s2">&quot;Madrid&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
@@ -832,16 +834,16 @@ by other means.</p>
 <span class="sd">  &lt;option value=&quot;10&quot;&gt;Berlin&lt;/option&gt;</span>
 <span class="sd">&lt;/optgroup&gt;</span>
 <span class="sd">&#39;&#39;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="render_option">render_option( )<a class="headerlink" href="#render_option" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">field</span><span class="o">.</span><span class="n">render_option</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">field</span><span class="o">.</span><span class="n">render_option</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Renders an <code>&lt;option&gt;</code> element. Used by <a href="#as_select">as_select()</a> and by <a href="#render_optgroup">render_optgroup()</a> to render its options, but you can call it yourself to build your options list by hand.</p>
 <p>If you omit the value, the label will be used as a value as well.</p>
 <p>Examples:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">render_option</span><span class="p">(</span><span class="s2">&quot;Lima&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">render_option</span><span class="p">(</span><span class="s2">&quot;Lima&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;option value=&quot;Lima&quot;&gt;Lima&lt;/option&gt;&#39;</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">render_option</span><span class="p">(</span><span class="s2">&quot;Lima&quot;</span><span class="p">,</span> <span class="mi">123</span><span class="p">)</span>
@@ -849,51 +851,51 @@ by other means.</p>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">render_option</span><span class="p">(</span><span class="s2">&quot;Lima&quot;</span><span class="p">,</span> <span class="s2">&quot;LIM&quot;</span><span class="p">,</span> <span class="n">data_color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;option value=&quot;LIM&quot; data-color=&quot;orange&quot;&gt;Lima&lt;/option&gt;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="render_error">render_error( )<a class="headerlink" href="#render_error" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">field</span><span class="o">.</span><span class="n">render_error</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">field</span><span class="o">.</span><span class="n">render_error</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>If the field has an error, this methods renders a tag (a <code>&lt;div&gt;</code> by default)with an &ldquo;error&rdquo; class and the error message. Both the tag and the class can be overwritten.</p>
 <p>If the field has no error, nothing is rendered.</p>
 <p>Examples:</p>
-<div class="highlight"><pre><span></span><span class="c1"># If the field has a `required` error</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># If the field has a `required` error</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">render_error</span><span class="p">()</span>
 <span class="s1">&#39;&lt;div class=&quot;error&quot;&gt;This field is required&lt;/div&gt;&#39;</span>
 
 <span class="c1"># Custom tag and class</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">render_error</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="n">className</span><span class="o">=</span><span class="s2">&quot;errorMessage&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">render_error</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;errorMessage&quot;</span><span class="p">)</span>
 <span class="s1">&#39;&lt;p class=&quot;errorMessage&quot;&gt;This field is required&lt;/p&gt;&#39;</span>
 
 <span class="c1"># If the field has no error</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">render_error</span><span class="p">()</span>
 <span class="s1">&#39;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <h2 id="using-form-templates">Using form templates<a class="headerlink" href="#using-form-templates" title="Permanent link">#</a></h2>
 <p>Proper Form doesn&rsquo;t have a default <code>form.render()</code> method, but you can write one yourself on each of your forms or, better yet, in a base form.</p>
 <p>For example you could have a separated template for each if your forms in a <code>templates/forms/</code> folder:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
 <span class="kn">from</span> <span class="nn">proper_form</span> <span class="kn">import</span> <span class="n">Form</span>
 
 <span class="k">class</span> <span class="nc">BaseForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">tmpl</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;forms/{name}.html.jinja2&quot;</span>
+        <span class="n">tmpl</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;forms/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.html.jinja2&quot;</span>
         <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="n">tmpl</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 <p>If you make all of your forms inherit from that base form, you will now be able of rendering a form just calling its <code>.render()</code> method.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">BaseForm</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">BaseForm</span><span class="p">):</span>
   <span class="n">name</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
   <span class="o">...</span>
-</pre></div>
+</code></pre></div>
 
-<div class="highlight"><pre><span></span><span class="x">&lt;p&gt;lorem ipsum&lt;/p&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="x">&lt;p&gt;lorem ipsum&lt;/p&gt;</span>
 <span class="cp">{{</span> <span class="nv">myform.render</span><span class="o">()</span> <span class="cp">}}</span><span class="x"></span>
 <span class="x">&lt;p&gt;lorem ipsum&lt;/p&gt;</span>
-</pre></div>
+</code></pre></div>
                 
                   
                 
@@ -951,7 +953,7 @@ by other means.</p>
     
       <script src="../assets/javascripts/application.28f21e1d.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.1",url:{base:".."}})</script>
       
     
   </body>

@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.4.2">
     
     
       
@@ -668,25 +668,25 @@
 <p>With a form set, you can create/update the person <em>and</em> its URLs at the same time, in a single form.</p>
 <p><a href="../img/form-set-form.png"><img alt="Form set form" src="../img/form-set-form.png" /></a></p>
 <p>To do so, you need to create two forms, one for the person data, and other for a website, and connect them like this:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WebPageForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">WebPageForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">URL</span><span class="p">()</span>
     <span class="n">title</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nc">PersonForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
     <span class="n">webs</span> <span class="o">=</span> <span class="n">FormSet</span><span class="p">(</span><span class="n">WebPageForm</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 <p>a <code>FormSet</code> is a special kind of <code>Field</code> that represents a list of forms, to create or edit several items, in the same page, at once.</p>
 <p>Now that you have a formset you can iterate over the forms in it and display them as you would with a regular form.</p>
 <p>In the console:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span> <span class="o">=</span> <span class="n">PersonForm</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">form</span> <span class="o">=</span> <span class="n">PersonForm</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">webs</span><span class="p">)</span>
 <span class="p">[</span><span class="n">WebPageForm</span><span class="p">]</span>
-</pre></div>
+</code></pre></div>
 
 <p>or in a template like this one</p>
-<p><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+<p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Name <span class="p">&lt;</span><span class="nt">small</span><span class="p">&gt;</span>(required)<span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
   <span class="cp">{{</span> <span class="nv">form.name.as_input</span><span class="o">(</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="o">)</span> <span class="cp">}}</span>
   <span class="cp">{{</span> <span class="nv">form.name.render_error</span><span class="o">()</span> <span class="cp">}}</span>
@@ -703,9 +703,9 @@
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="cp">{%</span>- <span class="k">endfor</span> <span class="cp">%}</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</pre></div>
+</code></pre></div>
 &hellip; that renders into</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Name <span class="p">&lt;</span><span class="nt">small</span><span class="p">&gt;</span>(required)<span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">input</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
@@ -719,20 +719,20 @@
       <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</pre></div>
+</code></pre></div>
 
 <p>As you can see it only displayed one, empty, <code>WebPageForm</code>. It creates one for each item in the input or object data (and we have none), plus the value of the <code>extra</code> attribute, that is one by default. You can set it to 0 or to a larger number to change that.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">PersonForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">PersonForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
 <span class="o">...</span>     <span class="n">webs</span> <span class="o">=</span> <span class="n">FormSet</span><span class="p">(</span><span class="n">WebPageForm</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">PersonForm</span><span class="p">()</span><span class="o">.</span><span class="n">webs</span><span class="p">)</span>
 <span class="p">[</span><span class="n">WebPageForm</span><span class="p">,</span> <span class="n">WebPageForm</span><span class="p">,</span> <span class="n">WebPageForm</span><span class="p">]</span>
-</pre></div>
+</code></pre></div>
 
 <p>Iterating over the formset will render the forms in the order they were created. FormSets can also be indexed into, which returns the corresponding form.</p>
 <h2 id="using-object-data-with-a-formset">Using object data with a formset<a class="headerlink" href="#using-object-data-with-a-formset" title="Permanent link">#</a></h2>
 <p>As shown above you can define the number of extra forms. What this means is that you are telling the formset how many additional forms to show in addition to the number of forms it generates from the object data. Let’s take a look at an example:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">WebPageForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">WebPageForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
 <span class="o">...</span>     <span class="n">url</span> <span class="o">=</span> <span class="n">URL</span><span class="p">()</span>
 <span class="o">...</span>     <span class="n">title</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
 
@@ -752,7 +752,7 @@
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">form</span><span class="o">.</span><span class="n">webs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">name</span>
 <span class="s1">&#39;webs--2--url&#39;</span>
-</pre></div>
+</code></pre></div>
 
 <p>There are now a total of three forms showing above. Two for the object data that was passed in and one extra form. Also note the format of the HTML names of the fields in the forms of the formset. It follows this format:</p>
 <p style="text-align:center;font-family:monospace;font-size:larger;font-weight:bold"><em>form_prefix</em>. <em>formset_name</em> -- <strong>OBJECT_ID</strong> -- <em>field_name</em></p>
@@ -771,7 +771,7 @@
 <p>A formset can accept any number of new forms. A &ldquo;new form&rdquo; are those that aren&rsquo;t created for editing an existing object, but added client side. To do so, the names of the fields must follow this pattern:</p>
 <p style="text-align:center;font-family:monospace;font-size:larger;font-weight:bold"><em>prefix</em>. <em>formset_name</em> -- _NEWx -- <em>field_name</em></p>
 <p>where &ldquo;x&rdquo; is a number shared by all the fields of a form. They doesn&rsquo;t have to be correlative, but they must be different for each form, example:</p>
-<div class="highlight"><pre><span></span><span class="nx">webs</span><span class="o">--</span><span class="nx">_NEW1</span><span class="o">--</span><span class="nx">url</span>
+<div class="highlight"><pre><span></span><code><span class="nx">webs</span><span class="o">--</span><span class="nx">_NEW1</span><span class="o">--</span><span class="nx">url</span>
 <span class="nx">webs</span><span class="o">--</span><span class="nx">_NEW1</span><span class="o">--</span><span class="nx">title</span>
 
 <span class="nx">webs</span><span class="o">--</span><span class="nx">_NEW2</span><span class="o">--</span><span class="nx">url</span>
@@ -779,7 +779,7 @@
 
 <span class="nx">webs</span><span class="o">--</span><span class="nx">_NEW3</span><span class="o">--</span><span class="nx">url</span>
 <span class="nx">webs</span><span class="o">--</span><span class="nx">_NEW3</span><span class="o">--</span><span class="nx">title</span>
-</pre></div>
+</code></pre></div>
 
 <p>If you create a formset with <code>can_create=False</code>, all the new forms are ignored.</p>
 <h2 id="deleting-existing-forms">Deleting existing forms<a class="headerlink" href="#deleting-existing-forms" title="Permanent link">#</a></h2>
@@ -787,17 +787,17 @@
 <p style="text-align:center;font-family:monospace;font-size:larger;font-weight:bold"><em>prefix</em>. <em>formset_name</em> -- <em>OBJECT_ID</em> -- _DELETED</p>
 <p>If you create a formset with <code>can_delete=False</code>, this special name is ignored.</p>
 <h2 id="arguments">Arguments<a class="headerlink" href="#arguments" title="Permanent link">#</a></h2>
-<div class="highlight"><pre><span></span><span class="n">FormSet</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="n">FormSet</span><span class="p">(</span>
     <span class="n">FormClass</span><span class="p">,</span>
-    <span class="n">backref</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">backref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">extra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">min_num</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-    <span class="n">max_num</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-    <span class="n">can_delete</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-    <span class="n">can_create</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-    <span class="n">error_messages</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">min_num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">can_delete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">can_create</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">error_messages</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="formclass">FormClass<a class="headerlink" href="#formclass" title="Permanent link">#</a></h3>
 <h3 id="backref-none">backref <small>(<code>None</code>)</small><a class="headerlink" href="#backref-none" title="Permanent link">#</a></h3>
@@ -809,7 +809,7 @@
 <p>In the example above, a WebPage model will have a non-nullable <code>person_id</code> field. If we save those forms first, you will not have yet a <code>person</code> to get the ID from, so the save operation is going to fail.</p>
 <p>We&rsquo;ll need to create a person first, <em>and then</em> create the child objects using the person as an argument.</p>
 <h4 id="with-backref">With backref<a class="headerlink" href="#with-backref" title="Permanent link">#</a></h4>
-<div class="highlight"><pre><span></span><span class="c1"># Possible SQLAlchemy models</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Possible SQLAlchemy models</span>
 
 <span class="k">class</span> <span class="nc">WebPage</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
   <span class="n">url</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Text</span><span class="p">)</span>
@@ -819,17 +819,17 @@
 
 <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
   <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Text</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 <p>A <code>backref</code> is how the child models call its parents, in this example, is &ldquo;owner&rdquo;, so we use that as a backref attribute:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WebPageForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">WebPageForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
   <span class="n">url</span> <span class="o">=</span> <span class="n">URL</span><span class="p">()</span>
   <span class="n">title</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nc">PersonForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
   <span class="n">name</span> <span class="o">=</span> <span class="n">Text</span><span class="p">()</span>
   <span class="n">webs</span> <span class="o">=</span> <span class="n">FormSet</span><span class="p">(</span><span class="n">WebPageForm</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s2">&quot;owner&quot;</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 <p>When Proper Form receives a <code>backref</code>, it reverse the order of the form saving. Now first it creates the parent object, and then the child objects using the parent object as an attribute.</p>
 <p><img alt="With backref" src="../img/with-backref.png" /></p>
@@ -846,11 +846,11 @@
 <p>If this option is <code>False</code>, <a href="#using-input-data-with-a-formset">the data from all new forms</a> is ignored. You can only use the formset to edit the data of pre-existing objects.</p>
 <h3 id="error_messages-none">error_messages <small>(<code>None</code>)</small><a class="headerlink" href="#error_messages-none" title="Permanent link">#</a></h3>
 <p>The <code>min_num</code>, and <code>max_num</code> validations fail with this predefined error messages:</p>
-<div class="highlight"><pre><span></span><span class="n">default_error_messages</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;min_num&quot;</span><span class="p">:</span> <span class="s2">&quot;Please submit at least {num} forms.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;max_num&quot;</span><span class="p">:</span> <span class="s2">&quot;Please submit at most {num} forms.&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">default_error_messages</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;min_num&quot;</span><span class="p">:</span> <span class="s2">&quot;Please submit at least </span><span class="si">{num}</span><span class="s2"> forms.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;max_num&quot;</span><span class="p">:</span> <span class="s2">&quot;Please submit at most </span><span class="si">{num}</span><span class="s2"> forms.&quot;</span><span class="p">,</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 <p>The <code>error_messages</code> argument allows you to overwrite all or one of these messages by passing a dictionary with your custom error messages for those validations.</p>
 <h2 id="adding-new-forms-with-javascript">Adding new forms with JavaScript<a class="headerlink" href="#adding-new-forms-with-javascript" title="Permanent link">#</a></h2>
@@ -912,7 +912,7 @@
     
       <script src="../assets/javascripts/application.28f21e1d.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.1",url:{base:".."}})</script>
       
     
   </body>

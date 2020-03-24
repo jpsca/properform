@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.4.2">
     
     
       
@@ -941,13 +941,13 @@
                 
                 <h1 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">#</a></h1>
 <p>A field represent a data type. It handles coercing of the input to that data type and following validations. For example, <code>Text</code>, <code>Integer</code>, <code>Date</code>, and <code>Email</code> are some of the available fields.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">proper_form</span> <span class="kn">as</span> <span class="nn">f</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">proper_form</span> <span class="k">as</span> <span class="nn">f</span>
 
 <span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">birthday</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 
 <p>Unlike most (all?) the other form libraries, Proper Form doesn&rsquo;t tie a field to a specific HTML representation. For example, an <code>Email</code> field can be rendered as a <code>&lt;input type="email"&gt;</code>, but also as a <code>&lt;select&gt;</code>, a <code>&lt;input type="checkbox"&gt;</code>, etc. The important part is that the received input is normalized and checked to have the shape of an email address, no matter how the input gets to the field.</p>
 <p>The most important thing to remember about fields, is that they always take a <strong>list</strong> of input values, even if only one is sent or needed. All received values are processed even if you only need the first one. It does that for several reasons:</p>
@@ -958,8 +958,8 @@
 </ol>
 <h2 id="fields-common-arguments">Fields common arguments<a class="headerlink" href="#fields-common-arguments" title="Permanent link">#</a></h2>
 <p>Each <code>Field</code> class constructor takes at least these arguments. Some <code>Field</code> classes take additional, field-specific arguments, but the following should always be accepted:</p>
-<div class="highlight"><pre><span></span><span class="n">Field</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Field</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <h3 id="validators"><code>*</code>validators<a class="headerlink" href="#validators" title="Permanent link">#</a></h3>
 <p>Zero or more callables that get the type-casted values and have to return <code>True</code> if is ok or <code>False</code> if not. Proper Form comes with several pre-made validators (see the <a href="/validators">Validators</a> page), but any custom function or callable object can be used.</p>
@@ -979,13 +979,13 @@ You can ignore it and continue without that value by setting this option to <cod
 <p>Validates that the number of values with this name is <em>at most</em> this.</p>
 <h3 id="error_messages-none">error_messages <small>(<code>None</code>)</small><a class="headerlink" href="#error_messages-none" title="Permanent link">#</a></h3>
 <p>The <code>required</code>, <code>strict</code>, <code>min_num</code>, and <code>max_num</code> validations fail with this predefined error messages:</p>
-<div class="highlight"><pre><span></span><span class="n">default_error_messages</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="n">default_error_messages</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="s2">&quot;This field is required.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid type.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;min_num&quot;</span><span class="p">:</span> <span class="s2">&quot;You need at least {num} values.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;max_num&quot;</span><span class="p">:</span> <span class="s2">&quot;You can have at most {num} values.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;min_num&quot;</span><span class="p">:</span> <span class="s2">&quot;You need at least </span><span class="si">{num}</span><span class="s2"> values.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;max_num&quot;</span><span class="p">:</span> <span class="s2">&quot;You can have at most </span><span class="si">{num}</span><span class="s2"> values.&quot;</span><span class="p">,</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 <p>The <code>error_messages</code> argument allows you to overwrite all or some of these messages by passing a dictionary with your custom error messages for those validations.</p>
 <h3 id="collection-false">collection <small>(<code>False</code>)</small><a class="headerlink" href="#collection-false" title="Permanent link">#</a></h3>
@@ -998,7 +998,7 @@ You can ignore it and continue without that value by setting this option to <cod
 <p>Just before the field return the type-casted and validated values, you might want to adjust them a little more.</p>
 <p>This option allows you to pass a function that recieves the final value, or a list of values, if <code>multiple</code> is <code>True</code>, process it/them in some way and returns it.</p>
 <p>For redability, instead of passing it as an argument, you can alternatively define a method in the parent form named <code>clean_NAME()</code> for the same effect.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
     <span class="c1"># as an argument</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">))</span>
     <span class="n">mydate</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">()</span>
@@ -1008,15 +1008,15 @@ You can ignore it and continue without that value by setting this option to <cod
         <span class="c1"># change timezone or something</span>
         <span class="o">...</span>
         <span class="k">return</span> <span class="n">clean_value</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="prepare-none">prepare <small>(<code>None</code>)</small><a class="headerlink" href="#prepare-none" title="Permanent link">#</a></h3>
 <p>Some data types, like dates, need to be converted to strings before can be shown in the HTML. You don&rsquo;t usually have to worry about this because the each field take care of it by default, but in some rare cases, you might need to use your own custom function. This option allows you to pass a function to do that.</p>
 <p>The function passed as <code>prepare</code>, must take a <em>stored</em> value and return a string.</p>
 <p>For redability, instead of passing it as an argument, you can alternatively define a method in the parent form named <code>prepare_NAME()</code> for the same effect.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
     <span class="c1"># as an argument</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">prepare</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">f</span><span class="s2">&quot;--{v}--&quot;</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">prepare</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;--</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">--&quot;</span><span class="p">)</span>
     <span class="n">mydate</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">()</span>
 
     <span class="c1"># as method in the parent form</span>
@@ -1024,7 +1024,7 @@ You can ignore it and continue without that value by setting this option to <cod
         <span class="c1"># change timezone or something</span>
         <span class="o">...</span>
         <span class="k">return</span> <span class="s2">&quot;some str value&quot;</span>
-</pre></div>
+</code></pre></div>
 
 <h2 id="field-attributes">Field attributes<a class="headerlink" href="#field-attributes" title="Permanent link">#</a></h2>
 <p>The attributes of fields can be useful when rendering fields, specially if you need to do something unusual.</p>
@@ -1037,32 +1037,32 @@ You can ignore it and continue without that value by setting this option to <cod
 <h3 id="value">value<a class="headerlink" href="#value" title="Permanent link">#</a></h3>
 <p>The first of the values or an empty string if none is found.</p>
 <h2 id="field-methods">Field methods<a class="headerlink" href="#field-methods" title="Permanent link">#</a></h2>
-<p>All field methods are about rendering, so they are covered in the <a href="/rendering/">Rendering page</a></p>
+<p>All field methods are about rendering, so they are covered in the <a href="rendering/">Rendering page</a></p>
 <h2 id="built-in-field-classes">Built-in Field classes<a class="headerlink" href="#built-in-field-classes" title="Permanent link">#</a></h2>
 <p>Naturally, Proper Form includes several Field classes that represent common data types needs. This section documents each built-in field.</p>
 <h3 id="boolean">Boolean( )<a class="headerlink" href="#boolean" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Boolean</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Boolean</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Normalizes to a <code>True</code> or <code>False</code> value.</p>
 <p>A value is normalized to <code>False</code> if, stripped and lowercased, is one of <code>""</code>, <code>"none"</code>, <code>"0"</code>, <code>"no"</code>, <code>"nope"</code>, <code>"nah"</code>, <code>"off"</code>, or <code>"false"</code>. Otherwise is normalized to <code>True</code>.</p>
 <h3 id="date">Date( )<a class="headerlink" href="#date" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Date</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Date</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validate that the given values are dates with the format <code>YYYY-MM-dd</code>.</p>
 <p>Normalizes to a <code>datetime.date</code> value.</p>
 <p>Shows the stored values using the format <code>YYYY-MM-dd</code>.</p>
 <h3 id="datetime">DateTime( )<a class="headerlink" href="#datetime" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">DateTime</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">DateTime</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validate that the given values are dates or datetimes with the format <code>YYYY-MM-dd</code> plus an optional time. The time can be in a 12-hours or 24-hours format, with or without seconds.</p>
 <p>Normalizes to a <code>datetime.datetime</code> value.</p>
 <p>Shows the stored values using the format <code>YYYY-MM-dd HH:mm:ss AM/PM</code> or <code>YYYY-MM-dd HH:mm AM/PM</code> if the seconds are zero.</p>
 <h3 id="email">Email( )<a class="headerlink" href="#email" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Email</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="n">check_dns</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">allow_smtputf8</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Email</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="n">check_dns</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_smtputf8</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validates and normalize an email address using the <a href="https://github.com/JoshData/python-email-validator">python-email-validator</a> library. Even if the format is valid, it cannot guarantee that the email is real, so the purpose of this validation is to alert the user of a typing mistake.</p>
 <p>The normalizations include lowercasing the domain part of the email address (domain names are case-insensitive), and unicode &ldquo;NFC&rdquo; normalization of the whole address.</p>
@@ -1073,18 +1073,18 @@ You can ignore it and continue without that value by setting this option to <cod
 <p>Accept non-ASCII characters in the local part of the address (before the @-sign).</p>
 <p>This is disabled by default because these email addresses require that your mail submission library and the mail servers along the route to the destination, including your own outbound mail server, all support the <a href="https://tools.ietf.org/html/rfc6531">SMTPUTF8 (RFC 6531)</a> extension.</p>
 <h3 id="file">File( )<a class="headerlink" href="#file" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">File</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">File</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>A field for rendering an <code>&lt;input type="file"&gt;</code>. Proper Form does not deal with any file handling or validation.</p>
 <h3 id="float">Float( )<a class="headerlink" href="#float" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Float</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Float</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Normalizes to a float value.</p>
 <h3 id="hexcolor">HexColor( )<a class="headerlink" href="#hexcolor" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">HexColor</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">HexColor</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Accepts a color in hex, rgb, or rgba color and normalize it to a hex value of 6 digits or 6 digits plus one for alpha.</p>
 <p>Examples:</p>
@@ -1095,39 +1095,39 @@ You can ignore it and continue without that value by setting this option to <cod
 <li>&ldquo;rgba(221, 96, 89, 0.3)&rdquo; → &ldquo;#dd60594c&rdquo;</li>
 </ul>
 <h3 id="integer">Integer( )<a class="headerlink" href="#integer" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Integer</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Integer</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Normalizes to an integer value.</p>
 <h3 id="month">Month( )<a class="headerlink" href="#month" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Month</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Month</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validate that the given values are dates with the <code>YYYY-MM</code> format. Example: &ldquo;1980-07&rdquo;.</p>
 <p>Normalizes to a <code>datetime.date</code> value.</p>
 <p>Shows the stored values using the <code>YYYY-MM</code> format.</p>
 <h3 id="password">Password( )<a class="headerlink" href="#password" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Password</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Password</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>A text field. Doesn&rsquo;t normalize or validates it.</p>
 <p>Whatever value is accepted by this field is not rendered back to the browser like normal fields.</p>
 <h3 id="slug">Slug( )<a class="headerlink" href="#slug" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Slug</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="n">Slug</span><span class="p">(</span>
     <span class="o">*</span><span class="n">validators</span><span class="p">,</span>
     <span class="n">max_length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">separator</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
-    <span class="n">stopwords</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-    <span class="n">regex_pattern</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-    <span class="n">replacements</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-    <span class="n">lowercase</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-    <span class="n">word_boundary</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-    <span class="n">entities</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-    <span class="n">decimal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-    <span class="n">hexadecimal</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">stopwords</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">regex_pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">replacements</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">lowercase</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">word_boundary</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">entities</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">decimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">hexadecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="o">**</span><span class="n">options</span>
 <span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 <p>A slug is a short label for something, containing only letters, numbers, underscores, or hyphens. Is tipically used for using a name in a URL.</p>
 <p>To do the conversion, this field uses the powerful <a href="https://github.com/un33k/python-slugify">python-slugify</a> library, so it takes the same arguments:</p>
@@ -1152,28 +1152,28 @@ You can ignore it and continue without that value by setting this option to <cod
 <p><strong>hexadecimal</strong> (bool):</p>
 <p>converts html hexadecimal to unicode (&#x17D; -&gt; Ž -&gt; z)</p>
 <h3 id="splitteddatetime">SplittedDateTime( )<a class="headerlink" href="#splitteddatetime" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">SplittedDateTime</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">SplittedDateTime</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>A Datetime field splitted in a date and a time field (with the same name). The input values are grouped in pairs, with the first one is the date and the second one the time.</p>
 <p>Validates that the first items of the pairs are dates with the format <code>YYYY-MM-dd</code>, and the seconds are empty strings (which is equivalent to &ldquo;00:00&rdquo;) or times in a 12-hours or 24-hours format, with or without seconds.</p>
 <p>Normalizes to a <code>datetime.datetime</code> value.</p>
 <p>Shows the date part of the stored values using the format <code>YYYY-MM-dd</code>, and the time parts as <code>HH:mm:ss AM/PM</code> or <code>HH:mm AM/PM</code> if the seconds are zero.</p>
 <h3 id="text">Text( )<a class="headerlink" href="#text" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Text</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>A simple text field that normalize the input by stripping the leading and final spaces.</p>
 <h3 id="time">Time( )<a class="headerlink" href="#time" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">Time</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Time</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>A 12-hours or 24-hours time field, seconds optional. Examples: &ldquo;5:03 AM&rdquo;, &ldquo;11:00 PM&rdquo;, &ldquo;4:20:16 PM.</p>
 <p>Normalizes to a <code>datetime.time</code> value.</p>
 <p>Shows the stored value as <code>HH:mm:ss AM/PM</code> or <code>HH:mm AM/PM</code> if the seconds are zero.</p>
 <h3 id="url">URL( )<a class="headerlink" href="#url" title="Permanent link">#</a></h3>
-<div class="highlight"><pre><span></span><span class="n">URL</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="n">require_tld</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">URL</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="n">require_tld</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Validates and normalize an URL address.</p>
 <p>Even if the format is valid, it cannot guarantee that the URL is real. The purpose of this function is to alert the user of a typing mistake.</p>
@@ -1237,7 +1237,7 @@ You can ignore it and continue without that value by setting this option to <cod
     
       <script src="../assets/javascripts/application.28f21e1d.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.1",url:{base:".."}})</script>
       
     
   </body>
