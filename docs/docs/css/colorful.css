@@ -1,6 +1,5 @@
-.md-typeset div.highlight {
+.md-typeset div.highlight pre {
 	border: 1px solid #EAEAEA;
-	background: #f8f8f8;
 	border-radius: 4px;
 	overflow: auto;
 }

@@ -21,12 +21,13 @@ edit_uri: ""
 
 theme:
   name: material
-  custom_dir: material
+  custom_dir: material/
   logo:
     icon: cloud_done
   palette:
     primary: red
     accent: pink
+  language: en
 
 extra_css:
   - css/colorful.css

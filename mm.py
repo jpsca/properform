@@ -41,6 +41,7 @@ data = {
         "ipdb",
         "tox",
         "mkdocs",
+        "mkdocs-material",
         "pymdown-extensions",
         "pygments",
         "pygments-github-lexers",

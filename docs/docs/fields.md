@@ -31,7 +31,7 @@ Field(*validators, **options)
 
 ### `*`validators
 
-Zero or more callables that get the type-casted values and have to return `True` if is ok or `False` if not. Proper Form comes with several pre-made validators (see the [Validators](/validators) page), but any custom function or callable object can be used.
+Zero or more callables that get the type-casted values and have to return `True` if is ok or `False` if not. Proper Form comes with several pre-made validators (see the [Validators](validators.md) page), but any custom function or callable object can be used.
 
 ### required <small>(`False`)</small>
 
@@ -154,7 +154,7 @@ The first of the values or an empty string if none is found.
 
 ## Field methods
 
-All field methods are about rendering, so they are covered in the [Rendering page](rendering/)
+All field methods are about rendering, so they are covered in the [Rendering page](rendering.md)
 
 
 ## Built-in Field classes

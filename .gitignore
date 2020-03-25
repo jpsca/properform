@@ -32,3 +32,4 @@ sdist/
 site/*
 var/
 wheels/
+docs/site
