@@ -48,7 +48,7 @@ If you are proposing a feature:
 
 Ready to contribute? Here's how to set up the project for local development.
 
-1.  Fork the copier repo on GitHub.
+1.  Fork the repo on GitHub.
 2.  Clone your fork locally:
 
 ```bash

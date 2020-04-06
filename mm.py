@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 """
-COPY THIS FILE TO YOUR PROJECT.
----------
 This file generates all the necessary files for packaging for the project.
 Read more about it at https://github.com/jpscaletti/mastermold/
 """
@@ -9,7 +7,7 @@ data = {
     "title": "Proper Form",
     "name": "proper_form",
     "pypi_name": "proper_form",
-    "version": "0.200326",
+    "version": "0.200406",
     "author": "Juan-Pablo Scaletti",
     "author_email": "juanpablo@jpscaletti.com",
     "description": "A not-terrible Python form library.",
@@ -17,9 +15,9 @@ data = {
     "repo_name": "jpscaletti/proper-form",
     "home_url": "https://github.com/jpscaletti/proper-form",
     # Displayed in the pypi project page
-    # "project_urls": {
-    #     "Documentation": "https://github.com/jpscaletti/proper-form",
-    # },
+    "project_urls": {
+        "Documentation": "https://jpscaletti.github.io/proper-form",
+    },
 
     "development_status": "4 - Beta",
     "minimal_python": 3.6,

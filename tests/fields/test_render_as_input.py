@@ -53,6 +53,23 @@ def test_text_as_input_with_custom_type():
     assert field.as_input(type="meh") == expected
 
 
+def test_value_index():
+    field = f.Text(name="name")
+    field.input_values = ["a", "b", "c"]
+
+    expected = '<input name="name" type="text" value="a">'
+    assert field.as_input(value_index=0) == expected
+
+    expected = '<input name="name" type="text" value="b">'
+    assert field.as_input(value_index=1) == expected
+
+    expected = '<input name="name" type="text" value="c">'
+    assert field.as_input(value_index=2) == expected
+
+    expected = '<input name="name" type="text" value="">'
+    assert field.as_input(value_index=3) == expected
+
+
 DEFAULT_INPUT_TYPES = [
     (f.Date, "date"),
     (f.Email, "email"),

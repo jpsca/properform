@@ -45,7 +45,6 @@ class Field(FieldRenderable):
 
         **extra
 
-
     """
 
     __slots__ = (
@@ -127,6 +126,11 @@ class Field(FieldRenderable):
     @property
     def value(self):
         return self.values[0] if self.values else ""
+
+    def get_value(self, index=0):
+        if self.values and index < len(self.values):
+            return self.values[index]
+        return ""
 
     def prepare(self, object_value):
         return [object_value]

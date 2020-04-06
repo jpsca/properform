@@ -21,19 +21,27 @@ class FieldRenderable(object):
             html = html + " "
         return "<label {}>{}{}</label>".format(html_attrs, html, text)
 
-    def as_input(self, *, label=None, **attrs):
+    def as_input(self, *, label=None, value_index=0, **attrs):
         """Renders the field as a `<input type="text">` element, although the type
         can be changed.
 
-        attrs (dict):
+        value_index (int):
+            If `multiple` is True but the field display only one value,
+            this is the index of the value that will be used.
+            By default this is 0.
+            If the list of values is not long enough, the value used is
+            an empty string.
+
+        **attrs:
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
         """
+        value = self.get_value(value_index)
         attrs.setdefault("name", self.name)
         attrs.setdefault("required", self.required)
         attrs.setdefault("type", self.input_type)
-        attrs.setdefault("value", self.value or "")
+        attrs.setdefault("value", value)
         html_attrs = get_html_attrs(attrs, show_error=self.error)
 
         html = "<input {}>".format(html_attrs)
@@ -42,19 +50,26 @@ class FieldRenderable(object):
             html = self.label(label, **kwargs) + "\n" + html
         return Markup(html)
 
-    def as_textarea(self, *, label=None, **attrs):
+    def as_textarea(self, *, label=None, value_index=0, **attrs):
         """Renders the field as a `<textarea>` tag.
 
-        attrs (dict):
+        value_index (int):
+            If `multiple` is True but the field display only one value,
+            this is the index of the value that will be used.
+            By default this is 0.
+            If the list of values is not long enough, the value used is
+            an empty string.
+
+        **attrs:
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
         """
         attrs.setdefault("name", self.name)
         attrs.setdefault("required", self.required)
-        html_attrs = get_html_attrs(attrs, show_error=self.error)
 
-        value = attrs.pop("value", None) or self.value or ""
+        value = attrs.pop("value", None) or self.get_value(value_index)
+        html_attrs = get_html_attrs(attrs, show_error=self.error)
         html = "<textarea {}>{}</textarea>".format(html_attrs, value)
         if label:
             kwargs = {"for": attrs.get("id", self.name)}
@@ -64,7 +79,7 @@ class FieldRenderable(object):
     def as_checkbox(self, *, label=None, **attrs):
         """Renders the field as a `<input type="checkbox">` tag.
 
-        attrs (dict):
+        **attrs:
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -90,7 +105,14 @@ class FieldRenderable(object):
     def as_radio(self, *, label=None, **attrs):
         """Renders the field as a `<input type="radio">` tag.
 
-        attrs (dict):
+        value_index (int):
+            If `multiple` is True but the field display only one value,
+            this is the index of the value that will be used.
+            By default this is 0.
+            If the list of values is not long enough, the value used is
+            an empty string.
+
+        **attrs:
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -120,7 +142,7 @@ class FieldRenderable(object):
         This is intended to be used with `<option>` tags writted by hand or genereated
         by other means.
 
-        attrs (dict):
+        **attrs:
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -143,7 +165,7 @@ class FieldRenderable(object):
         items (list):
             ...
 
-        attrs (dict):
+        **attrs:
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -175,7 +197,7 @@ class FieldRenderable(object):
         values (any|list|None):
             A value or a list of "selected" values.
 
-        attrs (dict):
+        **attrs:
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 
@@ -202,7 +224,7 @@ class FieldRenderable(object):
         value:
             Value for the option (sames as the label by default).
 
-        attrs (dict):
+        **attrs:
             Named parameters used to generate the HTML attributes.
             It follows the same rules as `get_html_attrs`
 

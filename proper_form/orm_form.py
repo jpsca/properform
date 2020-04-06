@@ -16,7 +16,10 @@ class SQLAForm(Form):
     def create_object(self, data):
         object = self._model(**data)
         self._session.add(object)
+        self._session.flush()
         return object
 
     def delete_object(self):
-        return self._session.delete(self._object)
+        result = self._session.delete(self._object)
+        self._session.flush()
+        return result
