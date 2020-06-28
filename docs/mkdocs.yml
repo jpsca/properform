@@ -13,10 +13,10 @@ nav:
 site_name: Proper Form
 site_description: A not-terrible Python form library.
 site_author: Juan-Pablo Scaletti
-site_url: https://github.com/jpscaletti/proper-form
+site_url: https://github.com/jpsca/proper-form
 
-repo_name: jpscaletti/proper-form
-repo_url: https://github.com/jpscaletti/proper-form
+repo_name: jpsca/proper-form
+repo_url: https://github.com/jpsca/proper-form
 edit_uri: ""
 
 theme:
@@ -39,9 +39,9 @@ extra:
   # manifest: "manifest.webmanifest"
   social:
     - type: globe
-      link: https://github.com/jpscaletti/proper-form
+      link: https://github.com/jpsca/proper-form
     - type: github-alt
-      link: https://github.com/jpscaletti/proper-form
+      link: https://github.com/jpsca/proper-form
 
 markdown_extensions:
   - admonition

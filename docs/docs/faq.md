@@ -49,7 +49,7 @@ I hope that a future version of Python (4?) removes this forced separation, so y
 
 ## How can I contribute to Proper Form?
 
-For bugs and feature requests, you can open an issue on the [GitHub page](https://github.com/jpscaletti/proper-form).
+For bugs and feature requests, you can open an issue on the [GitHub page](https://github.com/jpsca/proper-form).
 
 
 ## Does Proper Form handle file uploads or image thumbanils?
@@ -59,4 +59,4 @@ It does not. Those are concerns for your framework or for other specialized libr
 
 ## I have a question not covered in this documentation
 
-Please open an issue on the [GitHub page](https://github.com/jpscaletti/proper-form) with the tag "question".
+Please open an issue on the [GitHub page](https://github.com/jpsca/proper-form) with the tag "question".
