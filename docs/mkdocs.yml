@@ -21,9 +21,10 @@ edit_uri: ""
 
 theme:
   name: material
-  custom_dir: material/
-  logo:
-    icon: cloud_done
+  features:
+    - instant
+  icon:
+    logo: material/cloud
   palette:
     primary: red
     accent: pink
@@ -38,9 +39,7 @@ extra_css:
 extra:
   # manifest: "manifest.webmanifest"
   social:
-    - type: globe
-      link: https://github.com/jpsca/proper-form
-    - type: github-alt
+    - icon: fontawesome/brands/github-alt
       link: https://github.com/jpsca/proper-form
 
 markdown_extensions:
@@ -65,9 +64,6 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences
+  - pymdownx.tabbed
   - pymdownx.tasklist
   - pymdownx.tilde
-
-google_analytics:
-  - UA-XXXXXXXX-X
-  - auto
