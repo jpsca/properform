@@ -2,10 +2,10 @@
 # Validators
 
 Validators are functions that take the list of values of a filed, already type casted, and check if they meet some condition, like a minimum length.
- 
+
 ## Built-in validators
 
-Proper Form includes several validators for common data needs. These are technically validator *factories*, because they take some arguments and return a validator as a function, tailored to your specific need. Example:
+HyperForm includes several validators for common data needs. These are technically validator *factories*, because they take some arguments and return a validator as a function, tailored to your specific need. Example:
 
 ```python
 class MyForm(Form):

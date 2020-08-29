@@ -1,7 +1,7 @@
 from datetime import date, time, datetime
 import pytest
 
-from proper_form import fields as f
+from hyperform import fields as f
 
 
 TEST_DATA = [

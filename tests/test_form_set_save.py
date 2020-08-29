@@ -1,7 +1,7 @@
 import pytest
 
-import proper_form as f
-from proper_form.constants import SEP, NEW, ID, DELETED
+import hyperform as f
+from hyperform.constants import SEP, NEW, ID, DELETED
 
 
 class MyModel(object):

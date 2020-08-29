@@ -3,7 +3,7 @@
 
 ## Key Concepts
 
-- `Form`s are the core container of Proper Form, they are classes that group fields and/or formsets and, sometimes, connect them to models.
+- `Form`s are the core container of HyperForm, they are classes that group fields and/or formsets and, sometimes, connect them to models.
 - Fields do most of the heavy lifting. Each field represents a data type and the field handles coercing form the input string to that datatype. They can also run validations on the values.
 - Every field can be rendered as any form widget (inputs, selects, checboxes), even if a particular widget don't make sense for the data type.
 - In order to specify validation rules, fields contain a list of validator functions.
@@ -16,7 +16,7 @@ This is an example of a simple form connected to a Model:
 
 ```python
 # forms.py
-from proper_form import SQLAForm, Text, LongerThan
+from hyperform import SQLAForm, Text, LongerThan
 from .models import db, Message
 
 
@@ -99,7 +99,7 @@ def edit(msg_id=None):
     if msg_id:
         message = db.query(Message).filter_by(id=msg_id).first()
     else:
-        message = None  
+        message = None
 
     form = MessageForm(request.form, message)
     # [2]

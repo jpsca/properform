@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from proper_form.ftypes import type_date
+from hyperform.ftypes import type_date
 
 
 VALID_DATES = [

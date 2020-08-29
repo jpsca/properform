@@ -2,7 +2,7 @@ from datetime import time
 
 import pytest
 
-from proper_form.ftypes import type_time
+from hyperform.ftypes import type_time
 
 
 VALID_TIMES = [

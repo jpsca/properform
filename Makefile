@@ -24,13 +24,13 @@ clean-pyc:
 	find . -name '.pytest_cache' -exec rm -rf {} +
 
 test:
-	pytest -x proper_form tests
+	pytest -x hyperform tests
 
 flake:
-	flake8 --config=setup.cfg proper_form tests
+	flake8 --config=setup.cfg hyperform tests
 
 coverage:
-	pytest --cov-report html --cov proper_form proper_form tests
+	pytest --cov-report html --cov hyperform hyperform tests
 
 install:
 	pip install -e .[dev]

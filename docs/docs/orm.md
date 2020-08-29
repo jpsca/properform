@@ -1,7 +1,7 @@
 
 # ORM integration
 
-Proper Form can update/create/destroy entries in your database automatically, even for the forms inside a formset.
+HyperForm can update/create/destroy entries in your database automatically, even for the forms inside a formset.
 
 There is built-in support por [SQLAlchemy](https://www.sqlalchemy.org/) and [PonyORM](https://ponyorm.org/) but writing your own adapter is just a few lines of code.
 
@@ -16,7 +16,7 @@ Requires that your forms:
 Example, with `Flask-SQLAlchemy`:
 
 ```python
-from proper_form import SQLAForm, Text
+from hyperform import SQLAForm, Text
 from .models import db, MyModel, AnotherModel
 
 class BaseForm(SQLAForm):
@@ -52,7 +52,7 @@ Requires that your forms:
 Example:
 
 ```python
-from proper_form import PonyForm, Text
+from hyperform import PonyForm, Text
 from .models import db, MyModel, AnotherModel
 
 class BaseForm(PonyForm):
@@ -94,7 +94,7 @@ You might not need to write the three methods, in fact, the built-in adapters fo
 This is the *complete* (and incredible short) code for the built-in adapters:
 
 ```python
-from proper_form import Form
+from hyperform import Form
 
 
 class PonyForm(Form):

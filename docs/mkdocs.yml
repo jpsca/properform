@@ -10,13 +10,13 @@ nav:
   - orm.md
   - FAQ: faq.md
 
-site_name: Proper Form
+site_name: HyperForm
 site_description: A not-terrible Python form library.
 site_author: Juan-Pablo Scaletti
-site_url: https://github.com/jpsca/proper-form
+site_url: https://github.com/jpsca/hyperform
 
-repo_name: jpsca/proper-form
-repo_url: https://github.com/jpsca/proper-form
+repo_name: jpsca/hyperform
+repo_url: https://github.com/jpsca/hyperform
 edit_uri: ""
 
 theme:
@@ -40,7 +40,7 @@ extra:
   # manifest: "manifest.webmanifest"
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/jpsca/proper-form
+      link: https://github.com/jpsca/hyperform
 
 markdown_extensions:
   - admonition

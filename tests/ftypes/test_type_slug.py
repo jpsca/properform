@@ -1,4 +1,4 @@
-from proper_form.ftypes import type_slug
+from hyperform.ftypes import type_slug
 
 
 def test_slugify():

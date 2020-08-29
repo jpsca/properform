@@ -1,4 +1,4 @@
-import proper_form.fields as f
+import hyperform.fields as f
 
 
 def test_text_as_radio():

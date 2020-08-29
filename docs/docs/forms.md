@@ -1,12 +1,12 @@
 
 # Forms
 
-At the heart of Proper Form is the `Form` class. A form contain your field definitions, delegate validation, take input, and in general function as the glue holding everything together.
+At the heart of HyperForm is the `Form` class. A form contain your field definitions, delegate validation, take input, and in general function as the glue holding everything together.
 
-Form are classes that inherit from the `proper_form.Form` class. You then create instances of those classes in your controllers, using the request and maybe object data.
+Form are classes that inherit from the `hyperform.Form` class. You then create instances of those classes in your controllers, using the request and maybe object data.
 
 ```python
-from proper_form  import Form, Email, Password
+from hyperform  import Form, Email, Password
 
 class LoginForm(Form):
     login = Email(required=True)
@@ -30,7 +30,7 @@ Form(input_data=None, object=None, file_data=None, *, prefix="")
 
 A *MultiDict* containing the data from a form request.
 Form requests are typically POST requests and many web frameworks returns it under the name `request.POST`.
-    
+
 ### object
 
 Pre-existing data used to populate the form. This can be a dictionary or an instance of a class, typically an ORM Model.
@@ -43,7 +43,7 @@ In other frameworks, like Flask, this data is called `request.files`.
 
 ### prefix
 
-Optional namespace for the form. 
+Optional namespace for the form.
 
 
 ## Form methods

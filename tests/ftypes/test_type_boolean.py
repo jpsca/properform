@@ -1,6 +1,6 @@
 import pytest
 
-from proper_form.ftypes import type_boolean
+from hyperform.ftypes import type_boolean
 
 
 TRUE_VALUES = ["1", "-1", "nu-hu", "foobar", "very false", "not a chance", "maybe"]

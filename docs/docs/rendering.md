@@ -1,7 +1,7 @@
 
 # Rendering
 
-Instead of rendering a form with a predefined static markup, wih Proper Form you render its individual fields. For example:
+Instead of rendering a form with a predefined static markup, wih HyperForm you render its individual fields. For example:
 
 ```html+jinja
 <form method="post" action="">
@@ -39,7 +39,7 @@ The form can also have a `form.error` attribute manually set by you.
 
 ## Available methods
 
-One of the thing Proper Form does different is that it doesn't tie a field type to a specific HTML tag. You might think an URL field it's always going to be displayed as an `<input>`, but *it doesn't have to*. You could also have URLs as values of checkboxes, radio buttons, or selects.
+One of the thing HyperForm does different is that it doesn't tie a field type to a specific HTML tag. You might think an URL field it's always going to be displayed as an `<input>`, but *it doesn't have to*. You could also have URLs as values of checkboxes, radio buttons, or selects.
 
 For that reason, all of these method are available for all fields, no matter its data type.
 
@@ -127,7 +127,7 @@ field.as_checkbox(label=None, **attrs)
 
 Renders the field as a `<input type="checkbox">` element.
 
-If you use a `label` argument, a `<label>` will be added *surrounding* the input with a class "checkbox" and the text *after* the checkbox. 
+If you use a `label` argument, a `<label>` will be added *surrounding* the input with a class "checkbox" and the text *after* the checkbox.
 
 Examples:
 
@@ -348,13 +348,13 @@ Examples:
 
 ## Using form templates
 
-Proper Form doesn't have a default `form.render()` method, but you can write one yourself on each of your forms or, better yet, in a base form.
+HyperForm doesn't have a default `form.render()` method, but you can write one yourself on each of your forms or, better yet, in a base form.
 
 For example you could have a separated template for each if your forms in a `templates/forms/` folder:
 
 ```python
 from flask import render_template
-from proper_form import Form
+from hyperform import Form
 
 class BaseForm(Form):
     def render(self):

@@ -2,11 +2,11 @@ from datetime import datetime, date
 
 import pytest
 
-from proper_form import Date
-from proper_form import DateTime
-from proper_form import Field
-from proper_form import Integer
-from proper_form import validators as v
+from hyperform import Date
+from hyperform import DateTime
+from hyperform import Field
+from hyperform import Integer
+from hyperform import validators as v
 
 
 def test_confirmed_message():

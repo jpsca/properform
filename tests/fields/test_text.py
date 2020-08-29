@@ -1,4 +1,4 @@
-from proper_form.fields import Text
+from hyperform.fields import Text
 
 
 def test_clean_called():

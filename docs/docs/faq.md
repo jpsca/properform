@@ -2,13 +2,13 @@
 # Frequently Asked Questions
 
 
-## Does Proper Form works with ____?
+## Does HyperForm works with ____?
 
 Most likely **yes**.
 
 ### Request/Form Input
 
-Here are some of the popular libraries to are known to work with Proper Form, but if it’s not listed, it doesn’t mean it won’t work.
+Here are some of the popular libraries to are known to work with HyperForm, but if it’s not listed, it doesn’t mean it won’t work.
 
 - Django.
 - Werkzeug: Flask, etc.
@@ -38,7 +38,7 @@ That's it.
 Python 3.6 and beyond.
 
 
-## Is Proper Form an async library?
+## Is HyperForm an async library?
 
 No.
 
@@ -47,16 +47,16 @@ No.
 I hope that a future version of Python (4?) removes this forced separation, so you can transparently call the same code from sync and async functions (like you do in JavaScript, for example).
 
 
-## How can I contribute to Proper Form?
+## How can I contribute to HyperForm?
 
-For bugs and feature requests, you can open an issue on the [GitHub page](https://github.com/jpsca/proper-form).
+For bugs and feature requests, you can open an issue on the [GitHub page](https://github.com/jpsca/hyperform).
 
 
-## Does Proper Form handle file uploads or image thumbanils?
+## Does HyperForm handle file uploads or image thumbanils?
 
-It does not. Those are concerns for your framework or for other specialized libraries. Proper Form has a `File` field which will let you render a file input, but it doesn't do more than that.
+It does not. Those are concerns for your framework or for other specialized libraries. HyperForm has a `File` field which will let you render a file input, but it doesn't do more than that.
 
 
 ## I have a question not covered in this documentation
 
-Please open an issue on the [GitHub page](https://github.com/jpsca/proper-form) with the tag "question".
+Please open an issue on the [GitHub page](https://github.com/jpsca/hyperform) with the tag "question".

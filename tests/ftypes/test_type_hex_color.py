@@ -1,6 +1,6 @@
 import pytest
 
-from proper_form.ftypes import type_hex_color
+from hyperform.ftypes import type_hex_color
 
 
 VALID_COLORS = [

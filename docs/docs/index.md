@@ -1,19 +1,17 @@
 
-# Proper Form Documentation
+# HyperForm Intro
 
-Proper Form is a python library for modern form input handling and validation.
-
-It tries very hard not to be terrible like all the others:
+HyperForm is a library to make far easier to create beautiful, semantically rich, syntactically awesome, readily stylable and wonderfully accessible HTML forms in your Python web application.
 
 <blockquote style="max-width:480px; margin:0 auto;">
-<p>The main problem I used to have with it was the markup. 
-<br>I wanted Bootstrap <em>classes</em>. 
+<p>The main problem I used to have with it was the markup.
+<br>I wanted Bootstrap <em>classes</em>.
 <br>I wanted <em>complex layouts</em> like multiple columns.</p>
 <footer>— <cite>Random Redditor</cite></footer>
 </blockquote>
 
 
-## How Proper Form is different
+## How HyperForm is different
 
 - Your form can have nested subforms, to create or update several objects, in the same page, at once. No need for modals or separated pages.
 
@@ -31,7 +29,7 @@ It tries very hard not to be terrible like all the others:
 ## Just show me how it looks
 
 ```python
-from proper_form  import Form, Email, Text
+from hyperform  import Form, Email, Text
 
 
 class CommentForm(Form):
@@ -49,7 +47,6 @@ def comment():
         ...
     return render_template("comment.html", form=form)
 
-
 ```
 
 ## Installation
@@ -60,5 +57,5 @@ python -m venv .venv
 # Activate said environment
 source .venv/bin/activate
 # Install the library
-python -m pip install proper_form
+python -m pip install hyperform
 ```

@@ -1,5 +1,5 @@
-import proper_form as f
-from proper_form.constants import DELETED, ID
+import hyperform as f
+from hyperform.constants import DELETED, ID
 
 
 class MyModel(object):

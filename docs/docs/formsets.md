@@ -124,12 +124,12 @@ There are now a total of three forms showing above. Two for the object data that
 
 Notice how this imply each object **must** have a distinct ID, even if the data comes as dictionaries.
 
-Why Proper Form doesn't use a a simple counter, like the rest of form libraries? The answer it's to protect you from *race conditions*. You want to update a specific object, not just "the second object from the list", because there is no guarantee the list hasn't changed while the form was filled by the user.  Using IDs guarantees that you are updating the object you wanted to, even if is not in the same order as before.
+Why HyperForm doesn't use a a simple counter, like the rest of form libraries? The answer it's to protect you from *race conditions*. You want to update a specific object, not just "the second object from the list", because there is no guarantee the list hasn't changed while the form was filled by the user.  Using IDs guarantees that you are updating the object you wanted to, even if is not in the same order as before.
 
 !!! note
     *“But... what if the user manually change the IDs in the names? Would they be able to change the data of any other objects, like the one from another users?!”*
 
-    No, don't worry! Proper Form ignore any ID that isn't in the current list of objects. This feature prevents anyone to access/update data they shouldn't.
+    No, don't worry! HyperForm ignores any ID that isn't in the current list of objects. This feature prevents anyone to access/update data they shouldn't.
 
 !!! note
     In the example we are passing in a list of dictionaries as the object data, but the most common scenario will be using the result of a query using an ORM. In any case, it makes no difference.
@@ -195,7 +195,7 @@ When that's the case, the `backref` attribute is something you might need to add
 
 ![Without backref](img/without-backref.png)
 
-**Without** a `backref` attribute, Proper Form will try to save the child forms first, and them assign the list of them to the parent form. If you are dealing with models instead of dictionaries, your database might not like that.
+**Without** a `backref` attribute, HyperForm will try to save the child forms first, and them assign the list of them to the parent form. If you are dealing with models instead of dictionaries, your database might not like that.
 
 In the example above, a WebPage model will have a non-nullable `person_id` field. If we save those forms first, you will not have yet a `person` to get the ID from, so the save operation is going to fail.
 
@@ -230,7 +230,7 @@ class PersonForm(Form):
   webs = FormSet(WebPageForm, backref="owner")
 ```
 
-When Proper Form receives a `backref`, it reverse the order of the form saving. Now first it creates the parent object, and then the child objects using the parent object as an attribute.
+When HyperForm receives a `backref`, it reverse the order of the form saving. Now first it creates the parent object, and then the child objects using the parent object as an attribute.
 
 ![With backref](img/with-backref.png)
 

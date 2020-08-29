@@ -1,6 +1,6 @@
 import pytest
 
-from proper_form.ftypes import type_url
+from hyperform.ftypes import type_url
 
 
 VALID_URLS = [
