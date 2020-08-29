@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-     <loc>https://github.com/jpsca/properform/</loc>
+     <loc>https://github.com/jpsca/formable/</loc>
      <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/properform/crash/</loc>
+     <loc>https://github.com/jpsca/formable/crash/</loc>
      <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/properform/forms/</loc>
+     <loc>https://github.com/jpsca/formable/forms/</loc>
      <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/properform/fields/</loc>
+     <loc>https://github.com/jpsca/formable/fields/</loc>
      <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/properform/rendering/</loc>
+     <loc>https://github.com/jpsca/formable/rendering/</loc>
      <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/properform/validators/</loc>
+     <loc>https://github.com/jpsca/formable/validators/</loc>
      <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/properform/formsets/</loc>
+     <loc>https://github.com/jpsca/formable/formsets/</loc>
      <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/properform/orm/</loc>
+     <loc>https://github.com/jpsca/formable/orm/</loc>
      <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/properform/faq/</loc>
+     <loc>https://github.com/jpsca/formable/faq/</loc>
      <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url>

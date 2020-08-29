@@ -11,7 +11,7 @@
         <meta name="description" content="A not-terrible Python form library.">
       
       
-        <link rel="canonical" href="https://github.com/jpsca/properform/fields/">
+        <link rel="canonical" href="https://github.com/jpsca/formable/fields/">
       
       
         <meta name="author" content="Juan-Pablo Scaletti">
@@ -21,7 +21,7 @@
     
     
       
-        <title>Fields - ProperForm</title>
+        <title>Fields - Formable</title>
       
     
     
@@ -79,7 +79,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="https://github.com/jpsca/properform" title="ProperForm" class="md-header-nav__button md-logo" aria-label="ProperForm">
+    <a href="https://github.com/jpsca/formable" title="Formable" class="md-header-nav__button md-logo" aria-label="Formable">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.35 10.03A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.03A6.004 6.004 0 000 14a6 6 0 006 6h13a5 5 0 005-5c0-2.64-2.05-4.78-4.65-4.97z"/></svg>
@@ -92,7 +92,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            ProperForm
+            Formable
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -136,13 +136,13 @@
     
       <div class="md-header-nav__source">
         
-<a href="https://github.com/jpsca/properform" title="Go to repository" class="md-source">
+<a href="https://github.com/jpsca/formable" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
-    jpsca/properform
+    jpsca/formable
   </div>
 </a>
       </div>
@@ -166,24 +166,24 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://github.com/jpsca/properform" title="ProperForm" class="md-nav__button md-logo" aria-label="ProperForm">
+    <a href="https://github.com/jpsca/formable" title="Formable" class="md-nav__button md-logo" aria-label="Formable">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.35 10.03A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.03A6.004 6.004 0 000 14a6 6 0 006 6h13a5 5 0 005-5c0-2.64-2.05-4.78-4.65-4.97z"/></svg>
 
     </a>
-    ProperForm
+    Formable
   </label>
   
     <div class="md-nav__source">
       
-<a href="https://github.com/jpsca/properform" title="Go to repository" class="md-source">
+<a href="https://github.com/jpsca/formable" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
-    jpsca/properform
+    jpsca/formable
   </div>
 </a>
     </div>
@@ -882,7 +882,7 @@
                 
                 <h1 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">#</a></h1>
 <p>A field represent a data type. It handles coercing of the input to that data type and following validations. For example, <code>Text</code>, <code>Integer</code>, <code>Date</code>, and <code>Email</code> are some of the available fields.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">properform</span> <span class="k">as</span> <span class="nn">f</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">formable</span> <span class="k">as</span> <span class="nn">f</span>
 
 <span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -890,7 +890,7 @@
     <span class="n">birthday</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
 </code></pre></div>
 
-<p>Unlike most (all?) the other form libraries, ProperForm doesn&rsquo;t tie a field to a specific HTML representation. For example, an <code>Email</code> field can be rendered as a <code>&lt;input type="email"&gt;</code>, but also as a <code>&lt;select&gt;</code>, a <code>&lt;input type="checkbox"&gt;</code>, etc. The important part is that the received input is normalized and checked to have the shape of an email address, no matter how the input gets to the field.</p>
+<p>Unlike most (all?) the other form libraries, Formable doesn&rsquo;t tie a field to a specific HTML representation. For example, an <code>Email</code> field can be rendered as a <code>&lt;input type="email"&gt;</code>, but also as a <code>&lt;select&gt;</code>, a <code>&lt;input type="checkbox"&gt;</code>, etc. The important part is that the received input is normalized and checked to have the shape of an email address, no matter how the input gets to the field.</p>
 <p>The most important thing to remember about fields, is that they always take a <strong>list</strong> of input values, even if only one is sent or needed. All received values are processed even if you only need the first one. It does that for several reasons:</p>
 <ol>
 <li>You can configure any field to take and return a list of values by setting to <code>True</code> its <code>multiple</code> option.</li>
@@ -903,7 +903,7 @@
 </code></pre></div>
 
 <h3 id="validators"><code>*</code>validators<a class="headerlink" href="#validators" title="Permanent link">#</a></h3>
-<p>Zero or more callables that get the type-casted values and have to return <code>True</code> if is ok or <code>False</code> if not. ProperForm comes with several pre-made validators (see the <a href="../validators/">Validators</a> page), but any custom function or callable object can be used.</p>
+<p>Zero or more callables that get the type-casted values and have to return <code>True</code> if is ok or <code>False</code> if not. Formable comes with several pre-made validators (see the <a href="../validators/">Validators</a> page), but any custom function or callable object can be used.</p>
 <h3 id="required-false">required <small>(<code>False</code>)</small><a class="headerlink" href="#required-false" title="Permanent link">#</a></h3>
 <p>By default, each <code>Field</code> class assumes the value is optional, but if you set this option to <code>True</code>, an empty value – either None or the empty string (&ldquo;&rdquo;) – then <code>validate()</code> will fail.</p>
 <h3 id="strict-true">strict <small>(<code>True</code>)</small><a class="headerlink" href="#strict-true" title="Permanent link">#</a></h3>
@@ -980,7 +980,7 @@ You can ignore it and continue without that value by setting this option to <cod
 <h2 id="field-methods">Field methods<a class="headerlink" href="#field-methods" title="Permanent link">#</a></h2>
 <p>All field methods are about rendering, so they are covered in the <a href="../rendering/">Rendering page</a></p>
 <h2 id="built-in-field-classes">Built-in Field classes<a class="headerlink" href="#built-in-field-classes" title="Permanent link">#</a></h2>
-<p>Naturally, ProperForm includes several Field classes that represent common data types needs. This section documents each built-in field.</p>
+<p>Naturally, Formable includes several Field classes that represent common data types needs. This section documents each built-in field.</p>
 <h3 id="boolean">Boolean( )<a class="headerlink" href="#boolean" title="Permanent link">#</a></h3>
 <div class="highlight"><pre><span></span><code><span class="n">Boolean</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </code></pre></div>
@@ -1017,7 +1017,7 @@ You can ignore it and continue without that value by setting this option to <cod
 <div class="highlight"><pre><span></span><code><span class="n">File</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </code></pre></div>
 
-<p>A field for rendering an <code>&lt;input type="file"&gt;</code>. ProperForm does not deal with any file handling or validation.</p>
+<p>A field for rendering an <code>&lt;input type="file"&gt;</code>. Formable does not deal with any file handling or validation.</p>
 <h3 id="float">Float( )<a class="headerlink" href="#float" title="Permanent link">#</a></h3>
 <div class="highlight"><pre><span></span><code><span class="n">Float</span><span class="p">(</span><span class="o">*</span><span class="n">validators</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </code></pre></div>
@@ -1188,7 +1188,7 @@ You can ignore it and continue without that value by setting this option to <cod
         
         
       
-      <a href="https://github.com/jpsca/properform" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+      <a href="https://github.com/jpsca/formable" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
       </a>
     
