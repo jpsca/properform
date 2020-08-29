@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-     <loc>https://github.com/jpsca/proper-form/</loc>
-     <lastmod>2020-06-28</lastmod>
+     <loc>https://github.com/jpsca/properform/</loc>
+     <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/proper-form/crash/</loc>
-     <lastmod>2020-06-28</lastmod>
+     <loc>https://github.com/jpsca/properform/crash/</loc>
+     <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/proper-form/forms/</loc>
-     <lastmod>2020-06-28</lastmod>
+     <loc>https://github.com/jpsca/properform/forms/</loc>
+     <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/proper-form/fields/</loc>
-     <lastmod>2020-06-28</lastmod>
+     <loc>https://github.com/jpsca/properform/fields/</loc>
+     <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/proper-form/rendering/</loc>
-     <lastmod>2020-06-28</lastmod>
+     <loc>https://github.com/jpsca/properform/rendering/</loc>
+     <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/proper-form/validators/</loc>
-     <lastmod>2020-06-28</lastmod>
+     <loc>https://github.com/jpsca/properform/validators/</loc>
+     <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/proper-form/formsets/</loc>
-     <lastmod>2020-06-28</lastmod>
+     <loc>https://github.com/jpsca/properform/formsets/</loc>
+     <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/proper-form/orm/</loc>
-     <lastmod>2020-06-28</lastmod>
+     <loc>https://github.com/jpsca/properform/orm/</loc>
+     <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://github.com/jpsca/proper-form/faq/</loc>
-     <lastmod>2020-06-28</lastmod>
+     <loc>https://github.com/jpsca/properform/faq/</loc>
+     <lastmod>2020-08-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
