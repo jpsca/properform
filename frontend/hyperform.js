@@ -1,13 +1,5 @@
 /*!
- * SubForms.js
-*
- * A collection of functions to work with subforms and python's
- * library “Solution”
- *
- * Copyright 2014 Juan-Pablo Scaletti
- * Released under the MIT license
- *
- * Date: 2014-05-17
+ * hyperform.js
  */
 export const EVENT_ADD_FORM = 'formset.add';
 export const EVENT_DEL_FORM = 'formset.del';
@@ -61,16 +53,12 @@ export const setupFormSets = function(wrapper) {
   setupDel(wrapper);
 };
 
-
-
-
 function initSubForms($wrapper){
     $wrapper.find('[data-forms]').each(function(){
         initSubForm($(this));
     });
 }
 initSubForms($(document));
-
 
 function initSubForm($w){
     var delmsg = $w.attr('data-delmsg');
@@ -98,7 +86,6 @@ function initSubForm($w){
     });
 }
 
-
 function addSubForm($w, tmplSel){
     var maxforms = parseInt($w.attr('data-maxforms'), 10);
     if (!isNaN(maxforms)){
@@ -121,7 +108,6 @@ function addSubForm($w, tmplSel){
     return $pre;
 }
 
-
 function insertDeleteFlag($f){
     var $inputs = $f.find('[name]');
     if (!$inputs.length) return;
@@ -131,7 +117,6 @@ function insertDeleteFlag($f){
     $flag.insertAfter($inputs.eq(0));
     $inputs.remove();
 }
-
 
 function removeSubForm($w, $f){
     $f.find('[data-delbtn]').hide();
@@ -166,7 +151,6 @@ function updateSubFormsNames($w){
     }
 }
 
-
 function updateNames($form, depth, num){
     var $fields = $form.find('[name]');
     var $field, oldName, newName, nameParts;
@@ -179,7 +163,6 @@ function updateNames($form, depth, num){
         $field.attr('name', newName);
     });
 }
-
 
 function deconstructName(name){
     var nameParts = [];
@@ -201,7 +184,6 @@ function deconstructName(name){
     }
     return nameParts;
 }
-
 
 function getNewName(nameParts, depth, num){
     nameParts[depth * 2 + 1] = num;
