@@ -17,7 +17,7 @@
         <meta name="author" content="Juan-Pablo Scaletti">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.11">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
     
     
       
@@ -25,9 +25,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.860688db.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.4dd2dd8d.min.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/palette.943997b5.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.6a5ad368.min.css">
       
       
         
@@ -429,47 +429,48 @@
 <p>Our form has two text fields, both required. The second one has a validator to ensure that the value is longer than five characters. You can have several validators on each field.</p>
 <p>There are three steps involved in using a form.</p>
 <p><strong>[1] First</strong>, we need to show the form to the user. Let&rsquo;s see it with an example in Flask. First, in your controller, we create a form instance using the input data and the existing object (that could be <code>None</code>, if it doesn&rsquo;t exist yet):</p>
-<p>```python hl_lines=&rdquo;15&rdquo; tab=&rdquo;Controller&rdquo;
-from flask import request, render_template
-from .app import app
-from .forms import MessageForm
-from .models import db, Message</p>
-<p>@app.route(&ldquo;/messages/new/&rdquo;, methods=[&ldquo;GET&rdquo;, &ldquo;POST&rdquo;])
-@app.route(&ldquo;/messages/<int:msg_id>/edit/&rdquo;, methods=[&ldquo;GET&rdquo;, &ldquo;POST&rdquo;])
-def edit(msg_id=None):
-    # Load the message if exists
-    message = None
-    if msg_id:
-        message = db.query(Message).filter_by(id=msg_id).first()</p>
-<div class="highlight"><pre><span></span><code>form = MessageForm(request.form, message)
-
-# TODO
-
-return render_template(
-    &quot;message_edit.html.jinja2&quot;,
-    form=form,
-)
-</code></pre></div>
+<p>Controller:
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">request</span><span class="p">,</span> <span class="n">render_template</span>
+<span class="kn">from</span> <span class="nn">.app</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">MessageForm</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">Message</span>
 
 
-<p><code></code>html+jinja tab=&rdquo;Template&rdquo;
-{% extends &ldquo;layout.html&rdquo; %}
-{% block title %}Edit message{% endblock %}
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/messages/new/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/messages/&lt;int:msg_id&gt;/edit/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">edit</span><span class="p">(</span><span class="n">msg_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># Load the message if exists</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">msg_id</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Message</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">msg_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 
-{% block content %}
-<form method="post" action="">
-  <div class="form-group">
-    {{ form.your_name.as_input(label=&rdquo;Name:&rdquo;) }}
-    {{ form.your_name.render_error() }}
-  </div>
-  <div class="form-group">
-    {{ form.message.as_textarea(label=&rdquo;Message:&rdquo;) }}
-    {{ form.message.render_error() }}
-  </div>
-  <button type="submit" class="btn btn-primary">Save</button>
-</form>
-{% endblock %}
-```</p>
+<span class="hll">    <span class="n">form</span> <span class="o">=</span> <span class="n">MessageForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+</span>
+    <span class="c1"># TODO</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
+        <span class="s2">&quot;message_edit.html.jinja2&quot;</span><span class="p">,</span>
+        <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></p>
+<p>Template:
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;layout.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>Edit message<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+    <span class="cp">{{</span> <span class="nv">form.your_name.as_input</span><span class="o">(</span><span class="nv">label</span><span class="o">=</span><span class="s2">&quot;Name:&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+    <span class="cp">{{</span> <span class="nv">form.your_name.render_error</span><span class="o">()</span> <span class="cp">}}</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+    <span class="cp">{{</span> <span class="nv">form.message.as_textarea</span><span class="o">(</span><span class="nv">label</span><span class="o">=</span><span class="s2">&quot;Message:&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+    <span class="cp">{{</span> <span class="nv">form.message.render_error</span><span class="o">()</span> <span class="cp">}}</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>Save<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</code></pre></div></p>
 <p><strong>[2] Second</strong>, we process the input data the user send using the form:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">request</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">flash</span>
 <span class="kn">from</span> <span class="nn">.app</span> <span class="kn">import</span> <span class="n">app</span>
@@ -581,8 +582,8 @@ return render_template(
       
     </div>
     
-      <script src="../assets/javascripts/vendor.df0def68.min.js"></script>
-      <script src="../assets/javascripts/bundle.ba57d267.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      <script src="../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
       
       <script>
         app = initialize({

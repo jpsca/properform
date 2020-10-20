@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://github.com/jpsca/hyperform/</loc>
-     <lastmod>2020-08-30</lastmod>
+     <lastmod>2020-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://github.com/jpsca/hyperform/crash/</loc>
-     <lastmod>2020-08-30</lastmod>
+     <lastmod>2020-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://github.com/jpsca/hyperform/forms/</loc>
-     <lastmod>2020-08-30</lastmod>
+     <lastmod>2020-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://github.com/jpsca/hyperform/fields/</loc>
-     <lastmod>2020-08-30</lastmod>
+     <lastmod>2020-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://github.com/jpsca/hyperform/rendering/</loc>
-     <lastmod>2020-08-30</lastmod>
+     <lastmod>2020-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://github.com/jpsca/hyperform/validators/</loc>
-     <lastmod>2020-08-30</lastmod>
+     <lastmod>2020-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://github.com/jpsca/hyperform/formsets/</loc>
-     <lastmod>2020-08-30</lastmod>
+     <lastmod>2020-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://github.com/jpsca/hyperform/orm/</loc>
-     <lastmod>2020-08-30</lastmod>
+     <lastmod>2020-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://github.com/jpsca/hyperform/faq/</loc>
-     <lastmod>2020-08-30</lastmod>
+     <lastmod>2020-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
