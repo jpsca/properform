@@ -77,7 +77,7 @@ class Form(object):
             error=self.error,
         ))
 
-    def validate(self):
+    def validate(self):  # noqa: C901
         if self._is_valid is False:
             return None
         if self._valid_data is not None:
@@ -104,6 +104,7 @@ class Form(object):
 
             if field.error:
                 is_valid = False
+                self.error = field.error
                 continue
 
             valid_data[name] = py_value
@@ -116,6 +117,7 @@ class Form(object):
 
             if not formset.validate():
                 is_valid = False
+                self.error = formset.error
                 continue
 
             valid_data[name] = py_value

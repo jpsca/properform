@@ -10,7 +10,8 @@ def test_text_as_checkbox():
 def test_text_as_checkbox_with_label():
     field = f.Text(name="name")
     assert field.as_checkbox(label="I have read the TOS") == \
-        '<label class="checkbox"><input name="name" type="checkbox"> I have read the TOS</label>'
+        '<label class="checkbox"><input name="name" type="checkbox">' \
+        " I have read the TOS</label>"
 
 
 def test_text_as_checkbox_checked():

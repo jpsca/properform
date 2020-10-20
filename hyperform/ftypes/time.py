@@ -6,7 +6,8 @@ __all__ = ("type_time", )
 
 rx_noon = re.compile(r"^12\s*m?$", re.IGNORECASE)
 rx_time = re.compile(
-    r"^(?P<hour>[0-9]{1,2})(:(?P<minute>[0-9]{1,2}))?(:(?P<second>[0-9]{1,2}))?\s*(?P<tt>am|pm)?$",
+    r"^(?P<hour>[0-9]{1,2})(:(?P<minute>[0-9]{1,2}))?"
+    r"(:(?P<second>[0-9]{1,2}))?\s*(?P<tt>am|pm)?$",
     re.IGNORECASE,
 )
 

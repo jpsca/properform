@@ -40,7 +40,8 @@ There are three steps involved in using a form.
 
 **[1] First**, we need to show the form to the user. Let's see it with an example in Flask. First, in your controller, we create a form instance using the input data and the existing object (that could be `None`, if it doesn't exist yet):
 
-```python hl_lines="15" tab="Controller"
+Controller:
+```python hl_lines="15"
 from flask import request, render_template
 from .app import app
 from .forms import MessageForm
@@ -65,7 +66,8 @@ def edit(msg_id=None):
     )
 ```
 
-```html+jinja tab="Template"
+Template:
+```html+jinja
 {% extends "layout.html" %}
 {% block title %}Edit message{% endblock %}
 

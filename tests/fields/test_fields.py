@@ -17,28 +17,32 @@ TEST_DATA = [
         "1573-09-11 16:23",
         datetime(1573, 9, 11, 16, 23),
         "invalid",
-        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format, seconds optional.",
+        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format,"
+        " seconds optional.",
     ),
     (
         f.DateTime,
         "1573-09-11 16:23:15",
         datetime(1573, 9, 11, 16, 23, 15),
         "invalid",
-        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format, seconds optional.",
+        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format,"
+        " seconds optional.",
     ),
     (
         f.DateTime,
         "1573-09-11 4:23 AM",
         datetime(1573, 9, 11, 4, 23),
         "invalid",
-        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format, seconds optional.",
+        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format,"
+        " seconds optional.",
     ),
     (
         f.DateTime,
         "1573-09-11 4:23:15 PM",
         datetime(1573, 9, 11, 16, 23, 15),
         "invalid",
-        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format, seconds optional.",
+        "DateTime must have a YYYY-MM-dd with time in 12h or 24h format,"
+        " seconds optional.",
     ),
     (
         f.Email,

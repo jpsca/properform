@@ -22,7 +22,8 @@ class DateTime(Text):
         super().__init__(*args, **kwargs)
         self.error_messages.setdefault(
             "type",
-            "DateTime must have a YYYY-MM-dd with time in 12h or 24h format, seconds optional.",
+            "DateTime must have a YYYY-MM-dd with time in 12h or 24h format,"
+            " seconds optional.",
         )
 
     def prepare(self, object_value):
