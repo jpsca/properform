@@ -3,26 +3,28 @@ import hyperform.fields as f
 
 def test_render_as_select_tag():
     field = f.Integer()
-    assert field.as_select_tag() == \
-        '<select name="">'
+    assert field.as_select_tag() == '<select name="">'
 
 
 def test_render_as_select_tag_properties():
     field = f.Integer(required=True, multiple=True)
-    assert field.as_select_tag() == \
-        '<select name="" multiple required>'
+    assert field.as_select_tag() == '<select name="" multiple required>'
 
 
 def test_render_as_select_tag_attrs():
     field = f.Integer()
-    assert field.as_select_tag(data_format="local", selectize=True) == \
-        '<select data-format="local" name="" selectize>'
+    assert (
+        field.as_select_tag(data_format="local", selectize=True)
+        == '<select data-format="local" name="" selectize>'
+    )
 
 
 def test_render_as_select_tag_with_label():
     field = f.Integer(name="name")
-    assert field.as_select_tag(label="Choose one") == \
-        '<label for="name">Choose one</label>\n<select name="name">'
+    assert (
+        field.as_select_tag(label="Choose one")
+        == '<label for="name">Choose one</label>\n<select name="name">'
+    )
 
 
 def test_text_render_as_select():
@@ -123,18 +125,24 @@ def test_text_render_as_select_multiple():
 def test_text_render_as_select_with_optgroups():
     field = f.Text(name="city")
     items = [
-        ("America", [
-            ("New York", 1),
-            ("Boston", 2),
-            ("Toronto", 3),
-            ("Lima", 4),
-        ]),
-        ("Europe", [
-            ("Rome", 5),
-            ("Madrid", 6),
-            ("Paris", 7),
-            ("London", 8),
-        ]),
+        (
+            "America",
+            [
+                ("New York", 1),
+                ("Boston", 2),
+                ("Toronto", 3),
+                ("Lima", 4),
+            ],
+        ),
+        (
+            "Europe",
+            [
+                ("Rome", 5),
+                ("Madrid", 6),
+                ("Paris", 7),
+                ("London", 8),
+            ],
+        ),
     ]
     result = field.as_select(items)
     expected = (
@@ -144,13 +152,13 @@ def test_text_render_as_select_with_optgroups():
         '<option value="2">Boston</option>\n'
         '<option value="3">Toronto</option>\n'
         '<option value="4">Lima</option>\n'
-        '</optgroup>\n'
+        "</optgroup>\n"
         '<optgroup label="Europe">\n'
         '<option value="5">Rome</option>\n'
         '<option value="6">Madrid</option>\n'
         '<option value="7">Paris</option>\n'
         '<option value="8">London</option>\n'
-        '</optgroup>\n'
+        "</optgroup>\n"
         "</select>"
     )
     assert result == expected

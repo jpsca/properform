@@ -9,13 +9,11 @@ VALID_EMAILS = [
     "juan.pablo@example.com",
     "jps@nic.pe",
     "my.common.email+proper@gmail.com",
-
     # from https://en.wikipedia.org/wiki/International_email
     "Abc@example.com",
     "Abc.123@example.com",
     "user+mailbox/department=shipping@example.com",
     "!#$%&'*+-/=?^_`.{|}~@example.com",
-
     # International domains
     "test@mañana.com",
     "ivan@екзампл.ком",
@@ -35,7 +33,6 @@ INVALID_EMAILS = [
     "aa@a",
     "fail@test,com",
     "Wrapped <a@example.com>",
-
     "my@.leadingdot.com",
     "my@．．leadingfwdot.com",
     "my@..twodots.com",

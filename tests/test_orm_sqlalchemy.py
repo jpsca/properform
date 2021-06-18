@@ -6,7 +6,7 @@ import hyperform as f
 from hyperform.constants import SEP, NEW, DELETED
 
 
-engine = create_engine('sqlite:///:memory:', echo=True)
+engine = create_engine("sqlite:///:memory:", echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
@@ -27,7 +27,7 @@ class Car(Base):
     id = Column(Integer, primary_key=True)
     make = Column(String, nullable=False)
     model = Column(String, nullable=False)
-    owner_id = Column(Integer, ForeignKey('people.id'))
+    owner_id = Column(Integer, ForeignKey("people.id"))
     owner = relationship("Person", back_populates="cars")
 
 

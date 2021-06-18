@@ -6,12 +6,22 @@ from hyperform.ftypes import type_boolean
 TRUE_VALUES = ["1", "-1", "nu-hu", "foobar", "very false", "not a chance", "maybe"]
 
 FALSE_VALUES = [
-    "", "0",
-    None, "None", "none",
-    "no", "NO", "No", "nO",
-    "Nope", "nah",
-    "off", "Off",
-    False, "false", "False",
+    "",
+    "0",
+    None,
+    "None",
+    "none",
+    "no",
+    "NO",
+    "No",
+    "nO",
+    "Nope",
+    "nah",
+    "off",
+    "Off",
+    False,
+    "false",
+    "False",
 ]
 
 

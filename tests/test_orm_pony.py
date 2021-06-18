@@ -6,6 +6,7 @@ except ImportError:
 import hyperform as f
 from hyperform.constants import SEP, NEW, DELETED
 
+
 if orm:
     db = orm.Database()
 

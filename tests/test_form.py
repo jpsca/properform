@@ -10,7 +10,11 @@ def test_declare_form():
 
     form = ContactForm()
 
-    assert sorted(form._fields) == ["email", "message", "subject", ]
+    assert sorted(form._fields) == [
+        "email",
+        "message",
+        "subject",
+    ]
     assert form.updated_fields is None
     assert form.subject.name == "subject"
     assert form.email.name == "email"
@@ -78,7 +82,11 @@ def test_declare_form_with_prefix():
 
     form = ContactForm(prefix="myform")
 
-    assert sorted(form._fields) == ["email", "message", "subject", ]
+    assert sorted(form._fields) == [
+        "email",
+        "message",
+        "subject",
+    ]
     assert form.subject.name == f"myform{SEP}subject"
     assert form.email.name == f"myform{SEP}email"
     assert form.message.name == f"myform{SEP}message"
@@ -235,7 +243,7 @@ def test_updated_fields_from_object():
 
     form = MyForm(
         {"a": "a", "b": "new", "c": "c", "d": "new"},
-        {"a": "a", "b": "b", "c": "c", "d": "d"}
+        {"a": "a", "b": "b", "c": "c", "d": "d"},
     )
     assert form.validate()
     assert sorted(form.updated_fields) == ["b", "d"]

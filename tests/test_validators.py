@@ -77,30 +77,25 @@ DATA = [
     [Field, v.Confirmed(), ["password"], False],
     [Field, v.Confirmed(), ["lorem", "ipsum"], False],
     [Field, v.Confirmed(), ["password", "nope", "password"], False],
-
     [Field, v.LongerThan(5), ["123456789"], True],
     [Field, v.LongerThan(5), ["12345"], True],
     [Field, v.LongerThan(5), ["abc"], False],
     [Field, v.LongerThan(5), ["123456789", "qwertyuiop", "lorem ipsum"], True],
     [Field, v.LongerThan(5), ["123456789", "abc", "lorem ipsum"], False],
-
     [Field, v.ShorterThan(5), ["123"], True],
     [Field, v.ShorterThan(5), ["12345"], True],
     [Field, v.ShorterThan(5), ["qwertyuiop"], False],
     [Field, v.ShorterThan(5), ["1234", "abc", "lorem"], True],
     [Field, v.ShorterThan(5), ["1234", "abcdefghijk", "lorem"], False],
-
     [Integer, v.LessThan(10), ["8"], True],
     [Integer, v.LessThan(10), ["10"], True],
     [Integer, v.LessThan(10), ["34"], False],
     [Integer, v.LessThan(10), ["4", "3", "5"], True],
     [Integer, v.LessThan(10), ["4", "3", "25"], False],
-
     [Integer, v.MoreThan(10), ["20"], True],
     [Integer, v.MoreThan(10), ["-1"], False],
     [Integer, v.MoreThan(10), ["20", "13", "25"], True],
     [Integer, v.MoreThan(10), ["8", "13", "25"], False],
-
     [Integer, v.InRange(1900, 2010), ["1979"], True],
     [Integer, v.InRange(1900, 2010), ["1900"], True],
     [Integer, v.InRange(1900, 2010), ["2010"], True],
@@ -109,36 +104,28 @@ DATA = [
     [Integer, v.InRange(1900, 2010), ["-1"], False],
     [Integer, v.InRange(1900, 2010), ["1979", "1984", "2009"], True],
     [Integer, v.InRange(1900, 2010), ["1979", "1984", "2019"], False],
-
     [Date, v.Before(datetime(2017, 7, 5)), ["1979-05-05"], True],
     [Date, v.Before(datetime(2017, 7, 5)), ["2019-07-16"], False],
     [Date, v.Before(date(2017, 7, 5)), ["1979-05-05"], True],
     [Date, v.Before(date(2017, 7, 5)), ["2019-07-16"], False],
-
     [Date, v.After(datetime(2017, 7, 5)), ["2019-07-16"], True],
     [Date, v.After(datetime(2017, 7, 5)), ["1979-05-05"], False],
     [Date, v.After(date(2017, 7, 5)), ["2019-07-16"], True],
     [Date, v.After(date(2017, 7, 5)), ["1979-05-05"], False],
-
     [Date, v.BeforeNow(), ["1821-07-28"], True],
     [Date, v.BeforeNow(), ["3000-01-01"], False],
-
     [Date, v.AfterNow(), ["3000-01-01"], True],
     [Date, v.AfterNow(), ["1821-07-28"], False],
-
     [DateTime, v.Before(datetime(2017, 7, 5)), ["1979-05-05"], True],
     [DateTime, v.Before(datetime(2017, 7, 5)), ["2019-07-16"], False],
     [DateTime, v.Before(date(2017, 7, 5)), ["1979-05-05"], True],
     [DateTime, v.Before(date(2017, 7, 5)), ["2019-07-16"], False],
-
     [DateTime, v.After(datetime(2017, 7, 5)), ["2019-07-16"], True],
     [DateTime, v.After(datetime(2017, 7, 5)), ["1979-05-05"], False],
     [DateTime, v.After(date(2017, 7, 5)), ["2019-07-16"], True],
     [DateTime, v.After(date(2017, 7, 5)), ["1979-05-05"], False],
-
     [DateTime, v.BeforeNow(), ["1821-07-28"], True],
     [DateTime, v.BeforeNow(), ["3000-01-01"], False],
-
     [DateTime, v.AfterNow(), ["3000-01-01"], True],
     [DateTime, v.AfterNow(), ["1821-07-28"], False],
 ]

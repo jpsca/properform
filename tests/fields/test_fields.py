@@ -63,14 +63,14 @@ TEST_DATA = [
         "123",
         123,
         "invalid",
-        "Not a valid integer."
+        "Not a valid integer.",
     ),
     (
         f.Float,
         "123.2",
         123.2,
         "invalid",
-        "Not a valid float number."
+        "Not a valid float number.",
     ),
     (
         f.Month,
@@ -187,56 +187,16 @@ def test_fields_multiple_not_strict(Field, valid, expected, invalid, _error):
 
 
 TEST_DATA_PREPARE = [
-    (
-        f.Date,
-        ["1973-09-11"],
-        date(1973, 9, 11)
-    ),
-    (
-        f.DateTime,
-        ["1973-09-11 4:24 PM"],
-        datetime(1973, 9, 11, 16, 24)
-    ),
-    (
-        f.DateTime,
-        ["1973-09-11 4:24:15 AM"],
-        datetime(1973, 9, 11, 4, 24, 15)
-    ),
-    (
-        f.Integer,
-        ["123"],
-        123
-    ),
-    (
-        f.Float,
-        ["123.2"],
-        123.2
-    ),
-    (
-        f.Month,
-        ["1973-05"],
-        date(1973, 5, 1)
-    ),
-    (
-        f.SplittedDateTime,
-        ["1973-09-11", "5:34 AM"],
-        datetime(1973, 9, 11, 5, 34, 0)
-    ),
-    (
-        f.SplittedDateTime,
-        ["1973-09-11", "4:20:17 PM"],
-        datetime(1973, 9, 11, 16, 20, 17),
-    ),
-    (
-        f.Time,
-        ["5:34 AM"],
-        time(5, 34, 0)
-    ),
-    (
-        f.Time,
-        ["4:20:17 PM"],
-        time(16, 20, 17)
-    ),
+    (f.Date, ["1973-09-11"], date(1973, 9, 11)),
+    (f.DateTime, ["1973-09-11 4:24 PM"], datetime(1973, 9, 11, 16, 24)),
+    (f.DateTime, ["1973-09-11 4:24:15 AM"], datetime(1973, 9, 11, 4, 24, 15)),
+    (f.Integer, ["123"], 123),
+    (f.Float, ["123.2"], 123.2),
+    (f.Month, ["1973-05"], date(1973, 5, 1)),
+    (f.SplittedDateTime, ["1973-09-11", "5:34 AM"], datetime(1973, 9, 11, 5, 34, 0)),
+    (f.SplittedDateTime, ["1973-09-11", "4:20:17 PM"], datetime(1973, 9, 11, 16, 20, 17)),
+    (f.Time, ["5:34 AM"], time(5, 34, 0)),
+    (f.Time, ["4:20:17 PM"], time(16, 20, 17)),
 ]
 
 

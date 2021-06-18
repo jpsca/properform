@@ -57,5 +57,5 @@ python -m venv .venv
 # Activate said environment
 source .venv/bin/activate
 # Install the library
-python -m pip install hyperform
+pip install hyperform
 ```
